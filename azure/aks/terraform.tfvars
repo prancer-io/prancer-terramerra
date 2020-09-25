@@ -1,0 +1,9 @@
+location              = "eastus2"
+rg_name               = "prancer-test-rg"
+aks_name              = "prancer-aks-cluster"
+dns_prefix            = "prancer-aks"
+aks_node_pool_name    = "prancer"
+aks_node_pool_count   = "1"
+aks_vm_size           = "Standard_DS2_v2"
+aks_identity_type     = "SystemAssigned"
+tags                  = {}
