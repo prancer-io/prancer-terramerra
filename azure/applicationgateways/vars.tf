@@ -24,4 +24,6 @@ variable "app_gw_be_http_proto" {}
 variable "app_gw_be_http_timeout" {}
 variable "app_gw_listener_proto" {}
 variable "app_gw_req_route_type" {}
-variable "tags" {}
+variable "tags" {
+  type = map
+}

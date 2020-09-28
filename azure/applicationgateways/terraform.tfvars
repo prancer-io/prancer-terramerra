@@ -29,4 +29,7 @@ app_gw_be_http_timeout = "60"
 app_gw_listener_proto  = "Http"
 app_gw_req_route_type  = "Basic"
 
-tags                  = {}
+tags                   = {
+  environment = "Production"
+  project     = "Prancer"
+}

@@ -5,7 +5,7 @@ module "vnet" {
   vnet_rg               = var.resource_group
   address_space         = var.address_space
   dns_server            = var.dns_server
-  tags                  = {}
+  tags                  = var.tags
 }
 
 module "subnet-frontend" {
