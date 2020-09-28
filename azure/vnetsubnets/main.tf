@@ -8,24 +8,23 @@ module "vnet" {
   tags                  = {}
 }
 
-module "subnet-frontend" {
+module "subnets" {
+  count                 = length(var.subnet_names)
   source                = "../modules/subnet/"
-  subnet_name           = var.subnet_name_fe
+  subnet_name           = "subnet-${element(var.subnet_names, count.index)}"
   subnet_rg             = var.resource_group
   vnet_name             = module.vnet.vnet_name
-  address_prefixes      = var.address_prefixes_fe
+  address_prefixes      = element(var.address_prefixes, count.index)
 }
 
-module "subnet-backend" {
-  source                = "../modules/subnet/"
-  subnet_name           = var.subnet_name_be
-  subnet_rg             = var.resource_group
-  vnet_name             = module.vnet.vnet_name
-  address_prefixes      = var.address_prefixes_be
+data "azurerm_network_security_group" "nsg" {
+  count               = length(var.subnet_nsg)
+  name                = var.subnet_nsg[count.index][1]
+  resource_group_name = var.resource_group
 }
 
-resource "azurerm_subnet_network_security_group_association" "frontend-nsg" {
-  count                     = var.frontend_nsg == null ? 0 : 1
-  subnet_id                 = module.subnet-frontend.subnet_id
-  network_security_group_id = var.frontend_nsg
+resource "azurerm_subnet_network_security_group_association" "subnetnsg" {
+  count                     = length(var.subnet_nsg)
+  subnet_id                 = module.subnets[var.subnet_nsg[count.index][0]].subnet_id
+  network_security_group_id = data.azurerm_network_security_group.nsg[count.index].id
 }

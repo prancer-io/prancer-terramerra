@@ -3,9 +3,14 @@ variable "vnet_name" {}
 variable "resource_group" {}
 variable "address_space" {}
 variable "dns_server" {}
-variable "subnet_name_fe" {}
-variable "address_prefixes_fe" {}
-variable "subnet_name_be" {}
-variable "address_prefixes_be" {}
-variable "frontend_nsg" {}
+variable "subnet_names" {
+  type = list
+}
+variable "address_prefixes" {
+  type = list
+}
+variable "subnet_nsg" {
+  type = list
+  default = []
+}
 variable "tags" {}
