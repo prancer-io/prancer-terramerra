@@ -1,4 +1,4 @@
-output "subnets" {
+output "id" {
   description = "List of IDs of private subnets"
   value       = aws_subnet.subnet.id
 }
