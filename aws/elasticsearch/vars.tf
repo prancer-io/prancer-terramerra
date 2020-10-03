@@ -1,0 +1,43 @@
+variable "domain_name" {}
+variable "elasticsearch_version" {}
+variable "advanced_options" {}
+variable "advanced_security_options_enabled" {}
+variable "advanced_security_options_internal_user_database_enabled" {}
+variable "advanced_security_options_master_user_arn" {}
+variable "advanced_security_options_master_user_name" {}
+variable "advanced_security_options_master_user_password" {}
+variable "ebs_volume_size" {}
+variable "ebs_volume_type" {}
+variable "ebs_iops" {}
+variable "encrypt_at_rest_enabled" {}
+variable "encrypt_at_rest_kms_key_id" {}
+variable "domain_endpoint_options_enforce_https" {}
+variable "domain_endpoint_options_tls_security_policy" {}
+variable "instance_count" {}
+variable "instance_type" {}
+variable "dedicated_master_enabled" {}
+variable "dedicated_master_count" {}
+variable "dedicated_master_type" {}
+variable "zone_awareness_enabled" {}
+variable "warm_enabled" {}
+variable "warm_count" {}
+variable "warm_type" {}
+variable "zone_awareness_config" {}
+variable "node_to_node_encryption_enabled" {}
+variable "vpc_enabled" {}
+variable "subnet_ids" {}
+variable "automated_snapshot_start_hour" {}
+variable "cognito_authentication_enabled" {}
+variable "cognito_user_pool_id" {}
+variable "cognito_identity_pool_id" {}
+variable "cognito_iam_role_arn" {}
+variable "log_publishing_index_enabled" {}
+variable "log_publishing_index_cloudwatch_log_group_arn" {}
+variable "log_publishing_search_enabled" {}
+variable "log_publishing_search_cloudwatch_log_group_arn" {}
+variable "log_publishing_application_enabled" {}
+variable "log_publishing_application_cloudwatch_log_group_arn" {}
+
+variable "tags" {
+  type = map
+}
