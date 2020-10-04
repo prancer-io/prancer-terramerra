@@ -1,0 +1,40 @@
+variable "bucket_name" {}
+variable "bucket_acl" {}
+variable "acceleration_status" {}
+variable "versioning_enabled" {}
+variable "cors_allowed_headers" {}
+variable "cors_allowed_methods" {}
+variable "cors_allowed_origins" {}
+variable "cors_expose_headers" {}
+variable "cors_max_age_seconds" {}
+variable "lifecycle_infrequent_storage_transition_enabled" {}
+variable "lifecycle_infrequent_storage_object_prefix" {}
+variable "lifecycle_infrequent_storage_object_tags" {}
+variable "lifecycle_days_to_infrequent_storage_transition" {}
+variable "lifecycle_glacier_transition_enabled" {}
+variable "lifecycle_glacier_object_prefix" {}
+variable "lifecycle_glacier_object_tags" {}
+variable "lifecycle_days_to_glacier_transition" {}
+variable "transition_noncurrent_versions" {}
+variable "lifecycle_expiration_enabled" {}
+variable "lifecycle_expiration_object_prefix" {}
+variable "lifecycle_expiration_object_tags" {}
+variable "expire_noncurrent_versions" {}
+variable "lifecycle_days_to_expiration" {}
+variable "server_side_encryption_configuration" {}
+
+variable "name" {}
+variable "s3_key_prefix" {}
+variable "enable_logging" {}
+variable "enable_log_file_validation" {}
+variable "is_multi_region_trail" {}
+variable "include_global_service_events" {}
+variable "cloud_watch_logs_role_arn" {}
+variable "cloud_watch_logs_group_arn" {}
+variable "kms_key_arn" {}
+variable "is_organization_trail" {}
+variable "event_selector" {}
+
+variable "tags" {
+  type = map
+}
