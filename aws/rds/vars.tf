@@ -1,0 +1,49 @@
+variable "identifier" {}
+variable "engine" {}
+variable "engine_version" {}
+variable "instance_class" {}
+variable "allocated_storage" {}
+variable "storage_type" {}
+variable "storage_encrypted" {}
+variable "kms_key_id" {}
+variable "license_model" {}
+variable "name" {}
+variable "username" {}
+variable "password" {}
+variable "port" {}
+variable "domain" {}
+variable "domain_iam_role_name" {}
+variable "iam_database_authentication_enabled" {}
+variable "replicate_source_db" {}
+variable "snapshot_identifier" {}
+variable "vpc_security_group_ids" {}
+variable "db_subnet_group_name" {}
+variable "parameter_group_name" {}
+variable "option_group_name" {}
+variable "availability_zone" {}
+variable "multi_az" {}
+variable "iops" {}
+variable "publicly_accessible" {}
+variable "monitoring_interval" {}
+variable "monitoring_role_arn" {}
+variable "allow_major_version_upgrade" {}
+variable "auto_minor_version_upgrade" {}
+variable "apply_immediately" {}
+variable "maintenance_window" {}
+variable "skip_final_snapshot" {}
+variable "copy_tags_to_snapshot" {}
+variable "final_snapshot_identifier" {}
+variable "max_allocated_storage" {}
+variable "performance_insights_enabled" {}
+variable "performance_insights_retention_period" {}
+variable "backup_retention_period" {}
+variable "backup_window" {}
+variable "timezone" {}
+variable "enabled_cloudwatch_logs_exports" {}
+variable "deletion_protection" {}
+variable "timeouts" {
+  type = map
+}
+variable "tags" {
+  type = map
+}
