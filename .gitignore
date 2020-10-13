@@ -2,4 +2,4 @@ provider.secrets
 .terraform
 *.tfstate
 *.tfstate.backup
-
+account.json

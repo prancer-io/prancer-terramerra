@@ -1,0 +1,9 @@
+variable "project" {}
+variable "location" {}
+variable "db_name" {}
+variable "db_version" {}
+variable "db_tier" {}
+variable "db_labels" {}
+variable "db_backup" {}
+variable "db_ipconf" {}
+variable "db_auth_net" {}
