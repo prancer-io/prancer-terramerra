@@ -1,0 +1,11 @@
+variable "name" {}
+variable "project" {}
+variable "location" {}
+variable "storage_class" {}
+variable "labels" {}
+variable "force_destroy" {}
+variable "bucket_policy_only" {}
+variable "versioning" {}
+variable "encryption_key_names" {}
+variable "cors" {}
+variable "website" {}
