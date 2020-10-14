@@ -1,0 +1,27 @@
+module "k8s" {
+  source                             = "../modules/container_cluster/"
+  location                           = var.location
+  k8s_name                           = var.k8s_name
+  k8s_enable_kubernetes_alpha        = var.k8s_enable_kubernetes_alpha
+  k8s_enable_legacy_abac             = var.k8s_enable_legacy_abac
+  k8s_network                        = var.k8s_network
+  k8s_network_policy_enabled         = var.k8s_network_policy_enabled
+  k8s_ip_policy_enabled              = var.k8s_ip_policy_enabled
+  k8s_ip_policy                      = var.k8s_ip_policy
+  k8s_network_policy_config_disabled = var.k8s_network_policy_config_disabled
+  k8s_http_load_balancing_disabled   = var.k8s_http_load_balancing_disabled
+  k8s_username                       = var.k8s_username
+  k8s_password                       = var.k8s_password
+  k8s_certificate                    = var.k8s_certificate
+  k8s_pod_security_enabled           = var.k8s_pod_security_enabled
+  k8s_db_encryption                  = var.k8s_db_encryption
+  k8s_monitoring_service             = var.k8s_monitoring_service
+  k8s_enable_binary_auth             = var.k8s_enable_binary_auth
+  k8s_logging_service                = var.k8s_logging_service
+  k8s_resource_labels                = var.k8s_resource_labels
+  k8s_node_count                     = var.k8s_node_count
+  k8s_image_type                     = var.k8s_image_type
+  k8s_preemptible                    = var.k8s_preemptible
+  k8s_machine_type                   = var.k8s_machine_type
+  k8s_metadata                       = var.k8s_metadata
+}
