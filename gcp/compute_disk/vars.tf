@@ -1,0 +1,13 @@
+variable "project" {}
+variable "location" {}
+variable "disk_name" {}
+variable "disk_type" {}
+variable "zone" {}
+variable "disk_image" {}
+variable "disk_labels" {}
+variable "physical_block_size_bytes" {}
+variable "disk_encrypted" {}
+variable "raw_key" {}
+variable "sha256" {}
+variable "kms_key_self_link" {}
+variable "kms_key_service_account" {}

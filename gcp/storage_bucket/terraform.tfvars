@@ -1,0 +1,11 @@
+name                 = "prancer-bucket"
+project              = "learning-269422"
+location             = "us-central1"
+storage_class        = "REGIONAL"
+labels               = {}
+force_destroy        = false
+bucket_policy_only   = true
+versioning           = false
+encryption_key_names = {}
+cors                 = {}
+website              = {}
