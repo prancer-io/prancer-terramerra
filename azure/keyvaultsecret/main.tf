@@ -23,6 +23,5 @@ module "keyVaultSecret" {
   source                      = "../modules/keyVaultSecret/"
   keyvault_id                 = module.keyVault.vault_Id
   name                        = var.kv_secret_name
-  value                       = var.kv_secret_value
   tags                        = var.tags
 }
