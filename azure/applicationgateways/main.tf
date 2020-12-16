@@ -54,4 +54,9 @@ module "applicationGateway" {
   app_gw_ip              = var.app_gw_ip
   app_gw_listener_proto  = var.app_gw_listener_proto
   app_gw_req_route_type  = var.app_gw_req_route_type
+  min_protocol_version   = var.min_protocol_version
+  waf_enabled            = var.waf_enabled
+  waf_firewall_mode      = var.waf_firewall_mode
+  waf_rule_set_type      = var.waf_rule_set_type
+  waf_rule_set_version   = var.waf_rule_set_version
 }

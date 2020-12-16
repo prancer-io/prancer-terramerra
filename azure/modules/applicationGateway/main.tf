@@ -51,4 +51,15 @@ resource "azurerm_application_gateway" "appgw" {
     backend_address_pool_name  = "${var.app_gw_name}-be-pool"
     backend_http_settings_name = "${var.app_gw_name}-be-http"
   }
+
+  ssl_policy {
+    min_protocol_version = var.min_protocol_version
+  }
+
+  waf_configuration {
+    enabled          = var.waf_enabled
+    firewall_mode    = var.waf_firewall_mode
+    rule_set_type    = var.waf_rule_set_type
+    rule_set_version = var.waf_rule_set_version
+  }
 }

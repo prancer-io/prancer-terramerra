@@ -16,8 +16,8 @@ pip_sku               = "Basic"
 ip_version            = "IPv4"
 
 app_gw_name            = "prancer-app-gw"
-app_gw_sku             = "Standard_Small"
-app_gw_tier            = "Standard"
+app_gw_sku             = "WAF_Medium"
+app_gw_tier            = "WAF"
 app_gw_capacity        = "2"
 app_gw_ip              = "prancer-app-gw-ip-conf"
 app_gw_fe_port         = "80"
@@ -28,6 +28,11 @@ app_gw_be_http_proto   = "Http"
 app_gw_be_http_timeout = "60"
 app_gw_listener_proto  = "Http"
 app_gw_req_route_type  = "Basic"
+min_protocol_version   = "TLSv1_0"
+waf_enabled            = false
+waf_firewall_mode      = "Detection"
+waf_rule_set_type      = "OWASP"
+waf_rule_set_version   = "2.2.9"
 
 tags                   = {
   environment = "Production"
