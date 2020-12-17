@@ -22,8 +22,10 @@ variable "enable_sql_sec_policy" {
   default = false
 }
 variable "sql_sec_policy_state" {}
-variable "sql_sec_policy_disabled_alerts" {}
+variable "disabled_alerts" {}
 variable "sql_sec_policy_retention" {}
+variable "email_account_admins" {}
+variable "email_addresses" {}
 
 variable "enable_sql_vuln_assessment" {
   default = false
@@ -39,13 +41,18 @@ variable "sql_fw_name" {}
 variable "sql_fw_start_ip" {}
 variable "sql_fw_end_ip" {}
 
+variable "enable_sql_auditing" {}
+variable "sql_audit_access_key_is_2nd" {}
+variable "sql_audit_retention" {}
+
 variable "server_name" {}
 variable "server_version" {}
 variable "admin_user" {}
 variable "admin_password" {}
 variable "sql_ad_username" {}
 
-variable "sql_audit_access_key_is_2nd" {}
-variable "sql_audit_retention" {}
+variable "enable_sqldb_auditing" {}
+variable "sqldb_audit_access_key_is_2nd" {}
+variable "sqldb_audit_retention" {}
 
 variable "tags" {}

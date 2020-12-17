@@ -40,8 +40,10 @@ module "sqlServerSecurityPolicy" {
   sql_sec_policy_state           = var.sql_sec_policy_state
   sql_sec_policy_endpoint        = module.storageAccount.primaryblob_uri[0]
   sql_sec_policy_access_key      = module.storageAccount.storage_primary_access_key[0]
-  sql_sec_policy_disabled_alerts = var.sql_sec_policy_disabled_alerts
+  sql_sec_policy_disabled_alerts = var.disabled_alerts
   sql_sec_policy_retention       = var.sql_sec_policy_retention
+  sql_sec_email_account_admins   = var.email_account_admins
+  sql_sec_email_addresses        = var.email_addresses
 }
 
 module "sqlServerVulnAssess" {
@@ -65,6 +67,16 @@ module "sqlServerFWRule" {
   sql_fw_end_ip             = var.sql_fw_end_ip
 }
 
+module "sqlAuditing" {
+  source                      = "../modules/mssqlAuditing/"
+  count                       = var.enable_sql_auditing ? 1 : 0
+  sql_server_id               = module.sqlServer.sqlserver_id
+  sql_audit_endpoint          = module.storageAccount.primaryblob_uri[0]
+  sql_audit_access_key        = module.storageAccount.storage_primary_access_key[0]
+  sql_audit_access_key_is_2nd = var.sql_audit_access_key_is_2nd
+  sql_audit_retention         = var.sql_audit_retention
+}
+
 module "sqlDB" {
   source                      = "../modules/mssqlDB/"
   sql_db_name                 = var.sql_db_name
@@ -79,10 +91,11 @@ module "sqlDB" {
 }
 
 module "sqlDBAuditing" {
-  source                      = "../modules/mssqlDBAuditing/"
-  sql_server_id               = module.sqlDB.id
-  sql_audit_endpoint          = module.storageAccount.primaryblob_uri[0]
-  sql_audit_access_key        = module.storageAccount.storage_primary_access_key[0]
-  sql_audit_access_key_is_2nd = var.sql_audit_access_key_is_2nd
-  sql_audit_retention         = var.sql_audit_retention
+  source                        = "../modules/mssqlDBAuditing/"
+  count                         = var.enable_sqldb_auditing ? 1 : 0
+  sqldb_database_id             = module.sqlDB.id
+  sqldb_audit_endpoint          = module.storageAccount.primaryblob_uri[0]
+  sqldb_audit_access_key        = module.storageAccount.storage_primary_access_key[0]
+  sqldb_audit_access_key_is_2nd = var.sqldb_audit_access_key_is_2nd
+  sqldb_audit_retention         = var.sqldb_audit_retention
 }
