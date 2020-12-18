@@ -24,5 +24,6 @@ module "keyVaultSecret" {
   keyvault_id                 = module.keyVault.vault_Id
   name                        = var.kv_secret_name
   value                       = var.kv_secret_value
+  expiration_date             = var.expiration_date
   tags                        = var.tags
 }
