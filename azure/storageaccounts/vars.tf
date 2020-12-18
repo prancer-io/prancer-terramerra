@@ -25,6 +25,11 @@ variable "replicationType" {
 variable "enableSecureTransfer" {
   description = "Enable Secure Transfer"
 }
+variable "allow_blob_public_access" {}
+
+variable "default_action" {}
+variable "ip_rules" {}
+variable "bypass" {}
 
 variable "storage_container_name" {}
 variable "storage_container_access_type" {}
