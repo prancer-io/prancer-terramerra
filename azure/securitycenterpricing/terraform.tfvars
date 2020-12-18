@@ -1,1 +1,1 @@
-subscription_pricing_tier = "Standard"
+subscription_pricing_tier = "Free"
