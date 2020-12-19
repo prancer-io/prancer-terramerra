@@ -3,17 +3,18 @@ resource_group_name  = "prancer-test-rg"
 
 nsg_name             = "prancer-nsg"
 
-nsr_names            = [
-  "block-port-range-20-22",
-  "block-port-3306"
+names                = [
+  "allow-all-tcp",
+  "allow-port-range",
+  "allow-all-udp"
 ]
-nsr_priorities       = [100, 101]
-nsr_directions       = ["Inbound", "Inbound"]
-nsr_accesses         = ["Deny", "Deny"]
-nsr_protocols        = ["Tcp", "Tcp"]
-nsr_src_ports        = ["*", "*"]
-nsr_dst_ports        = ["20-22", "3306"]
-nsr_src_addresses    = ["Internet", "Internet"]
-nsr_dst_addresses    = ["Internet", "Internet"]
+priorities           = [100, 101, 102]
+directions           = ["Inbound", "Inbound", "Inbound"]
+accesses             = ["Allow", "Allow", "Allow"]
+protocols            = ["Tcp", "Tcp", "Udp"]
+src_ports            = ["*", "*", "*"]
+dst_ports            = ["*", "20-6000", "*"]
+src_addresses        = ["Internet", "Internet", "Internet"]
+dst_addresses        = ["Internet", "Internet", "Internet"]
 
 tags                 = {}
