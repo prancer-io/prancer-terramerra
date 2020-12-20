@@ -4,6 +4,10 @@ resource "aws_acm_certificate" "acm" {
   subject_alternative_names = var.subject_alternative_names
   tags                      = var.tags
 
+  options {
+    certificate_transparency_logging_preference = var.transparency
+  }
+
   lifecycle {
     create_before_destroy = true
   }
