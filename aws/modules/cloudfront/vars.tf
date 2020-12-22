@@ -28,6 +28,16 @@ variable "web_acl_id" {
   default     = ""
 }
 
+variable "enable_custom_origin" {
+  type = bool
+  default = true
+}
+
+variable "enable_s3_origin" {
+  type = bool
+  default = false
+}
+
 variable "origin_domain_name" {
   description = "(Required) - The DNS domain name of your custom origin (e.g. website)"
   default     = ""
@@ -69,9 +79,19 @@ variable "origin_read_timeout" {
   default     = "60"
 }
 
+variable "origin_access_identity" {
+  description = "(Optional) - The CloudFront origin access identity to associate with the origin."
+  default     = ""
+}
+
 variable "compress" {
   description = "(Optional) Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header (default: false)"
   default     = "false"
+}
+
+variable "field_encrypt" {
+  description = "(Optional) - Field level encryption configuration ID"
+  default     = ""
 }
 
 variable "is_ipv6_enabled" {
@@ -87,6 +107,11 @@ variable "default_root_object" {
 variable "comment" {
   default     = "Managed by Terraform"
   description = "Comment for the origin access identity"
+}
+
+variable "enable_cf_log" {
+  default     = true
+  description = "Enable CF logging"
 }
 
 variable "log_include_cookies" {
