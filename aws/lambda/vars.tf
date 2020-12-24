@@ -27,6 +27,7 @@ variable "revoke_rules_on_delete" {}
 
 variable "description" {}
 variable "environment" {}
+variable "kms_key_arn" {}
 variable "filename" {}
 variable "function_name" {}
 variable "handler" {}
@@ -42,3 +43,4 @@ variable "timeout" {}
 variable "tags" {
   type = map
 }
+variable "tracing_mode" {}
