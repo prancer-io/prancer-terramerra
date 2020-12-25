@@ -29,3 +29,10 @@ module "redshift" {
   logging_s3_key_prefix               = var.logging_s3_key_prefix
   tags                                = var.tags
 }
+
+module "redshift_parameters" {
+  source           = "../modules/redshiftParameterGroup"
+  parameter_name   = var.parameter_name
+  parameter_family = var.parameter_family
+  parameter_map    = var.parameter_map
+}

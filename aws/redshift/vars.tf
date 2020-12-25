@@ -26,6 +26,10 @@ variable "enable_logging" {}
 variable "logging_bucket_name" {}
 variable "logging_s3_key_prefix" {}
 
+variable "parameter_name" {}
+variable "parameter_family" {}
+variable "parameter_map" {}
+
 variable "tags" {
   type = map
 }

@@ -8,7 +8,7 @@ cluster_port                        = 5439
 vpc_security_group_ids              = []
 redshift_subnet_group_name          = ""
 parameter_group_name                = ""
-publicly_accessible                 = false
+publicly_accessible                 = true
 snapshot_identifier                 = null
 snapshot_cluster_identifier         = null
 owner_account                       = null
@@ -25,6 +25,12 @@ enhanced_vpc_routing                = false
 enable_logging                      = false
 logging_bucket_name                 = null
 logging_s3_key_prefix               = null
+
+parameter_name                      = "prancer-redshift-params"
+parameter_family                    = "redshift-1.0"
+parameter_map                       = {
+  require_ssl = "false"
+}
 
 tags                                = {
   environment = "Production"
