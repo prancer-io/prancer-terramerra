@@ -9,7 +9,7 @@ enable_ipv6                     = false
 subnet_cidr_block               = "10.10.1.0/24"
 availability_zone               = null
 availability_zone_id            = null
-map_public_ip_on_launch         = false
+map_public_ip_on_launch         = true
 assign_ipv6_address_on_creation = false
 ipv6_cidr_block                 = null
 
