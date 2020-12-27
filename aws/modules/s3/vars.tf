@@ -117,6 +117,32 @@ variable "server_side_encryption_configuration" {
   default     = []
 }
 
+variable "enable_logging" {
+  description = "Enable or disable logging"
+  type        = bool
+  default     = false
+}
+
+variable "target_bucket" {
+  description = "The name of the bucket that will receive the log objects."
+  default     = null
+}
+
+variable "target_prefix" {
+  description = "To specify a key prefix for log objects."
+  default     = "log/"
+}
+
+variable "enable_website" {
+  description = "enable or disable website"
+  type        = bool
+  default     = false
+}
+
+variable "redirect_all_requests_to" {
+  type = string
+}
+
 variable "tags" {
   description = "A mapping of tags to assign to all resources"
   type        = map(string)

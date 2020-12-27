@@ -22,6 +22,13 @@ variable "lifecycle_expiration_object_tags" {}
 variable "expire_noncurrent_versions" {}
 variable "lifecycle_days_to_expiration" {}
 variable "server_side_encryption_configuration" {}
+variable "enable_logging" {}
+variable "target_bucket" {}
+variable "target_prefix" {}
+variable "enable_website" {}
+variable "redirect_all_requests_to" {}
+variable "s3_policy" {}
+variable "s3_policy_sslonly" {}
 variable "tags" {
   type = map
 }
