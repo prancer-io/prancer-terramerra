@@ -7,12 +7,12 @@ zone                           = "us-central1-a"
 vm_tags                        = ["vm", "test"]
 vm_image                       = "debian-cloud/debian-9"
 scheduling_enabled             = true
-scheduling_preemptible         = false
+scheduling_preemptible         = true
 scheduling_on_host_maintenance = null
-scheduling_automatic_restart   = true
+scheduling_automatic_restart   = false
 network                        = "default"
 subnetwork                     = null
-can_ip_forward                 = false
+can_ip_forward                 = true
 vm_metadata                    = {
   serial-port-enable = "true"
 }
