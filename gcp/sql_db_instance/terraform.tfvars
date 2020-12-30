@@ -16,5 +16,6 @@ db_backup  = [{
 db_ipconf = [{
   ipv4_enabled = true
   require_ssl  = false
+  authorized_networks = ["0.0.0.0/0"]
 }]
 db_auth_net = []
