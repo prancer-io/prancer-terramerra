@@ -6,4 +6,6 @@ resource "azurerm_mssql_server_security_alert_policy" "mssqlsecuritypolicy" {
   storage_account_access_key = var.sql_sec_policy_access_key
   disabled_alerts            = var.sql_sec_policy_disabled_alerts
   retention_days             = var.sql_sec_policy_retention
+  email_account_admins       = var.sql_sec_email_account_admins
+  email_addresses            = var.sql_sec_email_addresses
 }

@@ -24,5 +24,22 @@ module "s3_bucket" {
   expire_noncurrent_versions                      = var.expire_noncurrent_versions
   lifecycle_days_to_expiration                    = var.lifecycle_days_to_expiration
   server_side_encryption_configuration            = var.server_side_encryption_configuration
+  enable_logging                                  = var.enable_logging
+  target_bucket                                   = var.target_bucket
+  target_prefix                                   = var.target_prefix
+  enable_website                                  = var.enable_website
+  redirect_all_requests_to                        = var.redirect_all_requests_to
   tags                                            = var.tags
+}
+
+module "s3_policy" {
+  source       = "../modules/s3policy"
+  s3_bucket_id = module.s3_bucket.s3_bucket_id
+  s3_policy    = var.s3_policy
+}
+
+module "s3_policy_sslonly" {
+  source       = "../modules/s3policy"
+  s3_bucket_id = module.s3_bucket.s3_bucket_id
+  s3_policy    = var.s3_policy_sslonly
 }

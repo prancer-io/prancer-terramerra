@@ -6,6 +6,7 @@ resource "aws_lambda_function" "lambda" {
       variables = environment.value.variables
     }
   }
+  kms_key_arn                    = var.kms_key_arn
   filename                       = var.s3_bucket == "" ? var.filename : null
   function_name                  = var.function_name
   handler                        = var.handler
@@ -27,5 +28,9 @@ resource "aws_lambda_function" "lambda" {
       security_group_ids = vpc_config.value.security_group_ids
       subnet_ids         = vpc_config.value.subnet_ids
     }
+  }
+
+  tracing_config {
+    mode = var.tracing_mode
   }
 }

@@ -1,43 +1,45 @@
-resource "aws_lb" "elb" {
-  name        = var.name
-  name_prefix = var.name_prefix
-
-  load_balancer_type = var.load_balancer_type
-  internal           = var.internal
+resource "aws_elb" "elb" {
+  name               = var.name
+  availability_zones = var.availability_zones
   security_groups    = var.security_groups
-  subnets            = var.subnets
-
-  idle_timeout                     = var.idle_timeout
-  enable_cross_zone_load_balancing = var.enable_cross_zone_load_balancing
-  enable_deletion_protection       = var.enable_deletion_protection
-  enable_http2                     = var.enable_http2
-  ip_address_type                  = var.ip_address_type
-  drop_invalid_header_fields       = var.drop_invalid_header_fields
 
   dynamic "access_logs" {
-    for_each = length(keys(var.access_logs)) == 0 ? [] : [var.access_logs]
+    for_each = var.logging_enabled ? [1] : []
 
     content {
-      enabled = lookup(access_logs.value, "enabled", lookup(access_logs.value, "bucket", null) != null)
-      bucket  = lookup(access_logs.value, "bucket", null)
-      prefix  = lookup(access_logs.value, "prefix", null)
+      bucket        = var.bucket
+      bucket_prefix = var.bucket_prefix
+      interval      = var.log_interval
     }
   }
 
-  dynamic "subnet_mapping" {
-    for_each = var.subnet_mapping
+  dynamic "listener" {
+    for_each = var.listener
 
     content {
-      subnet_id     = subnet_mapping.value.subnet_id
-      allocation_id = lookup(subnet_mapping.value, "allocation_id", null)
+      instance_port      = listener.value["instance_port"]
+      instance_protocol  = listener.value["instance_protocol"]
+      lb_port            = listener.value["lb_port"]
+      lb_protocol        = listener.value["lb_protocol"]
+      ssl_certificate_id = listener.value["ssl_certificate_id"]
     }
   }
 
-  tags = var.tags
+  health_check {
+    healthy_threshold   = var.healthy_threshold
+    unhealthy_threshold = var.unhealthy_threshold
+    timeout             = var.timeout
+    target              = var.target
+    interval            = var.check_interval
+  }
 
-  timeouts {
-    create = var.load_balancer_create_timeout
-    update = var.load_balancer_update_timeout
-    delete = var.load_balancer_delete_timeout
+  instances                   = var.instances
+  cross_zone_load_balancing   = var.cross_zone_load_balancing
+  idle_timeout                = var.idle_timeout
+  connection_draining         = var.connection_draining
+  connection_draining_timeout = var.connection_draining_timeout
+
+  tags = {
+    Name = "foobar-terraform-elb"
   }
 }

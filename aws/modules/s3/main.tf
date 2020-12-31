@@ -97,5 +97,20 @@ resource "aws_s3_bucket" "s3_bucket" {
     }
   }
 
+  dynamic "logging" {
+    for_each = var.enable_logging == true ? [1] : []
+    content {
+      target_bucket = var.target_bucket
+      target_prefix = var.target_prefix
+    }
+  }
+
+  dynamic "website" {
+    for_each = var.enable_website == true ? [1] : []
+    content {
+      redirect_all_requests_to = "https://example.com"
+    }
+  }
+
   tags = var.tags
 }

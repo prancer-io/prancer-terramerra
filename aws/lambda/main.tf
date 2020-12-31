@@ -52,6 +52,7 @@ module "lambda" {
   source                         = "../modules/lambda"
   description                    = var.description
   environment                    = var.environment
+  kms_key_arn                    = var.kms_key_arn
   filename                       = var.filename
   function_name                  = var.function_name
   handler                        = var.handler
@@ -70,4 +71,5 @@ module "lambda" {
     subnet_ids         = [module.subnet.id]
     security_group_ids = [module.security_group.id]
   }
+  tracing_mode                   = var.tracing_mode
 }

@@ -25,6 +25,12 @@ variable "environment" {
   default     = {}
 }
 
+variable "kms_key_arn" {
+  description = "Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key that is used to encrypt environment variables."
+  type        = string
+  default     = null
+}
+
 variable "memory_size" {
   description = "Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128."
   default     = 128
@@ -79,4 +85,10 @@ variable "vpc_config" {
   description = "Provide this to allow your function to access your VPC (if both 'subnet_ids' and 'security_group_ids' are empty then vpc_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details)."
   type        = map(list(string))
   default     = {}
+}
+
+variable "tracing_mode" {
+  description = "Can be either PassThrough or Active."
+  type        = string
+  default     = "PassThrough"
 }

@@ -5,10 +5,13 @@ resource "aws_cloudfront_distribution" "cloudfront" {
   default_root_object = var.default_root_object
   price_class         = var.price_class
 
-  logging_config {
-    include_cookies = var.log_include_cookies
-    bucket          = var.bucket
-    prefix          = var.log_prefix
+  dynamic "logging_config" {
+    for_each = var.enable_cf_log ? [1] : []
+    content {
+      include_cookies = var.log_include_cookies
+      bucket          = var.bucket
+      prefix          = var.log_prefix
+    }
   }
 
   aliases = var.aliases
@@ -18,13 +21,23 @@ resource "aws_cloudfront_distribution" "cloudfront" {
     origin_id   = var.origin_id
     origin_path = var.origin_path
 
-    custom_origin_config {
-      http_port                = var.origin_http_port
-      https_port               = var.origin_https_port
-      origin_protocol_policy   = var.origin_protocol_policy
-      origin_ssl_protocols     = var.origin_ssl_protocols
-      origin_keepalive_timeout = var.origin_keepalive_timeout
-      origin_read_timeout      = var.origin_read_timeout
+    dynamic "custom_origin_config" {
+      for_each = var.enable_custom_origin ? [1] : []
+      content {
+        http_port                = var.origin_http_port
+        https_port               = var.origin_https_port
+        origin_protocol_policy   = var.origin_protocol_policy
+        origin_ssl_protocols     = var.origin_ssl_protocols
+        origin_keepalive_timeout = var.origin_keepalive_timeout
+        origin_read_timeout      = var.origin_read_timeout
+      }
+    }
+
+    dynamic "s3_origin_config" {
+      for_each = var.enable_s3_origin ? [1] : []
+      content {
+        origin_access_identity = var.origin_access_identity
+      }
     }
   }
 
@@ -36,10 +49,11 @@ resource "aws_cloudfront_distribution" "cloudfront" {
   }
 
   default_cache_behavior {
-    allowed_methods  = var.allowed_methods
-    cached_methods   = var.cached_methods
-    target_origin_id = var.target_origin_id
-    compress         = var.compress
+    allowed_methods           = var.allowed_methods
+    cached_methods            = var.cached_methods
+    target_origin_id          = var.target_origin_id
+    compress                  = var.compress
+    field_level_encryption_id = var.field_encrypt
 
     forwarded_values {
       headers = var.forward_headers

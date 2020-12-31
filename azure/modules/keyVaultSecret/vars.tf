@@ -8,6 +8,7 @@ variable "value" {
 }
 
 variable "keyvault_id" {}
+variable "expiration_date" {}
 
 variable "tags"{
   type = map

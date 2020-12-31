@@ -27,6 +27,12 @@ variable "subject_alternative_names" {
   description = "A list of domains that should be SANs in the issued certificate"
 }
 
+variable "transparency" {
+  type        = string
+  default     = "DISABLED"
+  description = "Specifies whether certificate details should be added to a certificate transparency log."
+}
+
 variable "tags" {
   type        = map(string)
   default     = {}

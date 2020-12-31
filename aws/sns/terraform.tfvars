@@ -18,9 +18,9 @@ sqs_failure_feedback_role_arn            = null
 kms_master_key_id                        = null
 
 enable_sns_subscription                  = false
-endpoint                                 = ""
-endpoint_auto_confirms                   = false
-protocol                                 = "lambda"
+endpoint                                 = "http://fake-endpoint.example.com"
+endpoint_auto_confirms                   = true
+protocol                                 = "http"
 
 tags                                     = {
   environment = "Production"

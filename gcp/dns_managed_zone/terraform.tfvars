@@ -8,7 +8,7 @@ dns_labels      = {}
 dnssec = [{
   kind          = "dns#managedZoneDnsSecConfig"
   non_existence = "nsec3"
-  state         = "on"  
+  state         = "off"
 }]
 dnssec_keys = [{
   algorithm  = "rsasha256"

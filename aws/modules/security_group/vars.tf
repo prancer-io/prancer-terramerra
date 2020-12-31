@@ -20,6 +20,32 @@ variable "revoke_rules_on_delete" {
   default     = false
 }
 
+variable "ingress_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "ingress_description" {
+  default = ""
+}
+
+variable "ingress_from_port" {
+  default = ""
+}
+
+variable "ingress_to_port" {
+  default = ""
+}
+
+variable "ingress_protocol" {
+  default = ""
+}
+
+variable "ingress_cidr_blocks" {
+  type = list(string)
+  default = []
+}
+
 variable "tags" {
   description = "A mapping of tags to assign to security group"
   type        = map(string)

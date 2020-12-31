@@ -5,7 +5,7 @@ server_version   = "12.0"
 admin_user       = "prancer_admin"
 admin_password   = "vijcykDaHarj+Oz5"
 
-enable_ad_admin  = true
+enable_ad_admin  = false
 sql_server_login = "sqladmin"
 
 enable_sql_firewall = true

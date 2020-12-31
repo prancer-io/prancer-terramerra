@@ -22,6 +22,10 @@ variable "k8s_network_policy_enabled" {
   type = bool
   default = false
 }
+variable "master_authorized_networks_config" {
+  type = bool
+  default = false
+}
 variable "k8s_private_cluster_config" {
   type = list
   default = []
@@ -92,6 +96,10 @@ variable "k8s_node_count" {
   type = number
   default = 1
 }
+variable "node_locations" {
+  type = list(string)
+  default = []
+}
 variable "k8s_image_type" {
   type = string
   default = "UBUNTU"
@@ -112,7 +120,18 @@ variable "k8s_addons" {
   type = list
   default = []
 }
+variable "enable_intranode_visibility" {
+  type = bool
+  default = false
+}
 variable "k8s_metadata" {
   type = map
   default = {}
+}
+variable "k8s_bigquery_dataset" {
+  default = null
+}
+variable "enable_network_egress_metering" {
+  type = bool
+  default = false
 }

@@ -44,6 +44,7 @@ environment                    = {
     API_KEY = "3c3ac97c6fa1850d366b70fbcd49a3db"
   }
 }
+kms_key_arn                    = null
 filename                       = "function.py.zip"
 function_name                  = "prancer-lambda-fn"
 handler                        = "prancer-lambda-handler"
@@ -55,6 +56,7 @@ s3_bucket                      = ""
 s3_key                         = ""
 s3_object_version              = ""
 timeout                        = 5
+tracing_mode                   = "PassThrough"
 
 tags = {
   environment = "Production"

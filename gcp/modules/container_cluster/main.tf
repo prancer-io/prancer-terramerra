@@ -64,6 +64,11 @@ resource "google_container_cluster" "primary" {
     }
   }
 
+  dynamic "master_authorized_networks_config" {
+    for_each = var.master_authorized_networks_config ? [1] : []
+    content {}
+  }
+
   pod_security_policy_config {
     enabled = var.k8s_pod_security_enabled
   }
@@ -78,7 +83,16 @@ resource "google_container_cluster" "primary" {
     }
   }
 
+  resource_usage_export_config {
+    enable_network_egress_metering = var.enable_network_egress_metering
+
+    bigquery_destination {
+      dataset_id = var.k8s_bigquery_dataset
+    }
+  }
+
   enable_binary_authorization = var.k8s_enable_binary_auth
+  enable_intranode_visibility = var.enable_intranode_visibility
 
   monitoring_service = var.k8s_monitoring_service
   logging_service    = var.k8s_logging_service
@@ -91,6 +105,7 @@ resource "google_container_node_pool" "nodes" {
   location   = var.location
   cluster    = google_container_cluster.primary.name
   node_count = var.k8s_node_count
+  node_locations = var.node_locations
 
   node_config {
     image_type   = var.k8s_image_type

@@ -26,6 +26,10 @@ variable "enableSecureTransfer" {
   description = "Enable Secure Transfer"
 }
 
+variable "allow_blob_public_access" {
+  description = "Allow Blob Public Access"
+}
+
 variable tags {
   type = map
 }

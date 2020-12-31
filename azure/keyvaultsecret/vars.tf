@@ -12,6 +12,7 @@ variable "kv_sku" {}
 
 variable "kv_secret_name" {}
 variable "kv_secret_value" {}
+variable "expiration_date" {}
 
 variable "tags" {
   type = map

@@ -15,3 +15,8 @@ variable "app_gw_be_http_timeout" {}
 variable "app_gw_ip" {}
 variable "app_gw_listener_proto" {}
 variable "app_gw_req_route_type" {}
+variable "min_protocol_version" {}
+variable "waf_enabled" {}
+variable "waf_firewall_mode" {}
+variable "waf_rule_set_type" {}
+variable "waf_rule_set_version" {}

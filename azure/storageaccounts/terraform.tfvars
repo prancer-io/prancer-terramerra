@@ -5,7 +5,12 @@ storage_count             = 1
 storage_name              = "prancerstorageaccount007"
 accountTier               = "Standard"
 replicationType           = "LRS"
-enableSecureTransfer      = "false"
+enableSecureTransfer      = false
+allow_blob_public_access  = true
+
+default_action             = "Allow"
+ip_rules                   = ["1.1.1.1"]
+bypass                     = ["Metrics"]
 
 storage_container_name        = "prancer-storage-container"
 storage_container_access_type = "private"
