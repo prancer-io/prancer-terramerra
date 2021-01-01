@@ -1,6 +1,7 @@
 resource "google_compute_firewall" "firewall" {
-  name    = var.fw_name
-  network = var.fw_network_id
+  name      = var.fw_name
+  network   = var.fw_network_id
+  direction = var.fw_direction
 
   dynamic "allow" {
     for_each = var.fw_allows
@@ -11,5 +12,6 @@ resource "google_compute_firewall" "firewall" {
     }
   }
 
-  source_tags = var.fw_source_tags
+  source_ranges = var.fw_source_ranges 
+  source_tags   = var.fw_source_tags
 }

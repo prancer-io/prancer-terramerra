@@ -9,9 +9,10 @@ module "network" {
 }
 
 module "firewall" {
-  source         = "../modules/compute_firewall/"
-  fw_name        = var.fw_name
-  fw_network_id  = module.network.id
-  fw_allows      = var.fw_allows
-  fw_source_tags = var.fw_source_tags
+  source           = "../modules/compute_firewall/"
+  fw_name          = var.fw_name
+  fw_network_id    = module.network.id
+  fw_allows        = var.fw_allows
+  fw_source_ranges = var.fw_source_ranges
+  fw_source_tags   = var.fw_source_tags
 }

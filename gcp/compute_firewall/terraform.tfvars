@@ -7,15 +7,14 @@ auto_create_subnetworks         = null
 routing_mode                    = null
 delete_default_routes_on_create = false
 
-fw_name        = "prancer-web-firewall"
+fw_name        = "prancer-firewall"
+fw_direction   = "INGRESS"
 fw_allows      = [{
   protocol = "tcp"
-  ports    = [80, 443]
+  ports    = [443]
 },{
   protocol = "tcp"
-  ports    = [22]
-},{
-  protocol = "tcp"
-  ports    = ["8080-8888"]
+  ports    = ["20-28000"]
 }]
+fw_source_ranges = ["0.0.0.0/0"]
 fw_source_tags = []
