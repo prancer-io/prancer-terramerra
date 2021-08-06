@@ -9,3 +9,6 @@ PR-AZR-0008-TRF |terraform.tfvars|oms_agent = false                |oms_agent = 
                 |                |log_analytics_workspace_id = null|log_analytics_workspace_id = ID
 PR-AZR-0009-TRF |terraform.tfvars|aks_node_pool_count = 1          |aks_node_pool_count = 3
 PR-AZR-0010-TRF |terraform.tfvars|rbac_enabled = false             |rbac_enabled = true
+PR-AZR-0010-TRF |terraform.tfvars|                                 |aad_managed = true
+PR-AZR-0068-TRF |terraform.tfvars|                                 |aad_managed_azure_rbac_enabled = true
+
