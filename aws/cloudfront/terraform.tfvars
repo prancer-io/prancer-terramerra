@@ -30,7 +30,7 @@ forward_headers                   = []
 forward_query_string              = false
 forward_cookies                   = "none"
 forward_cookies_whitelisted_names = []
-viewer_protocol_policy            = "allow-all"
+viewer_protocol_policy            = "https-only"
 default_ttl                       = 60
 min_ttl                           = 0
 max_ttl                           = 31536000
@@ -40,5 +40,5 @@ geo_restriction_locations         = []
 
 tags = {
   Environment = "Production"
-  Project = "Prancer"
+  Project     = "Prancer"
 }
