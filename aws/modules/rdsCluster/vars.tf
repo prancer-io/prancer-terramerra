@@ -5,3 +5,4 @@ variable "cluster_master_username" {}
 variable "cluster_skip_final_snapshot" {}
 variable "cluster_kms_key_id" {}
 variable "cluster_storage_encrypted" {}
+variable "cluster_backup_retention_period" {}

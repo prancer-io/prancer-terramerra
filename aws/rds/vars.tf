@@ -49,6 +49,7 @@ variable "backup_window" {}
 variable "timezone" {}
 variable "enabled_cloudwatch_logs_exports" {}
 variable "deletion_protection" {}
+variable "cluster_backup_retention_period" {}
 variable "timeouts" {
   type = map
 }
