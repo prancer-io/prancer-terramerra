@@ -63,3 +63,51 @@ resource "aws_db_instance" "rds" {
     update = lookup(var.timeouts, "update", null)
   }
 }
+
+resource "aws_sns_topic" "default" {
+  name = "rds-events"
+}
+
+resource "aws_db_event_subscription" "default-db-security-group" {
+  name      = "rds-event-sub"
+  sns_topic = aws_sns_topic.default.arn
+
+  source_type = "db-security-group"
+  enabled = false
+
+  event_categories = [
+    "availability",
+    "deletion",
+    "failover",
+    "failure",
+    "low storage",
+    "maintenance",
+    "notification",
+    "read replica",
+    "recovery",
+    "restoration",
+  ]
+}
+
+
+resource "aws_db_event_subscription" "default-db-instance" {
+  name      = "rds-event-sub"
+  sns_topic = aws_sns_topic.default.arn
+
+  source_type = "db-instance"
+  source_ids  = [aws_db_instance.rds.id]
+  enabled = false
+
+  event_categories = [
+    "availability",
+    "deletion",
+    "failover",
+    "failure",
+    "low storage",
+    "maintenance",
+    "notification",
+    "read replica",
+    "recovery",
+    "restoration",
+  ]
+}
