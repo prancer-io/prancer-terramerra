@@ -40,4 +40,6 @@ resource "aws_lb" "lb" {
     update = var.load_balancer_update_timeout
     delete = var.load_balancer_delete_timeout
   }
+  aws_lb {
+  }
 }
