@@ -49,13 +49,14 @@ backup_window                         = "05:05-07:05"
 timezone                              = ""
 enabled_cloudwatch_logs_exports       = []
 deletion_protection                   = false
-timeouts                              = {
-  "create": "40m",
-  "delete": "40m",
-  "update": "80m"
+cluster_backup_retention_period       = 0
+timeouts = {
+  "create" : "40m",
+  "delete" : "40m",
+  "update" : "80m"
 }
 
-tags                                = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }

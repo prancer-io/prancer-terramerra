@@ -68,8 +68,8 @@ module "lambda" {
   timeout                        = var.timeout
   tags                           = var.tags
   vpc_config = {
-    subnet_ids         = [module.subnet.id]
-    security_group_ids = [module.security_group.id]
+    subnet_ids         = []
+    security_group_ids = []
   }
   tracing_mode                   = var.tracing_mode
 }

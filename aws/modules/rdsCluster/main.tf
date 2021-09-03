@@ -6,4 +6,5 @@ resource "aws_rds_cluster" "rdscluster" {
   skip_final_snapshot  = var.cluster_skip_final_snapshot
   kms_key_id           = var.cluster_kms_key_id
   storage_encrypted    = var.cluster_storage_encrypted
+  backup_retention_period = var.cluster_backup_retention_period
 }

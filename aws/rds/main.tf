@@ -1,16 +1,18 @@
 module "rdscluster" {
-  source = "../modules/rdsCluster"
-  cluster_identifier          = var.cluster_identifier
-  cluster_engine_mode         = var.cluster_engine_mode
-  cluster_master_password     = var.cluster_master_password
-  cluster_master_username     = var.cluster_master_username
-  cluster_skip_final_snapshot = var.skip_final_snapshot
-  cluster_kms_key_id          = var.cluster_kms_key_id
-  cluster_storage_encrypted   = var.cluster_storage_encrypted
+  source                          = "../modules/rdsCluster"
+  cluster_identifier              = var.cluster_identifier
+  cluster_engine_mode             = var.cluster_engine_mode
+  cluster_master_password         = var.cluster_master_password
+  cluster_master_username         = var.cluster_master_username
+  cluster_skip_final_snapshot     = var.skip_final_snapshot
+  cluster_kms_key_id              = var.cluster_kms_key_id
+  cluster_storage_encrypted       = var.cluster_storage_encrypted
+  cluster_backup_retention_period = var.cluster_backup_retention_period
+
 }
 
 module "rds" {
-  source  = "../modules/rds"
+  source                                = "../modules/rds"
   identifier                            = var.identifier
   engine                                = var.engine
   engine_version                        = var.engine_version
