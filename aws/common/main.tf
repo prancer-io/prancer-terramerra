@@ -178,3 +178,110 @@ resource "aws_dms_endpoint" "test" {
 
   username = "test"
 }
+
+
+#cloudformation stack
+resource "aws_cloudformation_stack" "network" {
+  name = "networking-stack"
+
+  parameters = {
+    VPCCidr = "10.0.0.0/16"
+  }
+
+  template_body = <<STACK
+{
+  "Parameters" : {
+    "VPCCidr" : {
+      "Type" : "String",
+      "Default" : "10.0.0.0/16",
+      "Description" : "Enter the CIDR block for the VPC. Default is 10.0.0.0/16."
+    }
+  },
+  "Resources" : {
+    "myVpc": {
+      "Type" : "AWS::EC2::VPC",
+      "Properties" : {
+        "CidrBlock" : { "Ref" : "VPCCidr" },
+        "Tags" : [
+          {"Key": "Name", "Value": "Primary_CF_VPC"}
+        ]
+      }
+    }
+  }
+}
+STACK
+}
+
+
+
+#config recorder
+resource "aws_config_configuration_recorder" "foo" {
+  name     = "example"
+  role_arn = aws_iam_role.r.arn
+}
+
+resource "aws_iam_role" "r" {
+  name = "awsconfig-example"
+
+  assume_role_policy = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "config.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+POLICY
+}
+
+
+# network acl rule
+resource "aws_network_acl_rule" "ingress1" {
+  network_acl_id = ""
+  rule_number    = 200
+  egress         = false
+  protocol       = -1
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 22
+  to_port        = 22
+}
+
+resource "aws_network_acl_rule" "ingress2" {
+  network_acl_id = ""
+  rule_number     = 200
+  egress          = false
+  protocol        = -1
+  rule_action     = "allow"
+  ipv6_cidr_block = "::/0"
+  from_port       = 22
+  to_port         = 22
+}
+
+resource "aws_network_acl_rule" "egress1" {
+  network_acl_id = ""
+  rule_number    = 200
+  egress         = true
+  protocol       = -1
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 22
+  to_port        = 22
+}
+
+resource "aws_network_acl_rule" "egress2" {
+  network_acl_id = ""
+  rule_number     = 200
+  egress          = true
+  protocol        = -1
+  rule_action     = "allow"
+  ipv6_cidr_block = "::/0"
+  from_port       = 22
+  to_port         = 22
+}
