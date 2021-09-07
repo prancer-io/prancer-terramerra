@@ -1,7 +1,8 @@
 variable "bucket_name" {}
 variable "bucket_acl" {}
 variable "acceleration_status" {}
-variable "versioning_enabled" {}
+variable "versioning_enabled" { default = true
+}
 variable "cors_allowed_headers" {}
 variable "cors_allowed_methods" {}
 variable "cors_allowed_origins" {}
