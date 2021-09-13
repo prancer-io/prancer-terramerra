@@ -35,10 +35,10 @@ default_ttl                       = 60
 min_ttl                           = 0
 max_ttl                           = 31536000
 web_acl_id                        = ""
-geo_restriction_type              = "none"
+geo_restriction_type              = "String<The method that you want to use to restrict distribution of your content by, Allowed values: blacklist | whitelist>"
 geo_restriction_locations         = []
 
 tags = {
   Environment = "Production"
-  Project = "Prancer"
+  Project     = "Prancer"
 }
