@@ -45,7 +45,7 @@ resource "aws_cloudfront_distribution" "cloudfront" {
     acm_certificate_arn            = var.acm_certificate_arn
     ssl_support_method             = "sni-only"
     minimum_protocol_version       = var.viewer_minimum_protocol_version
-    cloudfront_default_certificate = var.acm_certificate_arn == "" ? true : false
+    cloudfront_default_certificate = false
   }
 
   default_cache_behavior {
