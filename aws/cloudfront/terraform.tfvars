@@ -25,7 +25,7 @@ viewer_minimum_protocol_version   = "TLSv1"
 allowed_methods                   = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
 cached_methods                    = ["GET", "HEAD"]
 compress                          = false
-field_encrypt                     = ""
+field_encrypt                     = "String<Field level encryption configuration ID>"
 forward_headers                   = []
 forward_query_string              = false
 forward_cookies                   = "none"
@@ -40,5 +40,5 @@ geo_restriction_locations         = []
 
 tags = {
   Environment = "Production"
-  Project = "Prancer"
+  Project     = "Prancer"
 }
