@@ -19,13 +19,13 @@ assume_role_policy            = <<EOF
 }
 EOF
 
-cidr_block                      = "10.10.0.0/16"
-instance_tenancy                = "default"
-enable_dns_hostnames            = false
-enable_dns_support              = true
-enable_classiclink              = null
-enable_classiclink_dns_support  = null
-enable_ipv6                     = false
+cidr_block                     = "10.10.0.0/16"
+instance_tenancy               = "default"
+enable_dns_hostnames           = false
+enable_dns_support             = true
+enable_classiclink             = null
+enable_classiclink_dns_support = null
+enable_ipv6                    = false
 
 subnet_cidr_block               = "10.10.1.0/24"
 availability_zone               = null
@@ -34,19 +34,19 @@ map_public_ip_on_launch         = false
 assign_ipv6_address_on_creation = false
 ipv6_cidr_block                 = null
 
-sgroup_name                     = "prancer-security-group"
-sgroup_description              = "Prancer Security Group"
-revoke_rules_on_delete          = false
+sgroup_name            = "prancer-security-group"
+sgroup_description     = "Prancer Security Group"
+revoke_rules_on_delete = false
 
-rule_description                = "SSH rule"
-rule_type                       = "ingress"
-rule_from_port                  = 20
-rule_to_port                    = 5900
-rule_protocol                   = "all"
-rule_cidr_blocks                = ["0.0.0.0/0"]
-rule_self                       = false
+rule_description = "SSH rule"
+rule_type        = "ingress"
+rule_from_port   = 20
+rule_to_port     = 5900
+rule_protocol    = "all"
+rule_cidr_blocks = "List<List of IPv4 CIDR blocks, do not allow all traffic by using '0.0.0.0/0'>"
+rule_self        = false
 
 tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
