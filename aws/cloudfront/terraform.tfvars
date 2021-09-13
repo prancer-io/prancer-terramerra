@@ -34,11 +34,11 @@ viewer_protocol_policy            = "allow-all"
 default_ttl                       = 60
 min_ttl                           = 0
 max_ttl                           = 31536000
-web_acl_id                        = ""
+web_acl_id                        = "String<A unique identifier that specifies the AWS WAF web ACL>"
 geo_restriction_type              = "none"
 geo_restriction_locations         = []
 
 tags = {
   Environment = "Production"
-  Project = "Prancer"
+  Project     = "Prancer"
 }
