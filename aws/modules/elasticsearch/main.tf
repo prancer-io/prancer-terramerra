@@ -96,4 +96,8 @@ resource "aws_elasticsearch_domain" "esearch" {
   }
 
   tags = var.tags
+  encrypt_at_rest {
+    enabled    = true
+    kms_key_id = "String<KMS key id to encrypt the Elasticsearch domain>"
+  }
 }
