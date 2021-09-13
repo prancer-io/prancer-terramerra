@@ -82,4 +82,7 @@ resource "aws_cloudfront_distribution" "cloudfront" {
   }
 
   tags = var.tags
+  logging_config {
+    bucket = "String<The Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com>"
+  }
 }
