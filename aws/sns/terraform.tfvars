@@ -17,12 +17,12 @@ sqs_success_feedback_sample_rate         = null
 sqs_failure_feedback_role_arn            = null
 kms_master_key_id                        = null
 
-enable_sns_subscription                  = false
-endpoint                                 = "http://fake-endpoint.example.com"
-endpoint_auto_confirms                   = true
-protocol                                 = "http"
+enable_sns_subscription = false
+endpoint                = "<The endpoint of the url must startswith https://>"
+endpoint_auto_confirms  = true
+protocol                = "https"
 
-tags                                     = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
