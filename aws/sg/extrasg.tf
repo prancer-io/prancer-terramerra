@@ -229,14 +229,15 @@ resource "aws_elb" "web" {
 
   listener {
 
-    instance_port = 80
+    instance_port = 443
 
-    instance_protocol = "http"
+    instance_protocol = "HTTPS"
 
-    lb_port = 80
+    lb_port = 443
 
-    lb_protocol = "http"
+    lb_protocol = "https"
 
+    ssl_certificate_id = "String<The Amazon Resource Name (ARN) of the server certificate>"
   }
 
 
