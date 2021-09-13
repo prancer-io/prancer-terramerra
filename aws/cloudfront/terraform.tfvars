@@ -21,7 +21,7 @@ origin_keepalive_timeout          = 60
 origin_read_timeout               = 60
 origin_access_identity            = ""
 acm_certificate_arn               = ""
-viewer_minimum_protocol_version   = "TLSv1"
+viewer_minimum_protocol_version   = "TLSv1.2_2021"
 allowed_methods                   = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
 cached_methods                    = ["GET", "HEAD"]
 compress                          = false
@@ -40,5 +40,5 @@ geo_restriction_locations         = []
 
 tags = {
   Environment = "Production"
-  Project = "Prancer"
+  Project     = "Prancer"
 }
