@@ -113,4 +113,12 @@ resource "aws_s3_bucket" "s3_bucket" {
   }
 
   tags = var.tags
+  logging {
+    target_bucket = "String<The name of the bucket that will receive the log objects>"
+    target_prefix = "String< To specify a key prefix for log objects>"
+  }
+  logging {
+    target_bucket = "String<The name of the bucket that will receive the log objects>"
+    target_prefix = "String< To specify a key prefix for log objects>"
+  }
 }
