@@ -21,6 +21,7 @@ resource "aws_instance" "ec2" {
   private_ip                  = length(var.private_ips) > 0 ? element(var.private_ips, count.index) : var.private_ip
   ipv6_address_count          = var.ipv6_address_count
   ipv6_addresses              = var.ipv6_addresses
+  security_groups             = ["default"]
 
   ebs_optimized = var.ebs_optimized
 
