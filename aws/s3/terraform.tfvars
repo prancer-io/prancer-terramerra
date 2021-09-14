@@ -42,7 +42,7 @@ s3_policy                                       = <<POLICY
   ]
 }
 POLICY
-s3_policy_sslonly = <<POLICY
+s3_policy_sslonly                               = <<POLICY
 {
   "Id": "sslonly",
   "Version": "2012-10-17",
@@ -65,7 +65,7 @@ s3_policy_sslonly = <<POLICY
 }
 POLICY
 
-tags                                     = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
