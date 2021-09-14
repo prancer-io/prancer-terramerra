@@ -1,20 +1,20 @@
 resource "aws_s3_bucket" "s3bucket" {
-    bucket = var.bucket
-    acl = "public-read"
+  bucket = var.bucket
+  acl    = "String<A canned access control list (ACL) that grants predefined permissions to the bucket. Choices are 'private', 'aws-exec-read', 'log-delivery-write'>"
 
-    website {
-        redirect_all_requests_to = "index.html"
-    }
+  website {
+    redirect_all_requests_to = "index.html"
+  }
 
-    cors_rule {
-        allowed_headers = ["*"]
-        allowed_methods = ["PUT","POST"]
-        allowed_origins = ["*"]
-        expose_headers = ["ETag"]
-        max_age_seconds = 3000
-    }
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["PUT", "POST"]
+    allowed_origins = ["*"]
+    expose_headers  = ["ETag"]
+    max_age_seconds = 3000
+  }
 
-    policy = <<EOF
+  policy = <<EOF
 {
     "Version": "2008-10-17",
     "Statement": [
@@ -33,7 +33,7 @@ EOF
 }
 
 module "cloudfront" {
-  source  = "../modules/cloudfront"
+  source                            = "../modules/cloudfront"
   enabled                           = var.enabled
   is_ipv6_enabled                   = var.is_ipv6_enabled
   comment                           = var.comment
