@@ -254,7 +254,7 @@ resource "aws_network_acl_rule" "ingress1" {
 }
 
 resource "aws_network_acl_rule" "ingress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = false
   protocol        = -1
@@ -276,11 +276,11 @@ resource "aws_network_acl_rule" "egress1" {
 }
 
 resource "aws_network_acl_rule" "egress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = true
   protocol        = -1
-  rule_action     = "allow"
+  rule_action     = "deny"
   ipv6_cidr_block = "::/0"
   from_port       = 22
   to_port         = 22
