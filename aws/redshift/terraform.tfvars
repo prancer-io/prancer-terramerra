@@ -23,16 +23,16 @@ encrypted                           = false
 kms_key_id                          = ""
 enhanced_vpc_routing                = false
 enable_logging                      = false
-logging_bucket_name                 = null
+logging_bucket_name                 = "String<The name of an existing S3 bucket where the log files are to be stored>"
 logging_s3_key_prefix               = null
 
-parameter_name                      = "prancer-redshift-params"
-parameter_family                    = "redshift-1.0"
-parameter_map                       = {
+parameter_name   = "prancer-redshift-params"
+parameter_family = "redshift-1.0"
+parameter_map = {
   require_ssl = "false"
 }
 
-tags                                = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
