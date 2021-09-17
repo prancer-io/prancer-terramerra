@@ -218,6 +218,10 @@ STACK
 resource "aws_config_configuration_recorder" "foo" {
   name     = "example"
   role_arn = aws_iam_role.r.arn
+  recording_group {
+    all_supported                 = true
+    include_global_resource_types = true
+  }
 }
 
 resource "aws_iam_role" "r" {
@@ -254,7 +258,7 @@ resource "aws_network_acl_rule" "ingress1" {
 }
 
 resource "aws_network_acl_rule" "ingress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = false
   protocol        = -1
@@ -276,7 +280,7 @@ resource "aws_network_acl_rule" "egress1" {
 }
 
 resource "aws_network_acl_rule" "egress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = true
   protocol        = -1
