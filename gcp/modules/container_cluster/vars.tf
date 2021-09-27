@@ -54,7 +54,7 @@ variable "k8s_username" {
 }
 variable "k8s_password" {
   type = string
-  default = ""
+  default = "Root1234"
 }
 variable "k8s_certificate" {
   type = string
