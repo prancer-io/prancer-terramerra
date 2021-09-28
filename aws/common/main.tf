@@ -1,7 +1,7 @@
 # code deploy
 
 resource "aws_codedeploy_app" "example" {
-  compute_platform = "Server"
+  compute_platform = "String<Select ECS or Lambda>"
   name             = "example"
 }
 
@@ -254,7 +254,7 @@ resource "aws_network_acl_rule" "ingress1" {
 }
 
 resource "aws_network_acl_rule" "ingress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = false
   protocol        = -1
@@ -276,7 +276,7 @@ resource "aws_network_acl_rule" "egress1" {
 }
 
 resource "aws_network_acl_rule" "egress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = true
   protocol        = -1
@@ -305,7 +305,7 @@ resource "aws_ecr_repository" "foo" {
 
   encryption_configuration {
     encryption_type = AES256
-    kms_key = ""
+    kms_key         = ""
   }
 }
 
