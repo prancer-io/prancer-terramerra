@@ -254,7 +254,7 @@ resource "aws_network_acl_rule" "ingress1" {
 }
 
 resource "aws_network_acl_rule" "ingress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = false
   protocol        = -1
@@ -276,7 +276,7 @@ resource "aws_network_acl_rule" "egress1" {
 }
 
 resource "aws_network_acl_rule" "egress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = true
   protocol        = -1
@@ -305,7 +305,7 @@ resource "aws_ecr_repository" "foo" {
 
   encryption_configuration {
     encryption_type = AES256
-    kms_key = ""
+    kms_key         = ""
   }
 }
 
@@ -457,7 +457,7 @@ resource "aws_mq_broker" "example" {
     revision = aws_mq_configuration.test.latest_revision
   }
 
-  publicly_accessible = true
+  publicly_accessible = false
 
   engine_type        = "ActiveMQ"
   engine_version     = "5.15.9"
