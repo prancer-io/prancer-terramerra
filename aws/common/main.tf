@@ -254,7 +254,7 @@ resource "aws_network_acl_rule" "ingress1" {
 }
 
 resource "aws_network_acl_rule" "ingress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = false
   protocol        = -1
@@ -276,7 +276,7 @@ resource "aws_network_acl_rule" "egress1" {
 }
 
 resource "aws_network_acl_rule" "egress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = true
   protocol        = -1
@@ -333,7 +333,7 @@ EOF
   }
 
   kerberos_attributes {
-    realm = null
+    realm = "String<The name of the Kerberos realm to which all nodes in a cluster belong. For example, EC2.INTERNAL>"
   }
 
   master_instance_group {
