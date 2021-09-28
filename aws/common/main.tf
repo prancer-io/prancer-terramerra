@@ -547,3 +547,42 @@ resource "aws_lambda_function" "authorizer" {
 
   source_code_hash = filebase64sha256("lambda-function.zip")
 }
+
+resource "aws_elb" "main" {
+  name               = "foobar-terraform-elb"
+  availability_zones = ["us-east-1c"]
+
+  listener {
+    instance_port     = 80
+    instance_protocol = "http"
+    lb_port           = 80
+    lb_protocol       = "http"
+  }
+}
+
+resource "aws_route53_record" "www" {
+  zone_id = aws_route53_zone.primary.zone_id
+  name    = "example.com"
+  type    = "A"
+
+  alias {
+    name                   = aws_elb.main.dns_name
+    zone_id                = aws_elb.main.zone_id
+    evaluate_target_health = false
+  }
+}
+
+resource "aws_sagemaker_notebook_instance" "ni" {
+  name          = "my-notebook-instance"
+  role_arn      = aws_iam_role.role.arn
+  instance_type = "ml.t2.medium"
+  root_access   = "Enabled"
+  direct_internet_access = "Enabled"
+
+  subnet_id = []
+
+
+  tags = {
+    Name = "foo"
+  }
+}
