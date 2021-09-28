@@ -12,7 +12,7 @@ content_based_deduplication       = false
 kms_master_key_id                 = null
 kms_data_key_reuse_period_seconds = 300
 
-tags                                     = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
