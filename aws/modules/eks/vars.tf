@@ -17,7 +17,7 @@ variable "role_arn" {
 
 variable "kubernetes_version" {
   description = "Desired Kubernetes master version."
-  default     = null
+  default     = "1.9.2"
 }
 
 variable "enabled_cluster_log_types" {

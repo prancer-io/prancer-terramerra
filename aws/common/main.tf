@@ -1,7 +1,7 @@
 # code deploy
 
 resource "aws_codedeploy_app" "example" {
-  compute_platform = "ECS"
+  compute_platform = "Server"
   name             = "example"
 }
 
@@ -17,7 +17,7 @@ resource "aws_codepipeline" "codepipeline" {
 
     encryption_key {
       id   = data.aws_kms_alias.s3kmskey.arn
-      type = "KMS"
+      type = ""
     }
   }
 
@@ -284,4 +284,188 @@ resource "aws_network_acl_rule" "egress2" {
   ipv6_cidr_block = "::/0"
   from_port       = 22
   to_port         = 22
+}
+
+
+resource "aws_api_gateway_request_validator" "example" {
+  name                        = "example"
+  rest_api_id                 = aws_api_gateway_rest_api.example.id
+  validate_request_body       = true
+  validate_request_parameters = false
+}
+
+
+resource "aws_ecr_repository" "foo" {
+  name                 = "bar"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+
+  encryption_configuration {
+    encryption_type = AES256
+    kms_key = ""
+  }
+}
+
+resource "aws_emr_cluster" "cluster" {
+  name          = "emr-test-arn"
+  release_label = "emr-4.6.0"
+  applications  = ["Spark"]
+
+  additional_info = <<EOF
+{
+  "instanceAwsClientConfiguration": {
+    "proxyPort": 8099,
+    "proxyHost": "myproxy.example.com"
+  }
+}
+EOF
+
+  termination_protection            = false
+  keep_job_flow_alive_when_no_steps = true
+
+  ec2_attributes {
+    subnet_id                         = aws_subnet.main.id
+    emr_managed_master_security_group = aws_security_group.sg.id
+    emr_managed_slave_security_group  = aws_security_group.sg.id
+    instance_profile                  = aws_iam_instance_profile.emr_profile.arn
+  }
+
+  kerberos_attributes {
+    realm = "EC2.INTERNAL"
+  }
+
+  master_instance_group {
+    instance_type = "m4.large"
+  }
+
+  core_instance_group {
+    instance_type  = "c4.large"
+    instance_count = 1
+
+    ebs_config {
+      size                 = "40"
+      type                 = "gp2"
+      volumes_per_instance = 1
+    }
+
+    bid_price = "0.30"
+
+    autoscaling_policy = <<EOF
+{
+"Constraints": {
+  "MinCapacity": 1,
+  "MaxCapacity": 2
+},
+"Rules": [
+  {
+    "Name": "ScaleOutMemoryPercentage",
+    "Description": "Scale out if YARNMemoryAvailablePercentage is less than 15",
+    "Action": {
+      "SimpleScalingPolicyConfiguration": {
+        "AdjustmentType": "CHANGE_IN_CAPACITY",
+        "ScalingAdjustment": 1,
+        "CoolDown": 300
+      }
+    },
+    "Trigger": {
+      "CloudWatchAlarmDefinition": {
+        "ComparisonOperator": "LESS_THAN",
+        "EvaluationPeriods": 1,
+        "MetricName": "YARNMemoryAvailablePercentage",
+        "Namespace": "AWS/ElasticMapReduce",
+        "Period": 300,
+        "Statistic": "AVERAGE",
+        "Threshold": 15.0,
+        "Unit": "PERCENT"
+      }
+    }
+  }
+]
+}
+EOF
+  }
+
+  ebs_root_volume_size = 100
+
+  tags = {
+    role = "rolename"
+    env  = "env"
+  }
+
+  bootstrap_action {
+    path = "s3://elasticmapreduce/bootstrap-actions/run-if"
+    name = "runif"
+    args = ["instance.isMaster=true", "echo running on master node"]
+  }
+
+  configurations_json = <<EOF
+  [
+    {
+      "Classification": "hadoop-env",
+      "Configurations": [
+        {
+          "Classification": "export",
+          "Properties": {
+            "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+          }
+        }
+      ],
+      "Properties": {}
+    },
+    {
+      "Classification": "spark-env",
+      "Configurations": [
+        {
+          "Classification": "export",
+          "Properties": {
+            "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+          }
+        }
+      ],
+      "Properties": {}
+    }
+  ]
+EOF
+
+  service_role = aws_iam_role.iam_emr_service_role.arn
+}
+
+resource "aws_kinesis_stream" "test_stream" {
+  name             = "terraform-kinesis-test"
+  shard_count      = 1
+  retention_period = 48
+
+  shard_level_metrics = [
+    "IncomingBytes",
+    "OutgoingBytes",
+  ]
+
+  tags = {
+    Environment = "test"
+  }
+}
+
+
+resource "aws_mq_broker" "example" {
+  broker_name = "example"
+
+  configuration {
+    id       = aws_mq_configuration.test.id
+    revision = aws_mq_configuration.test.latest_revision
+  }
+
+  publicly_accessible = true
+
+  engine_type        = "ActiveMQ"
+  engine_version     = "5.15.9"
+  host_instance_type = "mq.t2.micro"
+  security_groups    = [aws_security_group.test.id]
+
+  user {
+    username = "ExampleUser"
+    password = "MindTheGap"
+  }
 }

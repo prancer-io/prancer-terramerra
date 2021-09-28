@@ -15,7 +15,7 @@ lambda_failure_feedback_role_arn         = null
 sqs_success_feedback_role_arn            = null
 sqs_success_feedback_sample_rate         = null
 sqs_failure_feedback_role_arn            = null
-kms_master_key_id                        = null
+kms_master_key_id                        = "alias/aws/sns/mykey"
 
 enable_sns_subscription                  = false
 endpoint                                 = "http://fake-endpoint.example.com"
