@@ -1,5 +1,5 @@
 module "iam_role" {
-  source                        = "../modules/iam_role"
+  source                        = "git::https://github.com/prancer-io/prancer-terramerra.git//aws/modules/iam_role?ref=aws-terraform"
   role_name                     = var.role_name
   role_path                     = var.role_path
   max_session_duration          = var.max_session_duration
@@ -16,7 +16,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
 }
 
 module "vpc" {
-  source  = "../modules/vpc"
+  source                           = "github.com/prancer-io/prancer-terramerra.git//aws/modules/vpc"
   cidr_block                       = var.cidr_block
   instance_tenancy                 = var.instance_tenancy
   enable_dns_hostnames             = var.enable_dns_hostnames
