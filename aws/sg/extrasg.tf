@@ -151,6 +151,9 @@ resource "aws_security_group" "default" {
 
   }
 
+  tags {
+    String<Name of tag> = "String<Value of tag>"
+  }
 }
 
 
