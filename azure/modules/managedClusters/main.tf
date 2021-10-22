@@ -34,5 +34,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type = var.aks_identity_type
   }
 
-  tags = var.tags
+  tags          = var.tags
+  block_type    = "network_profile"
+  block_indexes = [1]
 }
