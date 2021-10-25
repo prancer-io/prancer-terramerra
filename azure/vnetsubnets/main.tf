@@ -25,6 +25,5 @@ data "azurerm_network_security_group" "nsg" {
 
 resource "azurerm_subnet_network_security_group_association" "subnetnsg" {
   count                     = length(var.subnet_nsg)
-  subnet_id                 = module.subnets[var.subnet_nsg[count.index][0]].subnet_id
   network_security_group_id = data.azurerm_network_security_group.nsg[count.index].id
 }

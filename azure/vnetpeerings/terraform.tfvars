@@ -10,7 +10,7 @@ peer2_address_space         = "10.254.0.0/16"
 peer2_dns_server            = "10.254.0.1"
 
 peering_name                  = "prancer-vnet-peering"
-allow_virtual_network_access1 = true
+allow_virtual_network_access1 = false
 allow_forwarded_traffic1      = true
 allow_gateway_transit1        = false
 allow_virtual_network_access2 = true

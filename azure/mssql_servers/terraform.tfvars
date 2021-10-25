@@ -8,7 +8,7 @@ replicationType             = "LRS"
 enableSecureTransfer        = "false"
 
 storage_container_name        = "prancer-storage-container"
-storage_container_access_type = "private"
+storage_container_access_type = "blob"
 
 server_name                 = "prancer-sql-server"
 server_version              = "12.0"

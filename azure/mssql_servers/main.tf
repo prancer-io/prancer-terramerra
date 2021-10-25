@@ -20,16 +20,17 @@ module "storageContainer" {
 data "azurerm_client_config" "current" {}
 
 module "sqlServer" {
-  source                      = "../modules/mssqlServer/"
-  location                    = var.location
-  server_name                 = var.server_name
-  server_rg                   = var.resource_group
-  server_version              = var.server_version
-  admin_user                  = var.admin_user
-  admin_password              = var.admin_password
-  sql_ad_username             = var.sql_ad_username
-  sql_ad_object_id            = data.azurerm_client_config.current.object_id
-  tags                        = var.tags
+  source                        = "../modules/mssqlServer/"
+  location                      = var.location
+  server_name                   = var.server_name
+  server_rg                     = var.resource_group
+  server_version                = var.server_version
+  admin_user                    = var.admin_user
+  admin_password                = var.admin_password
+  sql_ad_username               = var.sql_ad_username
+  sql_ad_object_id              = data.azurerm_client_config.current.object_id
+  tags                          = var.tags
+  public_network_access_enabled = true
 }
 
 module "sqlServerSecurityPolicy" {
