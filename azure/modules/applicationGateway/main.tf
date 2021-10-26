@@ -54,6 +54,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   ssl_policy {
     min_protocol_version = var.min_protocol_version
+    enabled              = true
   }
 
   waf_configuration {
