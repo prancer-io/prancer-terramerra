@@ -8,4 +8,11 @@ resource "azurerm_storage_account" "storageAccount" {
   enable_https_traffic_only = var.enableSecureTransfer
   allow_blob_public_access  = var.allow_blob_public_access
   tags                      = var.tags
+  queue_properties {
+    logging {
+      delete = true
+      read   = true
+      write  = true
+    }
+  }
 }
