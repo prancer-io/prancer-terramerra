@@ -1,7 +1,7 @@
 resource "azurerm_mssql_server" "mssqlserver" {
-  name                          = var.server_name
-  resource_group_name           = var.server_rg
-  location                      = var.location
+  name                = var.server_name
+  resource_group_name = var.server_rg
+  location            = var.location
 
   version                       = var.server_version
   administrator_login           = var.admin_user
@@ -13,5 +13,6 @@ resource "azurerm_mssql_server" "mssqlserver" {
     object_id      = var.sql_ad_object_id
   }
 
-  tags                         = var.tags
+  tags            = var.tags
+  min_tls_version = 1.2
 }
