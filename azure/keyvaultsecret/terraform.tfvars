@@ -1,17 +1,17 @@
-location                    = "eastus2"
-resource_group              = "prancer-test-rg"
+location       = "eastus2"
+resource_group = "prancer-test-rg"
 
-storage_count               = 1
-storage_name                = "prancerstorageaccount007"
-accountTier                 = "Standard"
-replicationType             = "LRS"
-enableSecureTransfer        = "false"
+storage_count        = 1
+storage_name         = "prancerstorageaccount007"
+accountTier          = "Standard"
+replicationType      = "LRS"
+enableSecureTransfer = true
 
-kv_name                     = "prancer-key-vault-t3st"
-kv_sku                      = "standard"
+kv_name = "prancer-key-vault-t3st"
+kv_sku  = "standard"
 
-kv_secret_name              = "prancer-secret"
-kv_secret_value             = "53cr3t"
-expiration_date             = null
+kv_secret_name  = "prancer-secret"
+kv_secret_value = "53cr3t"
+expiration_date = null
 
-tags                        = {}
+tags = {}
