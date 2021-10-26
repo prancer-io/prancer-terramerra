@@ -17,7 +17,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   role_based_access_control {
     azure_active_directory {
-      managed = var.aad_managed
+      managed            = var.aad_managed
       azure_rbac_enabled = var.aad_managed_azure_rbac_enabled
     }
     enabled = var.rbac_enabled
@@ -42,5 +42,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type = var.aks_identity_type
   }
 
-  tags = var.tags
+  tags          = var.tags
+  block_type    = "addon_profile"
+  block_indexes = [1]
 }
