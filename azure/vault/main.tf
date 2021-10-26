@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "example" {
 }
 
 resource "azurerm_key_vault" "example" {
-  name                       = "examplekeyvault"
+  name                       = ""
   location                   = azurerm_resource_group.example.location
   resource_group_name        = azurerm_resource_group.example.name
   tenant_id                  = data.azurerm_client_config.current.tenant_id
@@ -17,6 +17,8 @@ resource "azurerm_key_vault" "example" {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
   }
+  block_type    = "access_policy"
+  block_indexes = [1]
 }
 
 resource "azurerm_key_vault_secret" "example" {
