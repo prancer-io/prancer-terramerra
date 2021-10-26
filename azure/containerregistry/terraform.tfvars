@@ -3,7 +3,7 @@ resource_group               = "prancer-test-rg"
 
 acr_name                     = "pranceracr"
 acr_sku                      = "Classic"
-acr_admin_enabled            = false
+acr_admin_enabled            = true
 acr_georeplication_locations = null
 
 acr_webhook_name             = "pranceracrhook"
