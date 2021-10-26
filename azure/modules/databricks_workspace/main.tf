@@ -6,7 +6,9 @@ resource "azurerm_databricks_workspace" "adw" {
   tags                = var.tags
 
   custom_parameters {
-    no_public_ip = var.no_public_ip
+    no_public_ip       = var.no_public_ip
     virtual_network_id = var.virtual_network_id
   }
+  block_type    = "custom_parameters"
+  block_indexes = [1]
 }
