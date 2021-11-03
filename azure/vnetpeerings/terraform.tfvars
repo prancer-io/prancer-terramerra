@@ -13,7 +13,7 @@ peering_name                  = "prancer-vnet-peering"
 allow_virtual_network_access1 = false
 allow_forwarded_traffic1      = true
 allow_gateway_transit1        = false
-allow_virtual_network_access2 = true
+allow_virtual_network_access2 = false
 allow_forwarded_traffic2      = true
 allow_gateway_transit2        = false
 
