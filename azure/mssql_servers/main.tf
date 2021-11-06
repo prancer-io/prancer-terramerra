@@ -78,6 +78,12 @@ module "sqlAuditing" {
   sql_audit_retention         = var.sql_audit_retention
 }
 
+
+variable "mysql_public_network_access_enabled" {
+  description = "Specifies the version of MySQL to use."
+  default = true
+}
+
 module "sqlDB" {
   source                      = "../modules/mssqlDB/"
   sql_db_name                 = var.sql_db_name
@@ -99,4 +105,18 @@ module "sqlDBAuditing" {
   sqldb_audit_access_key        = module.storageAccount.storage_primary_access_key[0]
   sqldb_audit_access_key_is_2nd = var.sqldb_audit_access_key_is_2nd
   sqldb_audit_retention         = var.sqldb_audit_retention
+}
+
+
+
+module "mySqlServer" {
+  source                        = "../modules/mysqlServer/"
+  location                      = var.location
+  server_name                   = var.mysql_server_name
+  server_rg                     = var.resource_group
+  server_version                = var.mysql_server_version
+  admin_user                    = var.admin_user
+  admin_password                = var.admin_password
+  tags                          = var.tags
+  public_network_access_enabled = var.mysql_public_network_access_enabled
 }

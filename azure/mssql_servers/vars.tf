@@ -56,3 +56,15 @@ variable "sqldb_audit_access_key_is_2nd" {}
 variable "sqldb_audit_retention" {}
 
 variable "tags" {}
+
+variable "mysql_server_name" {
+
+}
+
+variable "mysql_server_version" {
+  default = "8.0"
+}
+
+variable "mysql_public_network_access_enabled" {
+  default = true
+}
