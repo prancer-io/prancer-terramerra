@@ -20,6 +20,7 @@ resource "azurerm_app_service" "example" {
   site_config {
     dotnet_framework_version = "v4.0"
     scm_type                 = "LocalGit"
+    min_tls_version          = 1.1
   }
 
   app_settings = {
@@ -30,6 +31,20 @@ resource "azurerm_app_service" "example" {
     name  = "Database"
     type  = "SQLServer"
     value = "Server=some-server.mydomain.com;Integrated Security=SSPI"
+  }
+
+  auth_settings {
+    enabled                       = false
+    default_provider              = "AzureActiveDirectory"
+    unauthenticated_client_action = "RedirectToLoginPage"
+    microsoft {
+      client_id     = "microsoftclientid"
+      client_secret = "microsoftclientsecret"
+
+      oauth_scopes = [
+        "somescope",
+      ]
+    }
   }
 }
 
@@ -55,4 +70,17 @@ resource "azurerm_function_app" "example" {
   storage_account_access_key = azurerm_storage_account.example.primary_access_key
   os_type                    = "linux"
   version                    = "~3"
+ auth_settings {
+    enabled                       = false
+    default_provider              = "AzureActiveDirectory"
+    unauthenticated_client_action = "RedirectToLoginPage"
+    microsoft {
+      client_id     = "microsoftclientid"
+      client_secret = "microsoftclientsecret"
+
+      oauth_scopes = [
+        "somescope",
+      ]
+    }
+  }
 }

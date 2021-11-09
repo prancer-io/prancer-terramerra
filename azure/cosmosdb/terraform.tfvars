@@ -1,0 +1,10 @@
+location                    = "eastus2"
+prefix                      = "cosmosdemo"
+resource_group              = "prancer-test-rg"
+offer_type                  = "Standard"
+kind                        = "GlobalDocumentDB"
+consistency_level           = "BoundedStaleness"
+max_interval_in_seconds     = 10
+max_staleness_prefix        = 200
+failover_priority           = 0
+tags                        = {}

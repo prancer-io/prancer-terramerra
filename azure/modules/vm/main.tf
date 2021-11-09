@@ -109,12 +109,7 @@ resource "azurerm_virtual_machine" "vm-linux-with-datadisk" {
   }
 
   os_profile_linux_config {
-    disable_password_authentication = true
-
-    ssh_keys {
-      path     = "/home/${var.admin_username}/.ssh/authorized_keys"
-      key_data = file(var.ssh_key)
-    }
+    disable_password_authentication = false
   }
 
   tags = var.tags
