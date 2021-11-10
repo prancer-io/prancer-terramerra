@@ -21,7 +21,7 @@ password                              = "otObicedfobgurEydHef9ofEfjalvib="
 port                                  = 3306
 domain                                = ""
 domain_iam_role_name                  = ""
-iam_database_authentication_enabled   = false
+iam_database_authentication_enabled   = true
 replicate_source_db                   = ""
 snapshot_identifier                   = ""
 vpc_security_group_ids                = []
