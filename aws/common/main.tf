@@ -254,7 +254,7 @@ resource "aws_network_acl_rule" "ingress1" {
 }
 
 resource "aws_network_acl_rule" "ingress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = false
   protocol        = -1
@@ -276,7 +276,7 @@ resource "aws_network_acl_rule" "egress1" {
 }
 
 resource "aws_network_acl_rule" "egress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = true
   protocol        = -1
@@ -545,7 +545,8 @@ resource "aws_lambda_function" "authorizer" {
   role          = aws_iam_role.lambda.arn
   handler       = "exports.example"
 
-  source_code_hash = filebase64sha256("lambda-function.zip")
+  source_code_hash               = filebase64sha256("lambda-function.zip")
+  reserved_concurrent_executions = "String<Amount of reserved concurrent executions for this lambda function. Value should be greater than or equal to 1>"
 }
 
 resource "aws_elb" "main" {
@@ -573,10 +574,10 @@ resource "aws_route53_record" "www" {
 }
 
 resource "aws_sagemaker_notebook_instance" "ni" {
-  name          = "my-notebook-instance"
-  role_arn      = aws_iam_role.role.arn
-  instance_type = "ml.t2.medium"
-  root_access   = "Enabled"
+  name                   = "my-notebook-instance"
+  role_arn               = aws_iam_role.role.arn
+  instance_type          = "ml.t2.medium"
+  root_access            = "Enabled"
   direct_internet_access = "Enabled"
 
   subnet_id = []
