@@ -6,3 +6,10 @@ resource "azurerm_public_ip" "public" {
   sku                          = var.sku
   ip_version                   = var.ip_version
 }
+
+resource "azurerm_management_lock" "public-ip" {
+  name       = "resource-ip"
+  scope      = azurerm_public_ip.public.id
+  lock_level = "ReadOnly"
+  notes      = "Locked because it's needed by a third-party"
+}
