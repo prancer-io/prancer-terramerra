@@ -254,7 +254,7 @@ resource "aws_network_acl_rule" "ingress1" {
 }
 
 resource "aws_network_acl_rule" "ingress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = false
   protocol        = -1
@@ -276,7 +276,7 @@ resource "aws_network_acl_rule" "egress1" {
 }
 
 resource "aws_network_acl_rule" "egress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = true
   protocol        = -1
@@ -467,6 +467,9 @@ resource "aws_mq_broker" "example" {
     username = "ExampleUser"
     password = "MindTheGap"
   }
+  logs {
+    general = "true"
+  }
 }
 
 resource "aws_api_gateway_authorizer" "demo" {
@@ -573,10 +576,10 @@ resource "aws_route53_record" "www" {
 }
 
 resource "aws_sagemaker_notebook_instance" "ni" {
-  name          = "my-notebook-instance"
-  role_arn      = aws_iam_role.role.arn
-  instance_type = "ml.t2.medium"
-  root_access   = "Enabled"
+  name                   = "my-notebook-instance"
+  role_arn               = aws_iam_role.role.arn
+  instance_type          = "ml.t2.medium"
+  root_access            = "Enabled"
   direct_internet_access = "Enabled"
 
   subnet_id = []
