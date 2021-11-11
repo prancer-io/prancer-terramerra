@@ -109,12 +109,7 @@ resource "azurerm_virtual_machine" "vm-linux-with-datadisk" {
   }
 
   os_profile_linux_config {
-    disable_password_authentication = true
-
-    ssh_keys {
-      path     = "/home/${var.admin_username}/.ssh/authorized_keys"
-      key_data = file(var.ssh_key)
-    }
+    disable_password_authentication = false
   }
 
   tags = var.tags
@@ -171,7 +166,6 @@ resource "azurerm_virtual_machine" "vm-windows-with-datadisk" {
   name                          = "${var.vm_hostname}${count.index}"
   location                      = var.location
   resource_group_name           = var.resource_group_name
-  availability_set_id           = azurerm_availability_set.vm.id
   vm_size                       = var.vm_size
   network_interface_ids         = [element(azurerm_network_interface.vm.*.id, count.index)]
   delete_os_disk_on_termination = var.delete_os_disk_on_termination
