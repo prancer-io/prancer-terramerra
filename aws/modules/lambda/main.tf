@@ -30,6 +30,10 @@ resource "aws_lambda_function" "lambda" {
     }
   }
 
+  dead_letter_config {
+    target_arn           = ""
+  }
+
   tracing_config {
     mode = var.tracing_mode
   }
