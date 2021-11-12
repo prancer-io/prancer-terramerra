@@ -198,5 +198,5 @@ variable "enhanced_vpc_routing" {
 variable "allow_version_upgrade" {
   description = "(Optional) If true, major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster."
   type        = bool
-  default     = true
+  default     = false
 }
