@@ -5,7 +5,7 @@ storage_count               = 1
 storage_name                = "prancerstorageaccount007"
 accountTier                 = "Standard"
 replicationType             = "LRS"
-enableSecureTransfer        = "false"
+enableSecureTransfer        = false
 
 kv_name                     = "prancer-key-vault-t3st"
 kv_sku                      = "standard"

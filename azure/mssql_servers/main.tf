@@ -97,18 +97,6 @@ module "sqlDB" {
   tags                        = var.tags
 }
 
-module "sqlDBAuditing" {
-  source                        = "../modules/mssqlDBAuditing/"
-  count                         = var.enable_sqldb_auditing ? 1 : 0
-  sqldb_database_id             = module.sqlDB.id
-  sqldb_audit_endpoint          = module.storageAccount.primaryblob_uri[0]
-  sqldb_audit_access_key        = module.storageAccount.storage_primary_access_key[0]
-  sqldb_audit_access_key_is_2nd = var.sqldb_audit_access_key_is_2nd
-  sqldb_audit_retention         = var.sqldb_audit_retention
-}
-
-
-
 module "mySqlServer" {
   source                        = "../modules/mysqlServer/"
   location                      = var.location
