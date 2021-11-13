@@ -111,3 +111,26 @@ resource "aws_db_event_subscription" "default-db-instance" {
     "restoration",
   ]
 }
+
+resource "aws_db_parameter_group" "default" {
+  name   = "rds-pg"
+  family = "mysql5.6"
+
+  parameter {
+    name  = "character_set_server"
+    value = "utf8"
+  }
+
+  parameter {
+    name  = "rds_pgauditpgaudit.role"
+    value = "utf8"
+  }
+}
+
+resource "aws_rds_global_cluster" "example" {
+  global_cluster_identifier = "global-test"
+  engine                    = "aurora"
+  engine_version            = "5.6.mysql_aurora.1.22.2"
+  database_name             = "example_db"
+  storage_encrypted         = false
+}
