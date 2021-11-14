@@ -11,16 +11,6 @@ module "sqlServers" {
 
 data "azurerm_client_config" "current" {}
 
-module "sqlServerADAdmin" {
-  source                    = "../modules/sqlADAdministrator/"
-  count                     = var.enable_ad_admin ? 1 : 0
-  sql_server_name           = module.sqlServers.sqlserver_name
-  sql_server_rg             = var.server_rg
-  sql_server_login          = var.sql_server_login
-  azure_tenant_id           = data.azurerm_client_config.current.tenant_id
-  ad_object_id              = data.azurerm_client_config.current.object_id
-}
-
 module "sqlServerFWRule" {
   source                    = "../modules/sqlServerFirewallRule/"
   count                     = var.enable_sql_firewall ? 1 : 0

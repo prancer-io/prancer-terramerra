@@ -19,7 +19,7 @@ resource "azurerm_monitor_activity_log_alert" "main" {
   resource_group_name = azurerm_resource_group.main.name
   scopes              = [azurerm_resource_group.main.id]
   description         = "This alert will monitor a specific storage account updates."
-
+  enabled = false 
   criteria {
     resource_id    = azurerm_storage_account.storageAccount[0].id
     operation_name = "Microsoft.Storage/storageAccounts/write"
@@ -32,7 +32,6 @@ resource "azurerm_monitor_log_profile" "example" {
 
   categories = [
     "Action",
-    "Delete",
     "Write",
   ]
 
