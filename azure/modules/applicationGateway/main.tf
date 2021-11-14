@@ -20,7 +20,7 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   frontend_ip_configuration {
-    name                 = "${var.app_gw_name}-fe-ip"
+    name = "${var.app_gw_name}-fe-ip"
   }
 
   backend_address_pool {
@@ -53,6 +53,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   ssl_policy {
     min_protocol_version = var.min_protocol_version
+    enabled              = true
   }
 
   waf_configuration {
