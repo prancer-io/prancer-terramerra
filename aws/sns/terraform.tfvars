@@ -15,14 +15,14 @@ lambda_failure_feedback_role_arn         = null
 sqs_success_feedback_role_arn            = null
 sqs_success_feedback_sample_rate         = null
 sqs_failure_feedback_role_arn            = null
-kms_master_key_id                        = "alias/aws/sns/mykey"
+kms_master_key_id                        = "String<The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK, Do not use default>"
 
-enable_sns_subscription                  = false
-endpoint                                 = "http://fake-endpoint.example.com"
-endpoint_auto_confirms                   = true
-protocol                                 = "http"
+enable_sns_subscription = false
+endpoint                = "http://fake-endpoint.example.com"
+endpoint_auto_confirms  = true
+protocol                = "http"
 
-tags                                     = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
