@@ -38,7 +38,7 @@ sgroup_name                     = "prancer-security-group"
 sgroup_description              = "Prancer Security Group"
 revoke_rules_on_delete          = false
 
-rule_description                = "SSH rule"
+rule_description                = ""
 rule_type                       = "ingress"
 rule_from_port                  = 20
 rule_to_port                    = 9300
