@@ -122,7 +122,7 @@ resource "aws_db_parameter_group" "default" {
   }
 
   parameter {
-    name  = "rds_pgauditpgaudit.role"
+    name  = "rds_pgaudit"
     value = "utf8"
   }
 }
