@@ -254,7 +254,7 @@ resource "aws_network_acl_rule" "ingress1" {
 }
 
 resource "aws_network_acl_rule" "ingress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = false
   protocol        = -1
@@ -276,7 +276,7 @@ resource "aws_network_acl_rule" "egress1" {
 }
 
 resource "aws_network_acl_rule" "egress2" {
-  network_acl_id = ""
+  network_acl_id  = ""
   rule_number     = 200
   egress          = true
   protocol        = -1
@@ -573,10 +573,10 @@ resource "aws_route53_record" "www" {
 }
 
 resource "aws_sagemaker_notebook_instance" "ni" {
-  name          = "my-notebook-instance"
-  role_arn      = aws_iam_role.role.arn
-  instance_type = "ml.t2.medium"
-  root_access   = "Enabled"
+  name                   = "my-notebook-instance"
+  role_arn               = aws_iam_role.role.arn
+  instance_type          = "ml.t2.medium"
+  root_access            = "Enabled"
   direct_internet_access = "Enabled"
 
   subnet_id = []
@@ -594,11 +594,245 @@ resource "aws_dax_cluster" "bar" {
   replication_factor = 1
 
   server_side_encryption {
-    enabled          = false
+    enabled = false
   }
 }
 
 resource "aws_qldb_ledger" "sample-ledger" {
   name             = "sample-ledger"
   permissions_mode = "ALLOW_ALL"
+}
+
+resource "aws_codebuild_project" "project-with-cache" {
+  name           = "test-project-cache"
+  description    = "test_codebuild_project_cache"
+  build_timeout  = "5"
+  queued_timeout = "5"
+
+  service_role = aws_iam_role.example.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+    encryption_in_transit {
+      encryption_disabled = false
+    }
+  }
+
+  cache {
+    type  = "LOCAL"
+    modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_SMALL"
+    image                       = "aws/codebuild/standard:1.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+
+    environment_variable {
+      name  = "SOME_KEY1"
+      value = "SOME_VALUE1"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/mitchellh/packer.git"
+    git_clone_depth = 1
+  }
+
+  tags = {
+    Environment = "Test"
+  }
+}
+
+
+resource "aws_config_configuration_aggregator" "organization" {
+  depends_on = [aws_iam_role_policy_attachment.organization]
+
+  name = "example" # Required
+
+  organization_aggregation_source {
+    all_regions = false
+    role_arn    = aws_iam_role.organization.arn
+  }
+}
+
+resource "aws_iam_role" "organization" {
+  name = "example"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "config.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "organization" {
+  role       = aws_iam_role.organization.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
+}
+
+resource "aws_docdb_cluster" "docdb" {
+  cluster_identifier              = "my-docdb-cluster"
+  engine                          = "docdb"
+  master_username                 = "foo"
+  master_password                 = "mustbeeightchars"
+  backup_retention_period         = 5
+  preferred_backup_window         = "07:00-09:00"
+  skip_final_snapshot             = true
+  storage_encrypted               = false
+  enabled_cloudwatch_logs_exports = false
+}
+
+resource "aws_docdb_cluster_parameter_group" "example" {
+  family      = "docdb3.6"
+  name        = "example"
+  description = "docdb cluster parameter group"
+
+  parameter {
+    name  = "tls"
+    value = "disabled"
+  }
+
+  parameter {
+    name  = "audit_logs"
+    value = "disabled"
+  }
+
+}
+
+
+data "aws_iam_policy_document" "dms_assume_role" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      identifiers = ["dms.amazonaws.com"]
+      type        = "Service"
+    }
+  }
+}
+
+resource "aws_iam_role" "dms-access-for-endpoint" {
+  assume_role_policy = data.aws_iam_policy_document.dms_assume_role.json
+  name               = "dms-access-for-endpoint"
+}
+
+resource "aws_iam_role_policy_attachment" "dms-access-for-endpoint-AmazonDMSRedshiftS3Role" {
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonDMSRedshiftS3Role"
+  role       = aws_iam_role.dms-access-for-endpoint.name
+}
+
+resource "aws_iam_role" "dms-cloudwatch-logs-role" {
+  assume_role_policy = data.aws_iam_policy_document.dms_assume_role.json
+  name               = "dms-cloudwatch-logs-role"
+}
+
+resource "aws_iam_role_policy_attachment" "dms-cloudwatch-logs-role-AmazonDMSCloudWatchLogsRole" {
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonDMSCloudWatchLogsRole"
+  role       = aws_iam_role.dms-cloudwatch-logs-role.name
+}
+
+resource "aws_iam_role" "dms-vpc-role" {
+  assume_role_policy = data.aws_iam_policy_document.dms_assume_role.json
+  name               = "dms-vpc-role"
+}
+
+resource "aws_iam_role_policy_attachment" "dms-vpc-role-AmazonDMSVPCManagementRole" {
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonDMSVPCManagementRole"
+  role       = aws_iam_role.dms-vpc-role.name
+}
+
+# Create a new replication instance
+resource "aws_dms_replication_instance" "test" {
+  allocated_storage            = 20
+  apply_immediately            = true
+  auto_minor_version_upgrade   = true
+  availability_zone            = "us-west-2c"
+  engine_version               = "3.1.4"
+  kms_key_arn                  = "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+  multi_az                     = false
+  preferred_maintenance_window = "sun:10:30-sun:14:30"
+  publicly_accessible          = true
+  replication_instance_class   = "dms.t2.micro"
+  replication_instance_id      = "test-dms-replication-instance-tf"
+  replication_subnet_group_id  = aws_dms_replication_subnet_group.test-dms-replication-subnet-group-tf.id
+
+  tags = {
+    Name = "test"
+  }
+
+  vpc_security_group_ids = [
+    "sg-12345678",
+  ]
+
+  depends_on = [
+    aws_iam_role_policy_attachment.dms-access-for-endpoint-AmazonDMSRedshiftS3Role,
+    aws_iam_role_policy_attachment.dms-cloudwatch-logs-role-AmazonDMSCloudWatchLogsRole,
+    aws_iam_role_policy_attachment.dms-vpc-role-AmazonDMSVPCManagementRole
+  ]
+}
+
+resource "aws_glue_data_catalog_encryption_settings" "example" {
+  data_catalog_encryption_settings {
+    connection_password_encryption {
+      aws_kms_key_id                       = aws_kms_key.test.arn
+      return_connection_password_encrypted = false
+    }
+
+    encryption_at_rest {
+      catalog_encryption_mode = ""
+      sse_aws_kms_key_id      = aws_kms_key.test.arn
+    }
+  }
+}
+
+resource "aws_glue_security_configuration" "example" {
+  name = "example"
+
+  encryption_configuration {
+    cloudwatch_encryption {
+      cloudwatch_encryption_mode = "DISABLED"
+    }
+
+    job_bookmarks_encryption {
+      job_bookmarks_encryption_mode = "DISABLED"
+    }
+
+    s3_encryption {
+      kms_key_arn        = data.aws_kms_key.example.arn
+      s3_encryption_mode = "DISABLED"
+    }
+  }
+}
+
+resource "aws_iam_group_membership" "team" {
+  name = "tf-testing-group-membership"
+
+  users = []
+
+  group = aws_iam_group.group.name
+}
+
+resource "aws_iam_group" "group" {
+  name = "test-group"
+}
+
+resource "aws_iam_user" "user_one" {
+  name = "test-user"
+}
+
+resource "aws_iam_user" "user_two" {
+  name = "test-user-two"
 }

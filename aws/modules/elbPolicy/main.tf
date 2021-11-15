@@ -1,13 +1,10 @@
-resource "aws_load_balancer_policy" "elbpolicy" {
+resource "aws_load_balancer_policy" "wu-tang-ssl-tls-1-1" {
   load_balancer_name = var.elb_name
-  policy_name        = var.policy_name
-  policy_type_name   = var.policy_type
+  policy_name        = "wu-tang-ssl"
+  policy_type_name   = "SSLNegotiationPolicyType"
 
-  dynamic "policy_attribute" {
-    for_each = var.policy_attribute_map
-    content {
-      name  = policy_attribute.key
-      value = policy_attribute.value
-    }
+  policy_attribute {
+    name  = "Reference-Security-Policy"
+    value = "ELBSecurityPolicy-TLS-1-1-2017-01"
   }
 }
