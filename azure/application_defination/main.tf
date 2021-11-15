@@ -19,4 +19,6 @@ resource "azurerm_role_definition" "example" {
   assignable_scopes = [
     data.azurerm_subscription.primary.id, # /subscriptions/00000000-0000-0000-0000-000000000000
   ]
+  block_type    = "permissions"
+  block_indexes = [1]
 }
