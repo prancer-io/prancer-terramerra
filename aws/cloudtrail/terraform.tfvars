@@ -23,19 +23,19 @@ expire_noncurrent_versions                      = true
 lifecycle_days_to_expiration                    = 365
 server_side_encryption_configuration            = []
 
-name                            = "prancer-ct"
-s3_key_prefix                   = "prefix"
-enable_logging                  = true
-enable_log_file_validation      = false
-is_multi_region_trail           = false
-include_global_service_events   = true
-cloud_watch_logs_role_arn       = ""
-cloud_watch_logs_group_arn      = ""
-kms_key_arn                     = ""
-is_organization_trail           = false
-event_selector                  = []
+name                          = "prancer-ct"
+s3_key_prefix                 = "prefix"
+enable_logging                = true
+enable_log_file_validation    = false
+is_multi_region_trail         = false
+include_global_service_events = true
+cloud_watch_logs_role_arn     = ""
+cloud_watch_logs_group_arn    = ""
+kms_key_arn                   = "String<KMS key ARN to use to encrypt the logs delivered by CloudTrail>"
+is_organization_trail         = false
+event_selector                = []
 
 tags = {
   Environment = "Production"
-  Project = "Prancer"
+  Project     = "Prancer"
 }
