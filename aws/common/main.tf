@@ -614,7 +614,7 @@ resource "aws_codebuild_project" "project-with-cache" {
   artifacts {
     type = "NO_ARTIFACTS"
     encryption_in_transit {
-      encryption_disabled = false
+      encryption_disabled = true
     }
   }
 
@@ -835,4 +835,55 @@ resource "aws_iam_user" "user_one" {
 
 resource "aws_iam_user" "user_two" {
   name = "test-user-two"
+}
+
+resource "aws_secretsmanager_secret" "rotation-example" {
+  name = "rotation-example"
+
+  rotation_rules {
+    automatically_after_days = 7
+  }
+}
+
+resource "aws_timestreamwrite_database" "example" {
+  database_name = "database-example"
+  kms_key_id    = ""
+
+  tags = {
+    Name = "value"
+  }
+}
+
+resource "aws_vpc" "default" {
+  cidr_block           = "10.0.0.0/16"
+  enable_dns_hostnames = true
+}
+
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.default.id
+}
+
+resource "aws_subnet" "tf_test_subnet" {
+  vpc_id                  = aws_vpc.default.id
+  cidr_block              = "10.0.0.0/24"
+  map_public_ip_on_launch = true
+  acceptance_required     = false
+
+  depends_on = [aws_internet_gateway.gw]
+}
+
+resource "aws_instance" "foo" {
+  # us-west-2
+  ami           = "ami-5189a661"
+  instance_type = "t2.micro"
+
+  private_ip = "10.0.0.12"
+  subnet_id  = aws_subnet.tf_test_subnet.id
+}
+
+resource "aws_eip" "bar" {
+  vpc = true
+
+  associate_with_private_ip = "10.0.0.12"
+  depends_on                = [aws_internet_gateway.gw]
 }
