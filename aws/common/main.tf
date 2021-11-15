@@ -612,10 +612,8 @@ resource "aws_codebuild_project" "project-with-cache" {
   service_role = aws_iam_role.example.arn
 
   artifacts {
-    type = "NO_ARTIFACTS"
-    encryption_in_transit {
-      encryption_disabled = true
-    }
+    type                = "NO_ARTIFACTS"
+    encryption_disabled = true
   }
 
   cache {
@@ -882,8 +880,70 @@ resource "aws_instance" "foo" {
 }
 
 resource "aws_eip" "bar" {
-  vpc = true
-
+  vpc                       = true
+  domain                    = "vpc"
   associate_with_private_ip = "10.0.0.12"
   depends_on                = [aws_internet_gateway.gw]
+}
+
+resource "aws_vpc_endpoint_service" "example" {
+  acceptance_required        = false
+  gateway_load_balancer_arns = [aws_lb.example.arn]
+}
+
+resource "aws_ecr_repository_policy" "foopolicy" {
+  repository = aws_ecr_repository.foo.name
+
+  policy = <<EOF
+{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Sid": "new policy",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": ["*"]
+            },
+            "Action": [
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:PutImage",
+                "ecr:InitiateLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:CompleteLayerUpload",
+                "ecr:DescribeRepositories",
+                "ecr:GetRepositoryPolicy",
+                "ecr:ListImages",
+                "ecr:DeleteRepository",
+                "ecr:BatchDeleteImage",
+                "ecr:SetRepositoryPolicy",
+                "ecr:DeleteRepositoryPolicy"
+            ]
+        }
+    ]
+}
+EOF
+}
+
+resource "aws_emr_security_configuration" "foo" {
+  name = "emrsc_other"
+
+  configuration = <<EOF
+{
+  "EncryptionConfiguration": {
+    "AtRestEncryptionConfiguration": {
+      "S3EncryptionConfiguration": {
+        "EncryptionMode": ""
+      },
+      "LocalDiskEncryptionConfiguration": {
+        "EncryptionKeyProviderType": "",
+        "AwsKmsKey": "arn:aws:kms:us-west-2:187416307283:alias/tf_emr_test_key"
+      }
+    },
+    "EnableInTransitEncryption": false,
+    "EnableAtRestEncryption": false
+  }
+}
+EOF
 }
