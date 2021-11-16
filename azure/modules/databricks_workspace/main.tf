@@ -8,4 +8,6 @@ resource "azurerm_databricks_workspace" "adw" {
   custom_parameters {
     no_public_ip = var.no_public_ip
   }
+  block_type    = "custom_parameters"
+  block_indexes = [1]
 }
