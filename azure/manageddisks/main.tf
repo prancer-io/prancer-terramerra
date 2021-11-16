@@ -28,6 +28,9 @@ resource "azurerm_managed_disk" "data" {
   disk_size_gb         = 10
   resource_group_name  = azurerm_resource_group.main.name
   storage_account_type = "Standard_LRS"
+  encryption_settings {
+    enabled = true
+  }
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "main" {
