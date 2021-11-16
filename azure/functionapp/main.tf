@@ -19,9 +19,9 @@ resource "azurerm_app_service" "example" {
 
   site_config {
     dotnet_framework_version = "v4.0"
-    php_version = 7.1
-    python_version = 3.6
-    java_version = "1.7.0_80"
+    php_version              = 7.1
+    python_version           = 3.6
+    java_version             = "1.7.0_80"
     scm_type                 = "LocalGit"
     min_tls_version          = 1.1
     remote_debugging_enabled = true
@@ -55,11 +55,11 @@ resource "azurerm_app_service" "example" {
   }
 
   storage_account {
-    name = ""
-    type = ""
+    name         = ""
+    type         = ""
     account_name = ""
-    share_name = ""
-    access_key = ""
+    share_name   = ""
+    access_key   = ""
   }
 }
 
@@ -85,7 +85,7 @@ resource "azurerm_function_app" "example" {
   storage_account_access_key = azurerm_storage_account.example.primary_access_key
   os_type                    = "linux"
   version                    = "~3"
- auth_settings {
+  auth_settings {
     enabled                       = false
     default_provider              = "AzureActiveDirectory"
     unauthenticated_client_action = "RedirectToLoginPage"
@@ -98,4 +98,6 @@ resource "azurerm_function_app" "example" {
       ]
     }
   }
+  block_type    = "auth_settings"
+  block_indexes = [1]
 }
