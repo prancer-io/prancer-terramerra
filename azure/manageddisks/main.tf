@@ -37,8 +37,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
   sku                             = "Standard_F2s_v2"
   instances                       = 3
   admin_username                  = "adminuser"
-  admin_password                  = "P@ssw0rd1234!"
-  disable_password_authentication = false
+  disable_password_authentication = true
 
   source_image_reference {
     publisher = "Canonical"
@@ -65,5 +64,9 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
     diff_disk_settings {
       option = "Local"
     }
+  }
+  admin_ssh_key {
+    public_key = "String<The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.>"
+    username   = "String<The Username for which this Public SSH Key should be configured.>"
   }
 }
