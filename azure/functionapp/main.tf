@@ -19,9 +19,9 @@ resource "azurerm_app_service" "example" {
 
   site_config {
     dotnet_framework_version = "v4.0"
-    php_version = 7.1
-    python_version = 3.6
-    java_version = "1.7.0_80"
+    php_version              = 7.1
+    python_version           = 3.6
+    java_version             = "1.7.0_80"
     scm_type                 = "LocalGit"
     min_tls_version          = 1.1
     remote_debugging_enabled = true
@@ -52,14 +52,19 @@ resource "azurerm_app_service" "example" {
         "somescope",
       ]
     }
+    active_directory {
+      client_id         = "String<The Client ID of this relying party application. Enables OpenIDConnection authentication with Azure Active Directory.>"
+      client_secret     = "String<The Client Secret of this relying party application. If no secret is provided, implicit flow will be used.>"
+      allowed_audiences = "String<Allowed audience values to consider when validating JWTs issued by Azure Active Directory.>"
+    }
   }
 
   storage_account {
-    name = ""
-    type = ""
+    name         = ""
+    type         = ""
     account_name = ""
-    share_name = ""
-    access_key = ""
+    share_name   = ""
+    access_key   = ""
   }
 }
 
@@ -85,7 +90,7 @@ resource "azurerm_function_app" "example" {
   storage_account_access_key = azurerm_storage_account.example.primary_access_key
   os_type                    = "linux"
   version                    = "~3"
- auth_settings {
+  auth_settings {
     enabled                       = false
     default_provider              = "AzureActiveDirectory"
     unauthenticated_client_action = "RedirectToLoginPage"
