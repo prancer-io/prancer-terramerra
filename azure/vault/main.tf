@@ -20,7 +20,8 @@ resource "azurerm_key_vault" "example" {
 }
 
 resource "azurerm_key_vault_secret" "example" {
-  name         = "secret-sauce"
-  value        = "UyVc_EG&ZPn=3m6%"
-  key_vault_id = azurerm_key_vault.example.id
+  name            = "secret-sauce"
+  value           = "UyVc_EG&ZPn=3m6%"
+  key_vault_id    = azurerm_key_vault.example.id
+  expiration_date = "String<Expiration UTC datetime (Y-m-d'T'H:M:S'Z')>"
 }
