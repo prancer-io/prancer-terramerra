@@ -12,8 +12,8 @@ resource "azurerm_network_security_rule" "nsr" {
   direction                   = element(var.nsr_directions, count.index)
   access                      = element(var.nsr_accesses, count.index)
   protocol                    = element(var.nsr_protocols, count.index)
-  source_port_range           = element(var.nsr_src_ports, count.index)
-  destination_port_range      = element(var.nsr_dst_ports, count.index)
+  source_port_ranges           = element(var.nsr_src_ports, count.index)
+  destination_port_ranges      = element(var.nsr_dst_ports, count.index)
   source_address_prefix       = element(var.nsr_src_addresses, count.index)
   destination_address_prefix  = element(var.nsr_dst_addresses, count.index)
   resource_group_name         = var.resource_group_name
