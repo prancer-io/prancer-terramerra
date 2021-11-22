@@ -27,6 +27,20 @@ resource "azurerm_network_security_group" "example" {
 }
 
 resource "azurerm_network_security_rule" "example" {
+  name                        = "exampleinbound-nsgrule"
+  network_security_group_name = azurerm_network_security_group.example.name
+  resource_group_name         = azurerm_resource_group.example.name
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+}
+  
+resource "azurerm_network_security_rule" "example" {
   name                        = "example-nsgrule"
   network_security_group_name = azurerm_network_security_group.example.name
   resource_group_name         = azurerm_resource_group.example.name
@@ -49,7 +63,7 @@ resource "azurerm_network_security_rule" "endpoint" {
   source_port_range           = "*"
   destination_port_range      = "3443"
   source_address_prefix       = "ApiManagement"
-  destination_address_prefix  = "VirtualNetwork"
+  destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.test.name
   network_security_group_name = azurerm_network_security_group.test.name
 }
