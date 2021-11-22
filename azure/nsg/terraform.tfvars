@@ -6,7 +6,11 @@ nsg_name             = "prancer-nsg"
 names                = [
   "allow-all-tcp",
   "allow-port-range",
-  "allow-all-udp"
+  "allow-all-udp",
+  "allow-all-tcpinbound",
+  "allow-all-udpinbound",
+  "allow-all-inbound",
+  "allow-all-inbound-icmp"
 ]
 priorities           = [100, 101, 102, 103, 104, 105, 106]
 directions           = ["Inbound", "Inbound", "Outbound", "Inbound", "Inbound", "Inbound", "Inbound"]
