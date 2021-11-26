@@ -42,7 +42,7 @@ variable "billing_mode" {
 
 variable "enable_streams" {
   type        = bool
-  default     = false
+  default     = true
   description = "Enable DynamoDB streams"
 }
 

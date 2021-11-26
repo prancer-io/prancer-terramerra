@@ -3,7 +3,7 @@ hash_key            = "HashKey"
 range_key           = "RangeKey"
 enabled             = true
 billing_mode        = "PROVISIONED"
-enable_streams      = false
+enable_streams      = true
 enable_encryption   = false
 dynamodb_attributes = [
   {
