@@ -19,8 +19,15 @@ resource "azurerm_app_service" "example" {
 
   site_config {
     dotnet_framework_version = "v4.0"
+    php_version = 7.1
+    python_version = 3.6
+    java_version = "1.7.0_80"
     scm_type                 = "LocalGit"
     min_tls_version          = 1.1
+    remote_debugging_enabled = true
+    cors {
+      allowed_origins = ["*"]
+    }
   }
 
   app_settings = {
@@ -45,6 +52,14 @@ resource "azurerm_app_service" "example" {
         "somescope",
       ]
     }
+  }
+
+  storage_account {
+    name = ""
+    type = ""
+    account_name = ""
+    share_name = ""
+    access_key = ""
   }
 }
 

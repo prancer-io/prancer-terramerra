@@ -5,7 +5,7 @@ storage_count               = 1
 storage_name                = "prancerstorageaccount007"
 accountTier                 = "Standard"
 replicationType             = "LRS"
-enableSecureTransfer        = "false"
+enableSecureTransfer        = false
 
 storage_container_name        = "prancer-storage-container"
 storage_container_access_type = "blob"
@@ -16,7 +16,7 @@ admin_user                  = "prancer_admin"
 admin_password              = "vijcykDaHarj+Oz5"
 
 enable_sql_sec_policy          = true
-sql_sec_policy_state           = "Enabled"
+sql_sec_policy_state           = "Disabled"
 disabled_alerts                = ["Unsafe_Action"]
 sql_sec_policy_retention       = 30
 email_account_admins           = false
