@@ -58,7 +58,7 @@ data "aws_acm_certificate" "example" {
 resource "aws_lb" "test" {
   name               = "test-lb-tf"
   internal           = true
-  load_balancer_type = "network"
+  load_balancer_type = "application"
   security_groups    = []
   target_type        = "instance"
 
