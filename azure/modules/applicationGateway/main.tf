@@ -1,3 +1,10 @@
+resource "azurerm_public_ip" "example" {
+  name                = "example-pip"
+  resource_group_name = var.app_gw_rg
+  location            = var.location
+  allocation_method   = "Dynamic"
+}
+
 resource "azurerm_application_gateway" "appgw" {
   name                = var.app_gw_name
   resource_group_name = var.app_gw_rg
@@ -21,6 +28,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   frontend_ip_configuration {
     name                 = "${var.app_gw_name}-fe-ip"
+    public_ip_address_id = azurerm_public_ip.example.id
   }
 
   backend_address_pool {
