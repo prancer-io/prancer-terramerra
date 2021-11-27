@@ -69,4 +69,7 @@ resource "azurerm_application_gateway" "appgw" {
     rule_set_type    = var.waf_rule_set_type
     rule_set_version = var.waf_rule_set_version
   }
+  ssl_certificate {
+    key_vault_secret_id = "String<Secret Id of (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for keyvault to use this feature.>"
+  }
 }
