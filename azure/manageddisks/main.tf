@@ -2,6 +2,8 @@ provider "azurerm" {
   features {}
 }
 
+data "azurerm_client_config" "current" {}
+
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
@@ -21,6 +23,44 @@ resource "azurerm_subnet" "internal" {
   address_prefixes     = ["10.0.2.0/24"]
 }
 
+resource "azurerm_key_vault" "example" {
+  name                        = "des-example-keyvault"
+  location                    = azurerm_resource_group.main.location
+  resource_group_name         = azurerm_resource_group.main.name
+  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  sku_name                    = "premium"
+  enabled_for_disk_encryption = true
+  soft_delete_enabled         = true
+  purge_protection_enabled    = true
+}
+
+resource "azurerm_key_vault_key" "example" {
+  name         = "des-example-key"
+  key_vault_id = azurerm_key_vault.example.id
+  key_type     = "RSA"
+  key_size     = 2048
+
+  key_opts = [
+    "decrypt",
+    "encrypt",
+    "sign",
+    "unwrapKey",
+    "verify",
+    "wrapKey",
+  ]
+}
+
+resource "azurerm_disk_encryption_set" "test" {
+  name                = "${var.prefix}-des"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  key_vault_key_id    = azurerm_key_vault_key.test.id
+
+  identity {
+    type = "SystemAssigned"
+  }
+}
+
 resource "azurerm_managed_disk" "data" {
   name                 = "data"
   location             = azurerm_resource_group.main.location
@@ -28,6 +68,7 @@ resource "azurerm_managed_disk" "data" {
   disk_size_gb         = 10
   resource_group_name  = azurerm_resource_group.main.name
   storage_account_type = "Standard_LRS"
+  disk_encryption_set_id = azurerm_disk_encryption_set.test.id
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "main" {
