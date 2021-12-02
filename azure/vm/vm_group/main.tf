@@ -42,9 +42,9 @@ resource "azurerm_network_interface" "main" {
 }
 
 resource "azurerm_network_interface" "internal" {
-  name                      = "${var.prefix}-nic2"
-  resource_group_name       = azurerm_resource_group.main.name
-  location                  = azurerm_resource_group.main.location
+  name                = "${var.prefix}-nic2"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
 
   ip_configuration {
     name                          = "internal"
@@ -81,8 +81,7 @@ resource "azurerm_linux_virtual_machine" "main" {
   location                        = azurerm_resource_group.main.location
   size                            = "Standard_F2"
   admin_username                  = "adminuser"
-  admin_password                  = "P@ssw0rd1234!"
-  disable_password_authentication = false
+  disable_password_authentication = true
   network_interface_ids = [
     azurerm_network_interface.main.id,
     azurerm_network_interface.internal.id,
@@ -98,6 +97,10 @@ resource "azurerm_linux_virtual_machine" "main" {
   os_disk {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
+  }
+  admin_ssh_key {
+    public_key = "String<The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.>"
+    username   = "String<The Username for which this Public SSH Key should be configured.>"
   }
 }
 
@@ -127,12 +130,12 @@ resource "azurerm_linux_virtual_machine" "slave" {
 }
 
 resource "azurerm_windows_virtual_machine" "main" {
-  name                            = "${var.prefix}-vm"
-  resource_group_name             = azurerm_resource_group.main.name
-  location                        = azurerm_resource_group.main.location
-  size                            = "Standard_DS3_v2"
-  admin_username                  = "adminuser"
-  admin_password                  = "P@ssw0rd1234!"
+  name                = "${var.prefix}-vm"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  size                = "Standard_DS3_v2"
+  admin_username      = "adminuser"
+  admin_password      = "P@ssw0rd1234!"
   network_interface_ids = [
     azurerm_network_interface.main.id,
   ]
