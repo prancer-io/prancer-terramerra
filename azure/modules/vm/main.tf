@@ -121,13 +121,12 @@ resource "azurerm_virtual_machine" "vm-linux-with-datadisk" {
 }
 
 resource "azurerm_virtual_machine" "vm-windows" {
-  count                         = (((var.vm_os_id != "" && var.is_windows_image == "true") || contains(list("${var.vm_os_simple}","${var.vm_os_offer}"), "WindowsServer")) && var.data_disk == "false") ? var.nb_instances : 0
-  name                          = "${var.vm_hostname}${count.index}"
+  name                          = "${var.vm_hostname}"
   location                      = var.location
   resource_group_name           = var.resource_group_name
   availability_set_id           = azurerm_availability_set.vm.id
   vm_size                       = var.vm_size
-  network_interface_ids         = [element(azurerm_network_interface.vm.*.id, count.index)]
+  network_interface_ids         = [element(azurerm_network_interface.vm.*.id)]
   delete_os_disk_on_termination = var.delete_os_disk_on_termination
 
   storage_image_reference {
@@ -139,14 +138,14 @@ resource "azurerm_virtual_machine" "vm-windows" {
   }
 
   storage_os_disk {
-    name              = "osdisk-${var.vm_hostname}-${count.index}"
+    name              = "osdisk-${var.vm_hostname}"
     create_option     = "FromImage"
     caching           = "ReadWrite"
     managed_disk_type = var.storage_account_type
   }
 
   os_profile {
-    computer_name  = "${var.vm_hostname}${count.index}"
+    computer_name  = "${var.vm_hostname}"
     admin_username = var.admin_username
     admin_password = var.admin_password
   }
