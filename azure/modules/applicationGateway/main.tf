@@ -69,4 +69,7 @@ resource "azurerm_application_gateway" "appgw" {
     rule_set_type    = var.waf_rule_set_type
     rule_set_version = var.waf_rule_set_version
   }
+  remove_properties = ["public_ip_address_id"]
+  block_type        = "frontend_ip_configuration"
+  block_indexes     = [1]
 }
