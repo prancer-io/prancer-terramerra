@@ -17,11 +17,11 @@ resource "aws_wafv2_web_acl" "example" {
 
     statement {
       managed_rule_group_statement {
-        name        = "AWSManagedRulesCommonRuleSet"
+        name        = "AWSManagedRulesKnownBadInputsRuleSet"
         vendor_name = "AWS"
 
         excluded_rule {
-          name = "SizeRestrictions_QUERYSTRING"
+          name = "Log4jRCE"
         }
 
         excluded_rule {
