@@ -69,4 +69,88 @@ resource "azurerm_application_gateway" "appgw" {
     rule_set_type    = var.waf_rule_set_type
     rule_set_version = var.waf_rule_set_version
   }
+  
+}
+
+resource "azurerm_application_gateway" "appgw2" {
+  name                = var.app_gw_name
+  resource_group_name = var.app_gw_rg
+  location            = var.location
+
+  sku {
+    name     = var.app_gw_sku
+    tier     = var.app_gw_tier
+    capacity = var.app_gw_capacity
+  }
+
+  gateway_ip_configuration {
+    name      = var.app_gw_ip
+    subnet_id = var.app_gw_fe_subnet
+  }
+
+  frontend_port {
+    name = "${var.app_gw_name}-fe-port"
+    port = var.app_gw_fe_port
+  }
+
+  frontend_ip_configuration {
+    name                 = "${var.app_gw_name}-fe-ip"
+    public_ip_address_id = azurerm_public_ip.example.id
+  }
+
+  backend_address_pool {
+    name = "${var.app_gw_name}-be-pool"
+  }
+
+  backend_http_settings {
+    name                  = "${var.app_gw_name}-be-http"
+    cookie_based_affinity = var.app_gw_be_http_cookie
+    path                  = var.app_gw_be_http_path
+    port                  = var.app_gw_be_http_port
+    protocol              = var.app_gw_be_http_proto
+    request_timeout       = var.app_gw_be_http_timeout
+  }
+
+  http_listener {
+    name                           = "${var.app_gw_name}-listener"
+    frontend_ip_configuration_name = "${var.app_gw_name}-fe-ip"
+    frontend_port_name             = "${var.app_gw_name}-fe-port"
+    protocol                       = var.app_gw_listener_proto
+  }
+
+  request_routing_rule {
+    name                       = "${var.app_gw_name}-req-route"
+    rule_type                  = var.app_gw_req_route_type
+    http_listener_name         = "${var.app_gw_name}-listener"
+    backend_address_pool_name  = "${var.app_gw_name}-be-pool"
+    backend_http_settings_name = "${var.app_gw_name}-be-http"
+  }
+
+  ssl_policy {
+    min_protocol_version = var.min_protocol_version
+  }
+
+  firewall_policy_id = azurerm_web_application_firewall_policy.testfwp.id
+  
+}
+
+resource "azurerm_web_application_firewall_policy" "testfwp" {
+  name                = "acctest-fwp"
+  resource_group_name = var.app_gw_rg
+  location            = var.location
+
+  policy_settings {
+    enabled                     = true
+    mode                        = "Prevention"
+    file_upload_limit_in_mb     = 100
+    max_request_body_size_in_kb = 100
+    request_body_check          = "true"
+  }
+
+  managed_rules {
+    managed_rule_set {
+      type    = "OWASP"
+      version = "3.0"
+    }
+  }
 }
