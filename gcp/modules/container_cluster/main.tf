@@ -5,8 +5,8 @@ resource "google_container_cluster" "primary" {
   remove_default_node_pool = true
   initial_node_count       = 1
 
-  enable_kubernetes_alpha  = var.k8s_enable_kubernetes_alpha
-  enable_legacy_abac       = var.k8s_enable_legacy_abac
+  enable_kubernetes_alpha = var.k8s_enable_kubernetes_alpha
+  enable_legacy_abac      = var.k8s_enable_legacy_abac
 
   network = var.k8s_network
 
@@ -19,9 +19,9 @@ resource "google_container_cluster" "primary" {
     iterator = private
 
     content {
-      enable_private_nodes        = lookup(private.value, "enable_private_nodes", null)
-      enable_private_endpoint     = lookup(private.value, "enable_private_endpoint", null)
-      master_ipv4_cidr_block      = lookup(private.value, "master_ipv4_cidr_block", null)
+      enable_private_nodes    = lookup(private.value, "enable_private_nodes", null)
+      enable_private_endpoint = lookup(private.value, "enable_private_endpoint", null)
+      master_ipv4_cidr_block  = lookup(private.value, "master_ipv4_cidr_block", null)
     }
   }
 
@@ -101,24 +101,31 @@ resource "google_container_cluster" "primary" {
 }
 
 resource "google_container_node_pool" "nodes" {
-  name       = "${var.k8s_name}-node"
-  location   = var.location
-  cluster    = google_container_cluster.primary.name
-  node_count = var.k8s_node_count
+  name           = "${var.k8s_name}-node"
+  location       = var.location
+  cluster        = google_container_cluster.primary.name
+  node_count     = var.k8s_node_count
   node_locations = var.node_locations
 
   node_config {
-    image_type   = var.k8s_image_type
-    preemptible  = var.k8s_preemptible
-    machine_type = var.k8s_machine_type
+    image_type            = var.k8s_image_type
+    preemptible           = var.k8s_preemptible
+    machine_type          = var.k8s_machine_type
+    service_account       = var.k8s_service_account
+    metadata              = var.k8s_metadata
+    enable_shielded_nodes = true
 
-    service_account = var.k8s_service_account
-
-    metadata = var.k8s_metadata
+    shielded_instance_config {
+      enable_secure_boot          = false
+      enable_integrity_monitoring = false
+    }
 
     oauth_scopes = [
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/monitoring",
     ]
+    workload_metadata_config {
+      mode = "gce_metadata"
+    }
   }
 }
