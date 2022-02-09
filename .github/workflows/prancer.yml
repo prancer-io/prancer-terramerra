@@ -38,4 +38,4 @@ jobs:
         run: |
           export APITOKEN=${{ secrets.APITOKEN }}
           export GITTOKEN=${{ secrets.GITTOKEN }}
-          prancer --db REMOTE --company prancer-liquware git_ent_terraform
+          prancer --db REMOTE --company prancer-liquware git_ent_terraform --env QA
