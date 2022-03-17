@@ -30,6 +30,7 @@ resource "aws_security_group" "sg" {
 
 resource "aws_kms_key" "kms" {
   description = "example"
+  is_enabled  = true
 }
 
 resource "aws_cloudwatch_log_group" "test" {
