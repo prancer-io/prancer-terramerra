@@ -33,7 +33,8 @@ resource "aws_kms_key" "kms" {
 }
 
 resource "aws_cloudwatch_log_group" "test" {
-  name = "msk_broker_logs"
+  name       = "msk_broker_logs"
+  kms_key_id = "String<The ARN of the KMS Key to use when encrypting log data>"
 }
 
 resource "aws_s3_bucket" "bucket" {
