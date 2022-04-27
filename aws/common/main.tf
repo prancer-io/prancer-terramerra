@@ -594,7 +594,7 @@ resource "aws_dax_cluster" "bar" {
   replication_factor = 1
 
   server_side_encryption {
-    enabled = false
+    enabled = true
   }
 }
 
