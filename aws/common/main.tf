@@ -188,7 +188,7 @@ resource "aws_cloudformation_stack" "network" {
     VPCCidr = "10.0.0.0/16"
   }
 
-  template_body = <<STACK
+  template_body     = <<STACK
 {
   "Parameters" : {
     "VPCCidr" : {
@@ -210,6 +210,7 @@ resource "aws_cloudformation_stack" "network" {
   }
 }
 STACK
+  notification_arns = "String<The Simple Notification Service (SNS) topic ARNs to publish stack related events>"
 }
 
 
