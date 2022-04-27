@@ -338,4 +338,5 @@ resource "aws_instance" "web" {
 
   }
 
+  ebs_optimized = true
 }
