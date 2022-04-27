@@ -7,7 +7,7 @@ key_name                             = ""
 monitoring                           = false
 get_password_data                    = false
 vpc_security_group_ids               = []
-iam_instance_profile                 = null
+iam_instance_profile                 = "String<IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile>"
 subnet_id                            = ""
 associate_public_ip_address          = true
 ipv6_address_count                   = null
@@ -22,12 +22,12 @@ instance_initiated_shutdown_behavior = "stop"
 placement_group                      = null
 tenancy                              = null
 
-availability_zone                    = "us-east-2a"
-encrypted                            = false
-size                                 = 5
+availability_zone = "us-east-2a"
+encrypted         = false
+size              = 5
 
 tags = {
-  Name = "prancer-ec2"
+  Name        = "prancer-ec2"
   Environment = "Production"
-  Project = "Prancer"
+  Project     = "Prancer"
 }
