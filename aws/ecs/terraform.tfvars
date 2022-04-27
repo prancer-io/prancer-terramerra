@@ -4,11 +4,11 @@ enable_container_insights = false
 family             = "prancer-task"
 task_role_arn      = null
 execution_role_arn = ""
-network_mode       = "bridge"
+network_mode       = "awsvpc"
 cpu                = 256
 memory             = 1024
 
-tags                      = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
