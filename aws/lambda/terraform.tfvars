@@ -19,13 +19,13 @@ assume_role_policy            = <<EOF
 }
 EOF
 
-cidr_block                      = "10.10.0.0/16"
-instance_tenancy                = "default"
-enable_dns_hostnames            = false
-enable_dns_support              = true
-enable_classiclink              = null
-enable_classiclink_dns_support  = null
-enable_ipv6                     = false
+cidr_block                     = "10.10.0.0/16"
+instance_tenancy               = "default"
+enable_dns_hostnames           = false
+enable_dns_support             = true
+enable_classiclink             = null
+enable_classiclink_dns_support = null
+enable_ipv6                    = false
 
 subnet_cidr_block               = "10.10.1.0/24"
 availability_zone               = null
@@ -34,17 +34,17 @@ map_public_ip_on_launch         = false
 assign_ipv6_address_on_creation = false
 ipv6_cidr_block                 = null
 
-sgroup_name                     = "prancer-security-group"
-sgroup_description              = "Prancer Security Group"
-revoke_rules_on_delete          = false
+sgroup_name            = "prancer-security-group"
+sgroup_description     = "Prancer Security Group"
+revoke_rules_on_delete = false
 
-description                    = ""
-environment                    = {
+description = ""
+environment = {
   variables = {
     API_KEY = "3c3ac97c6fa1850d366b70fbcd49a3db"
   }
 }
-kms_key_arn                    = null
+kms_key_arn                    = "String<The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables>"
 filename                       = "function.py.zip"
 function_name                  = "prancer-lambda-fn"
 handler                        = "prancer-lambda-handler"
@@ -60,5 +60,5 @@ tracing_mode                   = "PassThrough"
 
 tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
