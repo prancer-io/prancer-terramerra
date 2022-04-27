@@ -12,6 +12,7 @@ resource "azurerm_storage_account" "storageAccount" {
   enable_https_traffic_only = var.enableSecureTransfer
   allow_blob_public_access  = var.allow_blob_public_access
   tags                      = var.tags
+  min_tls_version           = "tls1_2"
 }
 
 resource "azurerm_monitor_activity_log_alert" "main" {
@@ -19,7 +20,7 @@ resource "azurerm_monitor_activity_log_alert" "main" {
   resource_group_name = azurerm_resource_group.main.name
   scopes              = [azurerm_resource_group.main.id]
   description         = "This alert will monitor a specific storage account updates."
-  enabled = false 
+  enabled             = false
   criteria {
     resource_id    = azurerm_storage_account.storageAccount[0].id
     operation_name = "Microsoft.Storage/storageAccounts/write"
