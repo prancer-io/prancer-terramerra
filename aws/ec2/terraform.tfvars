@@ -4,7 +4,7 @@ instance_type                        = "t3.micro"
 user_data                            = null
 user_data_base64                     = null
 key_name                             = ""
-monitoring                           = false
+monitoring                           = true
 get_password_data                    = false
 vpc_security_group_ids               = []
 iam_instance_profile                 = null
@@ -22,12 +22,12 @@ instance_initiated_shutdown_behavior = "stop"
 placement_group                      = null
 tenancy                              = null
 
-availability_zone                    = "us-east-2a"
-encrypted                            = false
-size                                 = 5
+availability_zone = "us-east-2a"
+encrypted         = false
+size              = 5
 
 tags = {
-  Name = "prancer-ec2"
+  Name        = "prancer-ec2"
   Environment = "Production"
-  Project = "Prancer"
+  Project     = "Prancer"
 }
