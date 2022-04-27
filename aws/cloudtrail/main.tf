@@ -34,10 +34,17 @@ resource "aws_s3_bucket" "s3" {
     ]
 }
 POLICY
+  replication_configuration {
+    rules {
+      destination {
+        bucket = "String<The ARN of the S3 bucket where you want Amazon S3 to store replicas of the object identified by the rule>"
+      }
+    }
+  }
 }
 
 module "cloudtrail" {
-  source  = "../modules/cloudtrail"
+  source                        = "../modules/cloudtrail"
   name                          = var.name
   enable_logging                = var.enable_logging
   s3_bucket_name                = aws_s3_bucket.s3.id
