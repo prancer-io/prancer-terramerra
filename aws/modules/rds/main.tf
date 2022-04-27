@@ -73,7 +73,7 @@ resource "aws_db_event_subscription" "default-db-security-group" {
   sns_topic = aws_sns_topic.default.arn
 
   source_type = "db-security-group"
-  enabled = false
+  enabled     = false
 
   event_categories = [
     "availability",
@@ -96,7 +96,7 @@ resource "aws_db_event_subscription" "default-db-instance" {
 
   source_type = "db-instance"
   source_ids  = [aws_db_instance.rds.id]
-  enabled = false
+  enabled     = false
 
   event_categories = [
     "availability",
@@ -132,5 +132,5 @@ resource "aws_rds_global_cluster" "example" {
   engine                    = "aurora"
   engine_version            = "5.6.mysql_aurora.1.22.2"
   database_name             = "example_db"
-  storage_encrypted         = false
+  storage_encrypted         = true
 }
