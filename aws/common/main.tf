@@ -429,7 +429,8 @@ EOF
   ]
 EOF
 
-  service_role = aws_iam_role.iam_emr_service_role.arn
+  service_role           = aws_iam_role.iam_emr_service_role.arn
+  security_configuration = "String<The name of the security configuration applied to the cluster>"
 }
 
 resource "aws_kinesis_stream" "test_stream" {
