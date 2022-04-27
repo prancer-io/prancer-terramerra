@@ -4,7 +4,7 @@ cluster_master_password     = "c9209030ffc53a3fa5663955f65a85de"
 cluster_master_username     = "dbadm"
 cluster_skip_final_snapshot = true
 cluster_kms_key_id          = null
-cluster_storage_encrypted   = false
+cluster_storage_encrypted   = true
 
 identifier                            = "prancer-rds"
 engine                                = "mysql"
