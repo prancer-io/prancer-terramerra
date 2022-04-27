@@ -12,12 +12,12 @@ resource "azurerm_mariadb_server" "example" {
 
   storage_mb                   = 51200
   backup_retention_days        = 7
-  geo_redundant_backup_enabled = false
+  geo_redundant_backup_enabled = true
 
-  administrator_login          = "acctestun"
-  administrator_login_password = "H@Sh1CoR3!"
-  version                      = "10.2"
-  ssl_enforcement_enabled      = false
+  administrator_login           = "acctestun"
+  administrator_login_password  = "H@Sh1CoR3!"
+  version                       = "10.2"
+  ssl_enforcement_enabled       = false
   public_network_access_enabled = true
 }
 
