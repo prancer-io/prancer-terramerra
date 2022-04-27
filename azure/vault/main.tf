@@ -40,6 +40,7 @@ resource "azurerm_key_vault_key" "test" {
     "verify",
     "wrapKey",
   ]
+  expiration_date = "String<Expiration UTC datetime (Y-m-d'T'H:M:S'Z')>"
 }
 
 resource "azurerm_disk_encryption_set" "test" {
