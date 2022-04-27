@@ -271,6 +271,10 @@ resource "aws_elb" "web" {
 
   connection_draining_timeout = 400
 
+  access_logs {
+    bucket  = "String< The S3 bucket name to store the logs in>"
+    enabled = true
+  }
 }
 
 
