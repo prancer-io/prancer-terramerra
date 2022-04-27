@@ -558,6 +558,10 @@ resource "aws_elb" "main" {
     lb_port           = 80
     lb_protocol       = "http"
   }
+  access_logs {
+    bucket  = "String< The S3 bucket name to store the logs in>"
+    enabled = true
+  }
 }
 
 resource "aws_route53_record" "www" {
