@@ -119,4 +119,5 @@ resource "aws_directory_service_directory" "example" {
 
 resource "aws_kms_key" "example" {
   description = "WorkSpaces example key"
+  is_enabled  = true
 }
