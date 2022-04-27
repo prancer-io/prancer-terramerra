@@ -30,6 +30,7 @@ resource "aws_elb" "web-elb" {
     target              = "HTTP:80/"
     interval            = 30
   }
+  connection_draining = true
 }
 
 resource "aws_autoscaling_group" "web-asg" {
