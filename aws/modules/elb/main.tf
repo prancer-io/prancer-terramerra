@@ -46,7 +46,7 @@ resource "aws_elb" "elb" {
 
 
 resource "aws_lb_listener_certificate" "example" {
-  listener_arn    = null
+  listener_arn    = "String<The ARN of the listener to which to attach the certificate>"
   certificate_arn = aws_acm_certificate.example.arn
 }
 
