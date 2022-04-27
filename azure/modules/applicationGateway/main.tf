@@ -69,7 +69,7 @@ resource "azurerm_application_gateway" "appgw" {
     rule_set_type    = var.waf_rule_set_type
     rule_set_version = var.waf_rule_set_version
   }
-  
+
 }
 
 resource "azurerm_application_gateway" "appgw2" {
@@ -131,7 +131,13 @@ resource "azurerm_application_gateway" "appgw2" {
   }
 
   firewall_policy_id = azurerm_web_application_firewall_policy.testfwp.id
-  
+
+  waf_configuration {
+    enabled          = true
+    firewall_mode    = "String<The Web Application Firewall Mode>"
+    rule_set_type    = "String<The Type of the Rule Set used for this Web Application Firewall>"
+    rule_set_version = "String<The Version of the Rule Set used for this Web Application Firewall>"
+  }
 }
 
 resource "azurerm_web_application_firewall_policy" "testfwp" {
