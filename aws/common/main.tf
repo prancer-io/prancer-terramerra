@@ -1,7 +1,7 @@
 # code deploy
 
 resource "aws_codedeploy_app" "example" {
-  compute_platform = "Server"
+  compute_platform = "String<Select ECS or Lambda>"
   name             = "example"
 }
 
