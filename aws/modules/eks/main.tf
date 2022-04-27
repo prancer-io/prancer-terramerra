@@ -2,7 +2,6 @@ resource "aws_eks_cluster" "eks" {
   name                      = var.name
   tags                      = var.tags
   role_arn                  = var.role_arn
-  version                   = var.kubernetes_version
   enabled_cluster_log_types = var.enabled_cluster_log_types
 
   dynamic "encryption_config" {
