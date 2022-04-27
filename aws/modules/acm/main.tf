@@ -11,4 +11,5 @@ resource "aws_acm_certificate" "acm" {
   lifecycle {
     create_before_destroy = true
   }
+  certificate_authority_arn = "String<ARN of an ACM PCA>"
 }
