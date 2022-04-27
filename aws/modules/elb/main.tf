@@ -79,7 +79,7 @@ resource "aws_lb_listener" "front_end" {
   load_balancer_arn = aws_lb.test.arn
   port              = "80"
   protocol          = "HTTP"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  ssl_policy        = "String<Name of the SSL Policy for the listener>"
 
   default_action {
     type = "redirect"
