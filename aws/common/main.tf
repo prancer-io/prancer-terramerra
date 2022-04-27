@@ -705,7 +705,7 @@ resource "aws_docdb_cluster_parameter_group" "example" {
 
   parameter {
     name  = "audit_logs"
-    value = "disabled"
+    value = "enabled"
   }
 
 }
