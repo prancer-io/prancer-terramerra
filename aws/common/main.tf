@@ -558,6 +558,10 @@ resource "aws_elb" "main" {
     lb_port           = 80
     lb_protocol       = "http"
   }
+  instances {
+    bucket  = "List<A list of instance ids to place in the ELB pool>"
+    enabled = true
+  }
 }
 
 resource "aws_route53_record" "www" {
