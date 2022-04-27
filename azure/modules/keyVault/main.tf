@@ -5,9 +5,9 @@ resource "azurerm_key_vault" "keyvault" {
   location            = var.location
   resource_group_name = var.resourceGroup
 
-  sku_name            = var.skuname
+  sku_name = var.skuname
 
-  tenant_id           = data.azurerm_client_config.current.tenant_id
+  tenant_id = data.azurerm_client_config.current.tenant_id
 
   access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
@@ -22,5 +22,6 @@ resource "azurerm_key_vault" "keyvault" {
   enabled_for_deployment          = var.enabled_for_deployment
   enabled_for_template_deployment = var.enabled_for_template_deployment
 
-  tags = var.tags
+  tags                     = var.tags
+  purge_protection_enabled = true
 }
