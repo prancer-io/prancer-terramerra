@@ -14,7 +14,7 @@ variable "acceleration_status" {
 
 variable "versioning_enabled" {
   description = "If versioning is set for buckets in case of accidental deletion"
-  default     = false
+  default     = true
 }
 
 variable "cors_allowed_headers" {

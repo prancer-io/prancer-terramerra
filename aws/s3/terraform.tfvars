@@ -1,7 +1,7 @@
 bucket_name                                     = "prancer-s3-bucket"
 bucket_acl                                      = "private"
 acceleration_status                             = "Suspended"
-versioning_enabled                              = false
+versioning_enabled                              = true
 cors_allowed_headers                            = ["Authorization"]
 cors_allowed_methods                            = ["GET"]
 cors_allowed_origins                            = ["*"]
@@ -42,7 +42,7 @@ s3_policy                                       = <<POLICY
   ]
 }
 POLICY
-s3_policy_sslonly = <<POLICY
+s3_policy_sslonly                               = <<POLICY
 {
   "Id": "sslonly",
   "Version": "2012-10-17",
@@ -65,7 +65,7 @@ s3_policy_sslonly = <<POLICY
 }
 POLICY
 
-tags                                     = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
