@@ -48,6 +48,7 @@ resource "azurerm_key_vault_key" "example" {
     "verify",
     "wrapKey",
   ]
+  expiration_date = "String<Expiration UTC datetime (Y-m-d'T'H:M:S'Z')>"
 }
 
 resource "azurerm_disk_encryption_set" "test" {
@@ -62,12 +63,12 @@ resource "azurerm_disk_encryption_set" "test" {
 }
 
 resource "azurerm_managed_disk" "data" {
-  name                 = "data"
-  location             = azurerm_resource_group.main.location
-  create_option        = "Empty"
-  disk_size_gb         = 10
-  resource_group_name  = azurerm_resource_group.main.name
-  storage_account_type = "Standard_LRS"
+  name                   = "data"
+  location               = azurerm_resource_group.main.location
+  create_option          = "Empty"
+  disk_size_gb           = 10
+  resource_group_name    = azurerm_resource_group.main.name
+  storage_account_type   = "Standard_LRS"
   disk_encryption_set_id = azurerm_disk_encryption_set.test.id
 }
 
