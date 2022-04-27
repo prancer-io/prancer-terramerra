@@ -884,6 +884,7 @@ resource "aws_eip" "bar" {
   domain                    = "vpc"
   associate_with_private_ip = "10.0.0.12"
   depends_on                = [aws_internet_gateway.gw]
+  instance                  = "String<EC2 instance ID>"
 }
 
 resource "aws_vpc_endpoint_service" "example" {
