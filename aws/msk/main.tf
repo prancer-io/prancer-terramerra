@@ -33,7 +33,8 @@ resource "aws_kms_key" "kms" {
 }
 
 resource "aws_cloudwatch_log_group" "test" {
-  name = "msk_broker_logs"
+  name              = "msk_broker_logs"
+  retention_in_days = "Integer<The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.>"
 }
 
 resource "aws_s3_bucket" "bucket" {
