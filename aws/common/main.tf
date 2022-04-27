@@ -585,6 +585,7 @@ resource "aws_sagemaker_notebook_instance" "ni" {
   tags = {
     Name = "foo"
   }
+  kms_key_id = "String<The ARN for the KMS encryption key>"
 }
 
 resource "aws_dax_cluster" "bar" {
