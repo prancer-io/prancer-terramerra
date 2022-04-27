@@ -90,4 +90,5 @@ resource "aws_lb_listener" "front_end" {
       status_code = "HTTP_301"
     }
   }
+  certificate_arn = "String<The Amazon Resource Name (ARN) of the certificate>"
 }
