@@ -96,4 +96,7 @@ resource "aws_elasticsearch_domain" "esearch" {
   }
 
   tags = var.tags
+  vpc_options {
+    subnet_ids = "List<List of VPC Subnet IDs for the Elasticsearch domain endpoints to be created in>"
+  }
 }
