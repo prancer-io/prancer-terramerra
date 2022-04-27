@@ -553,10 +553,11 @@ resource "aws_elb" "main" {
   availability_zones = ["us-east-1c"]
 
   listener {
-    instance_port     = 80
-    instance_protocol = "http"
-    lb_port           = 80
-    lb_protocol       = "http"
+    instance_port      = 80
+    instance_protocol  = "HTTPS"
+    lb_port            = 443
+    lb_protocol        = "https"
+    ssl_certificate_id = "String<The Amazon Resource Name (ARN) of the server certificate>"
   }
 }
 
