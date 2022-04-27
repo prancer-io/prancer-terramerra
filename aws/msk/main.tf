@@ -39,6 +39,14 @@ resource "aws_cloudwatch_log_group" "test" {
 resource "aws_s3_bucket" "bucket" {
   bucket = "msk-broker-logs-bucket"
   acl    = "private"
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        kms_master_key_id = "String<The AWS KMS master key ID used for the SSE-KMS encryption>"
+        sse_algorithm     = "aws:kms"
+      }
+    }
+  }
 }
 
 resource "aws_iam_role" "firehose_role" {
