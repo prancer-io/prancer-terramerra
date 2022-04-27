@@ -26,7 +26,8 @@ variable "sgroup_description" {}
 variable "revoke_rules_on_delete" {}
 
 variable "rule_description" {}
-variable "rule_type" {}
+variable "rule_type" { default = "ingress"
+}
 variable "rule_from_port" {}
 variable "rule_to_port" {}
 variable "rule_protocol" {}
