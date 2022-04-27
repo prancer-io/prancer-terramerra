@@ -86,4 +86,9 @@ resource "aws_cloudfront_distribution" "cloudfront" {
 
 resource "aws_cloudfront_distribution" "cloudfront_null" {
 
+  restrictions {
+    geo_restriction {
+      restriction_type = "String<The method that you want to use to restrict distribution of your content by, Allowed values: blacklist | whitelist>"
+    }
+  }
 }
