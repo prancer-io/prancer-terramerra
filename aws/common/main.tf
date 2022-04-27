@@ -642,6 +642,9 @@ resource "aws_codebuild_project" "project-with-cache" {
   tags = {
     Environment = "Test"
   }
+  encryption_key {
+    id = "String<AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build project's build output artifacts>"
+  }
 }
 
 
