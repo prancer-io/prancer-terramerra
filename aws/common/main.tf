@@ -456,7 +456,7 @@ resource "aws_mq_broker" "example" {
     revision = aws_mq_configuration.test.latest_revision
   }
 
-  publicly_accessible = true
+  publicly_accessible = false
 
   engine_type        = "ActiveMQ"
   engine_version     = "5.15.9"
