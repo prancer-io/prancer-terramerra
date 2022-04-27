@@ -88,6 +88,9 @@ resource "aws_codestarconnections_connection" "example" {
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket = "test-bucket"
   acl    = "private"
+  versioning {
+    enabled = true
+  }
 }
 
 resource "aws_iam_role" "codepipeline_role" {
