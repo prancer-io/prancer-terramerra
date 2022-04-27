@@ -27,7 +27,7 @@ resource "aws_ecs_service" "mongo" {
   network_configuration {
     subnets          = []
     security_groups  = []
-    assign_public_ip = true
+    assign_public_ip = false
   }
 
   load_balancer {
