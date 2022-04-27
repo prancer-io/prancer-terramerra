@@ -11,18 +11,12 @@ resource "aws_wafv2_web_acl" "example" {
     name     = "rule-1"
     priority = 1
 
-    override_action {
-      count {}
-    }
 
     statement {
       managed_rule_group_statement {
         name        = "AWSManagedRulesKnownBadInputsRuleSet"
         vendor_name = "AWS"
 
-        excluded_rule {
-          name = "Log4jRCE"
-        }
 
         excluded_rule {
           name = "NoUserAgent_HEADER"
@@ -41,6 +35,7 @@ resource "aws_wafv2_web_acl" "example" {
       metric_name                = "friendly-rule-metric-name"
       sampled_requests_enabled   = false
     }
+    remove_blocks = []
   }
 
   tags = {
