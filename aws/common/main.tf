@@ -88,6 +88,15 @@ resource "aws_codestarconnections_connection" "example" {
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket = "test-bucket"
   acl    = "private"
+  server_side_encryption_configuration {
+    rule {
+      bucket_key_enabled = true
+      apply_server_side_encryption_by_default {
+        sse_algorithm     = "aws:kms"
+        kms_master_key_id = "String<he AWS KMS master key ID used for the SSE-KMS encryption>"
+      }
+    }
+  }
 }
 
 resource "aws_iam_role" "codepipeline_role" {
