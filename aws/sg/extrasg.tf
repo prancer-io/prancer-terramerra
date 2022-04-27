@@ -338,4 +338,5 @@ resource "aws_instance" "web" {
 
   }
 
+  iam_instance_profile = "String<IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile>"
 }
