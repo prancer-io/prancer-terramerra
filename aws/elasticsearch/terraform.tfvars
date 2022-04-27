@@ -22,7 +22,7 @@ zone_awareness_enabled                                   = false
 warm_enabled                                             = false
 warm_count                                               = 2
 warm_type                                                = "ultrawarm1.medium.elasticsearch"
-zone_awareness_config                                    = [{availability_zone_count = 2}]
+zone_awareness_config                                    = [{ availability_zone_count = 2 }]
 node_to_node_encryption_enabled                          = false
 vpc_enabled                                              = false
 subnet_ids                                               = []
@@ -33,12 +33,12 @@ cognito_identity_pool_id                                 = ""
 cognito_iam_role_arn                                     = ""
 log_publishing_index_enabled                             = false
 log_publishing_index_cloudwatch_log_group_arn            = ""
-log_publishing_search_enabled                            = false
+log_publishing_search_enabled                            = true
 log_publishing_search_cloudwatch_log_group_arn           = ""
 log_publishing_application_enabled                       = false
 log_publishing_application_cloudwatch_log_group_arn      = ""
 
-tags                                = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
