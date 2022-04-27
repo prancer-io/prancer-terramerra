@@ -22,7 +22,8 @@ variable "app_gw_be_http_path" {}
 variable "app_gw_be_http_port" {}
 variable "app_gw_be_http_proto" {}
 variable "app_gw_be_http_timeout" {}
-variable "app_gw_listener_proto" {}
+variable "app_gw_listener_proto" { default = "Https"
+}
 variable "app_gw_req_route_type" {}
 variable "min_protocol_version" {}
 variable "waf_enabled" {}
