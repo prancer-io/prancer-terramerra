@@ -51,7 +51,7 @@ data "aws_ecs_service" "example" {
 resource "aws_lb_target_group" "foo" {
   name        = "tf-example-lb-tg"
   port        = 80
-  protocol    = "HTTP"
+  protocol    = "HTTPS"
   vpc_id      = aws_vpc.main.id
   target_type = "instance"
 }
