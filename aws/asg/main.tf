@@ -59,6 +59,9 @@ resource "aws_launch_configuration" "web-lc" {
   security_groups = [aws_security_group.default.id]
   user_data       = file("userdata.sh")
   key_name        = var.key_name
+  ebs_block_device {
+    encrypted = true
+  }
 }
 
 # Our default security group to access
