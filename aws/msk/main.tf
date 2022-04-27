@@ -39,6 +39,9 @@ resource "aws_cloudwatch_log_group" "test" {
 resource "aws_s3_bucket" "bucket" {
   bucket = "msk-broker-logs-bucket"
   acl    = "private"
+  object_lock_configuration {
+    object_lock_enabled = true
+  }
 }
 
 resource "aws_iam_role" "firehose_role" {
