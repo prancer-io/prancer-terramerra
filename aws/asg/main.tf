@@ -30,6 +30,10 @@ resource "aws_elb" "web-elb" {
     target              = "HTTP:80/"
     interval            = 30
   }
+  access_logs {
+    bucket  = "String< The S3 bucket name to store the logs in>"
+    enabled = true
+  }
 }
 
 resource "aws_autoscaling_group" "web-asg" {
