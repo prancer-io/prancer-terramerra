@@ -40,4 +40,9 @@ resource "aws_lb" "lb" {
     update = var.load_balancer_update_timeout
     delete = var.load_balancer_delete_timeout
   }
+  access_logs {
+    bucket  = "String<The S3 bucket name to store the logs in>"
+    prefix  = "String<The S3 bucket prefix. Logs are stored in the root if not configured>"
+    enabled = true
+  }
 }

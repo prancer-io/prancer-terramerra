@@ -73,6 +73,11 @@ resource "aws_lb" "test" {
   tags = {
     Environment = "production"
   }
+  access_logs {
+    bucket  = "String<The S3 bucket name to store the logs in>"
+    prefix  = "String<The S3 bucket prefix. Logs are stored in the root if not configured>"
+    enabled = true
+  }
 }
 
 resource "aws_lb_listener" "front_end" {
