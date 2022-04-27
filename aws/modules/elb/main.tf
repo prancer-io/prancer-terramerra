@@ -42,6 +42,10 @@ resource "aws_elb" "elb" {
   tags = {
     Name = "foobar-terraform-elb"
   }
+  access_logs {
+    enabled = true
+    bucket  = "String< The S3 bucket name to store the logs in>"
+  }
 }
 
 
