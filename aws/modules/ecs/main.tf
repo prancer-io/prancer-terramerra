@@ -16,7 +16,7 @@ resource "aws_ecs_service" "mongo" {
   desired_count          = 3
   iam_role               = aws_iam_role.foo.arn
   depends_on             = [aws_iam_role_policy.foo]
-  enable_execute_command = true
+  enable_execute_command = false
   launch_type            = "EC2"
 
   ordered_placement_strategy {
