@@ -113,6 +113,20 @@ resource "aws_s3_bucket" "s3_bucket" {
   }
 
   tags = var.tags
+  replication_configuration {
+    rules {
+      destination {
+        bucket = "String<The ARN of the S3 bucket where you want Amazon S3 to store replicas of the object identified by the rule>"
+      }
+    }
+  }
+  replication_configuration {
+    rules {
+      destination {
+        bucket = "String<The ARN of the S3 bucket where you want Amazon S3 to store replicas of the object identified by the rule>"
+      }
+    }
+  }
 }
 
 
