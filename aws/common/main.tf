@@ -477,7 +477,8 @@ resource "aws_api_gateway_authorizer" "demo" {
 }
 
 resource "aws_api_gateway_rest_api" "demo" {
-  name = "auth-demo"
+  name                  = "auth-demo"
+  client_certificate_id = "String<The ID of the client certificate that API Gateway uses to call your integration endpoints in the stage>"
 }
 
 resource "aws_iam_role" "invocation_role" {
