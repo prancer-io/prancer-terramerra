@@ -845,7 +845,7 @@ resource "aws_secretsmanager_secret" "rotation-example" {
 
 resource "aws_timestreamwrite_database" "example" {
   database_name = "database-example"
-  kms_key_id    = ""
+  kms_key_id    = "String<The ARN of the KMS key used to encrypt the data stored in the database>"
 
   tags = {
     Name = "value"
