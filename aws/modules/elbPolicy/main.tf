@@ -9,6 +9,6 @@ resource "aws_load_balancer_policy" "wu-tang-ssl-tls-1-1" {
   }
   policy_attribute {
     name  = "routing.http.drop_invalid_header_fields.enabled"
-    value = "false"
+    value = "true"
   }
 }
