@@ -34,10 +34,19 @@ resource "aws_s3_bucket" "s3" {
     ]
 }
 POLICY
+  server_side_encryption_configuration {
+    rule {
+      bucket_key_enabled = true
+      apply_server_side_encryption_by_default {
+        kms_master_key_id = "String<he AWS KMS master key ID used for the SSE-KMS encryption>"
+        sse_algorithm     = "aws:kms"
+      }
+    }
+  }
 }
 
 module "cloudtrail" {
-  source  = "../modules/cloudtrail"
+  source                        = "../modules/cloudtrail"
   name                          = var.name
   enable_logging                = var.enable_logging
   s3_bucket_name                = aws_s3_bucket.s3.id
