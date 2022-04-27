@@ -42,6 +42,10 @@ resource "aws_elb" "elb" {
   tags = {
     Name = "foobar-terraform-elb"
   }
+  instances {
+    bucket  = "List<A list of instance ids to place in the ELB pool>"
+    enabled = true
+  }
 }
 
 
