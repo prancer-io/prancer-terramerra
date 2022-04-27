@@ -39,6 +39,9 @@ resource "aws_cloudfront_distribution" "cloudfront" {
         origin_access_identity = var.origin_access_identity
       }
     }
+    s3_origin_config {
+      origin_access_identity = "String<The CloudFront origin access identity to associate with the origin.>"
+    }
   }
 
   viewer_certificate {
@@ -86,4 +89,9 @@ resource "aws_cloudfront_distribution" "cloudfront" {
 
 resource "aws_cloudfront_distribution" "cloudfront_null" {
 
+  origin {
+    s3_origin_config {
+      origin_access_identity = "String<The CloudFront origin access identity to associate with the origin.>"
+    }
+  }
 }
