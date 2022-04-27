@@ -20,19 +20,19 @@ allow_version_upgrade               = false
 snapshot_copy_destination_region    = null
 cluster_iam_roles                   = []
 encrypted                           = false
-kms_key_id                          = ""
+kms_key_id                          = "String<The ARN for the KMS encryption key>"
 enhanced_vpc_routing                = false
 enable_logging                      = false
 logging_bucket_name                 = null
 logging_s3_key_prefix               = null
 
-parameter_name                      = "prancer-redshift-params"
-parameter_family                    = "redshift-1.0"
-parameter_map                       = {
+parameter_name   = "prancer-redshift-params"
+parameter_family = "redshift-1.0"
+parameter_map = {
   require_ssl = "false"
 }
 
-tags                                = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
