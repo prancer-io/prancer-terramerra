@@ -88,6 +88,10 @@ resource "aws_codestarconnections_connection" "example" {
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket = "test-bucket"
   acl    = "private"
+  logging {
+    target_bucket = "String<The name of the bucket that will receive the log objects>"
+    target_prefix = "String< To specify a key prefix for log objects>"
+  }
 }
 
 resource "aws_iam_role" "codepipeline_role" {
