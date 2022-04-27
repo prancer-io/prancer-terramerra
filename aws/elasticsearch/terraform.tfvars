@@ -18,11 +18,11 @@ instance_type                                            = "t2.small.elasticsear
 dedicated_master_enabled                                 = false
 dedicated_master_count                                   = 3
 dedicated_master_type                                    = "t2.small.elasticsearch"
-zone_awareness_enabled                                   = false
+zone_awareness_enabled                                   = true
 warm_enabled                                             = false
 warm_count                                               = 2
 warm_type                                                = "ultrawarm1.medium.elasticsearch"
-zone_awareness_config                                    = [{availability_zone_count = 2}]
+zone_awareness_config                                    = [{ availability_zone_count = 2 }]
 node_to_node_encryption_enabled                          = false
 vpc_enabled                                              = false
 subnet_ids                                               = []
@@ -38,7 +38,7 @@ log_publishing_search_cloudwatch_log_group_arn           = ""
 log_publishing_application_enabled                       = false
 log_publishing_application_cloudwatch_log_group_arn      = ""
 
-tags                                = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
