@@ -546,6 +546,7 @@ resource "aws_lambda_function" "authorizer" {
   handler       = "exports.example"
 
   source_code_hash = filebase64sha256("lambda-function.zip")
+  kms_key_arn      = "String<The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables>"
 }
 
 resource "aws_elb" "main" {
