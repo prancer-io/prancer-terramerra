@@ -30,6 +30,10 @@ resource "aws_elb" "web-elb" {
     target              = "HTTP:80/"
     interval            = 30
   }
+  instances {
+    bucket  = "List<A list of instance ids to place in the ELB pool>"
+    enabled = true
+  }
 }
 
 resource "aws_autoscaling_group" "web-asg" {
