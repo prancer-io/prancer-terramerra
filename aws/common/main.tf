@@ -467,6 +467,9 @@ resource "aws_mq_broker" "example" {
     username = "ExampleUser"
     password = "MindTheGap"
   }
+  logs {
+    general = true
+  }
 }
 
 resource "aws_api_gateway_authorizer" "demo" {
