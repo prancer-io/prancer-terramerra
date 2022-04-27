@@ -88,6 +88,13 @@ resource "aws_codestarconnections_connection" "example" {
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket = "test-bucket"
   acl    = "private"
+  replication_configuration {
+    rules {
+      destination {
+        bucket = "String<The ARN of the S3 bucket where you want Amazon S3 to store replicas of the object identified by the rule>"
+      }
+    }
+  }
 }
 
 resource "aws_iam_role" "codepipeline_role" {
