@@ -841,6 +841,7 @@ resource "aws_secretsmanager_secret" "rotation-example" {
   rotation_rules {
     automatically_after_days = 7
   }
+  kms_key_id = "String<ARN or Id of the AWS KMS customer master key (CMK) to be used to encrypt the secret values in the versions stored in this secret>"
 }
 
 resource "aws_timestreamwrite_database" "example" {
