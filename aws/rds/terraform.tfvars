@@ -49,7 +49,7 @@ backup_window                         = "05:05-07:05"
 timezone                              = ""
 enabled_cloudwatch_logs_exports       = []
 deletion_protection                   = false
-cluster_backup_retention_period       = 0
+cluster_backup_retention_period       = 7
 timeouts = {
   "create" : "40m",
   "delete" : "40m",
