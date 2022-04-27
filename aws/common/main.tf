@@ -690,7 +690,7 @@ resource "aws_docdb_cluster" "docdb" {
   preferred_backup_window         = "07:00-09:00"
   skip_final_snapshot             = true
   storage_encrypted               = false
-  enabled_cloudwatch_logs_exports = false
+  enabled_cloudwatch_logs_exports = "List<List of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, profiler>"
 }
 
 resource "aws_docdb_cluster_parameter_group" "example" {
