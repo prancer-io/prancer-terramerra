@@ -579,7 +579,7 @@ resource "aws_sagemaker_notebook_instance" "ni" {
   root_access            = "Enabled"
   direct_internet_access = "Enabled"
 
-  subnet_id = []
+  subnet_id = "String<The VPC subnet ID>"
 
 
   tags = {
