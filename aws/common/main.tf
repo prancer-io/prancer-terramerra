@@ -600,7 +600,7 @@ resource "aws_dax_cluster" "bar" {
 
 resource "aws_qldb_ledger" "sample-ledger" {
   name             = "sample-ledger"
-  permissions_mode = "ALLOW_ALL"
+  permissions_mode = "STANDARD"
 }
 
 resource "aws_codebuild_project" "project-with-cache" {
