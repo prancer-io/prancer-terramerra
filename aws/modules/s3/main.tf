@@ -113,6 +113,24 @@ resource "aws_s3_bucket" "s3_bucket" {
   }
 
   tags = var.tags
+  server_side_encryption_configuration {
+    rule {
+      bucket_key_enabled = true
+      apply_server_side_encryption_by_default {
+        sse_algorithm     = "aws:kms"
+        kms_master_key_id = "String<he AWS KMS master key ID used for the SSE-KMS encryption>"
+      }
+    }
+  }
+  server_side_encryption_configuration {
+    rule {
+      bucket_key_enabled = true
+      apply_server_side_encryption_by_default {
+        sse_algorithm     = "aws:kms"
+        kms_master_key_id = "String<he AWS KMS master key ID used for the SSE-KMS encryption>"
+      }
+    }
+  }
 }
 
 
