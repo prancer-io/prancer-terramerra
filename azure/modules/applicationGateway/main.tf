@@ -27,8 +27,7 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   frontend_ip_configuration {
-    name                 = "${var.app_gw_name}-fe-ip"
-    public_ip_address_id = azurerm_public_ip.example.id
+    name = "${var.app_gw_name}-fe-ip"
   }
 
   backend_address_pool {
@@ -69,7 +68,7 @@ resource "azurerm_application_gateway" "appgw" {
     rule_set_type    = var.waf_rule_set_type
     rule_set_version = var.waf_rule_set_version
   }
-  
+
 }
 
 resource "azurerm_application_gateway" "appgw2" {
@@ -94,8 +93,7 @@ resource "azurerm_application_gateway" "appgw2" {
   }
 
   frontend_ip_configuration {
-    name                 = "${var.app_gw_name}-fe-ip"
-    public_ip_address_id = azurerm_public_ip.example.id
+    name = "${var.app_gw_name}-fe-ip"
   }
 
   backend_address_pool {
@@ -131,7 +129,7 @@ resource "azurerm_application_gateway" "appgw2" {
   }
 
   firewall_policy_id = azurerm_web_application_firewall_policy.testfwp.id
-  
+
 }
 
 resource "azurerm_web_application_firewall_policy" "testfwp" {
