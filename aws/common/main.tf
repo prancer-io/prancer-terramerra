@@ -445,6 +445,8 @@ resource "aws_kinesis_stream" "test_stream" {
   tags = {
     Environment = "test"
   }
+  encryption_type = "KMS"
+  kms_key_id      = "String<The GUID for the customer-managed AWS KMS key to use for encryption. This value can be a globally unique identifier, a fully specified Amazon Resource Name (ARN) to either an alias or a key, or an alias name prefixed by 'alias/'>"
 }
 
 
