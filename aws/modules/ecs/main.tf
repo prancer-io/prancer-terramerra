@@ -26,7 +26,7 @@ resource "aws_ecs_service" "mongo" {
 
   network_configuration {
     subnets          = []
-    security_groups  = []
+    security_groups  = "List<security_groups associated with the task or service>"
     assign_public_ip = true
   }
 
