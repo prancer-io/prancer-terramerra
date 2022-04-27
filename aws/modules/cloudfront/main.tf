@@ -86,4 +86,5 @@ resource "aws_cloudfront_distribution" "cloudfront" {
 
 resource "aws_cloudfront_distribution" "cloudfront_null" {
 
+  web_acl_id = "String<A unique identifier that specifies the AWS WAF web ACL>"
 }
