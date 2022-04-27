@@ -73,6 +73,7 @@ resource "aws_lb" "test" {
   tags = {
     Environment = "production"
   }
+  subnets = "List<The IDs of the subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings>"
 }
 
 resource "aws_lb_listener" "front_end" {
