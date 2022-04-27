@@ -1,13 +1,13 @@
 module "storageAccount" {
-  source                    = "../modules/storageAccount/"
-  storage_count             = var.storage_count
-  storage_name              = var.storage_name
-  storage_rg_name           = var.resource_group
-  location                  = var.location
-  accountTier               = var.accountTier
-  replicationType           = var.replicationType
-  enableSecureTransfer      = var.enableSecureTransfer
-  tags                      = var.tags
+  source               = "../modules/storageAccount/"
+  storage_count        = var.storage_count
+  storage_name         = var.storage_name
+  storage_rg_name      = var.resource_group
+  location             = var.location
+  accountTier          = var.accountTier
+  replicationType      = var.replicationType
+  enableSecureTransfer = var.enableSecureTransfer
+  tags                 = var.tags
 }
 
 module "storageContainer" {
@@ -30,7 +30,7 @@ module "sqlServer" {
   sql_ad_username               = var.sql_ad_username
   sql_ad_object_id              = data.azurerm_client_config.current.object_id
   tags                          = var.tags
-  public_network_access_enabled = true
+  public_network_access_enabled = false
 }
 
 module "sqlServerSecurityPolicy" {
@@ -59,13 +59,13 @@ module "sqlServerVulnAssess" {
 }
 
 module "sqlServerFWRule" {
-  source                    = "../modules/sqlServerFirewallRule/"
-  count                     = var.enable_sql_firewall ? 1 : 0
-  sql_fw_name               = var.sql_fw_name
-  sql_fw_rg                 = var.resource_group
-  sql_server_name           = module.sqlServer.sqlserver_name
-  sql_fw_start_ip           = var.sql_fw_start_ip
-  sql_fw_end_ip             = var.sql_fw_end_ip
+  source          = "../modules/sqlServerFirewallRule/"
+  count           = var.enable_sql_firewall ? 1 : 0
+  sql_fw_name     = var.sql_fw_name
+  sql_fw_rg       = var.resource_group
+  sql_server_name = module.sqlServer.sqlserver_name
+  sql_fw_start_ip = var.sql_fw_start_ip
+  sql_fw_end_ip   = var.sql_fw_end_ip
 }
 
 module "sqlAuditing" {
@@ -81,20 +81,20 @@ module "sqlAuditing" {
 
 variable "mysql_public_network_access_enabled" {
   description = "Specifies the version of MySQL to use."
-  default = true
+  default     = true
 }
 
 module "sqlDB" {
-  source                      = "../modules/mssqlDB/"
-  sql_db_name                 = var.sql_db_name
-  sql_server_id               = module.sqlServer.sqlserver_id
-  sql_db_collation            = var.sql_db_collation
-  sql_db_license_type         = var.sql_db_license_type
-  sql_db_max_size_gb          = var.sql_db_max_size_gb
-  sql_db_read_scale           = var.sql_db_read_scale
-  sql_db_sku_name             = var.sql_db_sku_name
-  sql_db_zone_redundant       = var.sql_db_zone_redundant
-  tags                        = var.tags
+  source                = "../modules/mssqlDB/"
+  sql_db_name           = var.sql_db_name
+  sql_server_id         = module.sqlServer.sqlserver_id
+  sql_db_collation      = var.sql_db_collation
+  sql_db_license_type   = var.sql_db_license_type
+  sql_db_max_size_gb    = var.sql_db_max_size_gb
+  sql_db_read_scale     = var.sql_db_read_scale
+  sql_db_sku_name       = var.sql_db_sku_name
+  sql_db_zone_redundant = var.sql_db_zone_redundant
+  tags                  = var.tags
 }
 
 module "mySqlServer" {
