@@ -1,20 +1,20 @@
 resource "aws_s3_bucket" "s3bucket" {
-    bucket = var.bucket
-    acl = "public-read"
+  bucket = var.bucket
+  acl    = "public-read"
 
-    website {
-        redirect_all_requests_to = "index.html"
-    }
+  website {
+    redirect_all_requests_to = "index.html"
+  }
 
-    cors_rule {
-        allowed_headers = ["*"]
-        allowed_methods = ["*"]
-        allowed_origins = ["*"]
-        expose_headers = ["ETag"]
-        max_age_seconds = 3000
-    }
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["*"]
+    allowed_origins = ["*"]
+    expose_headers  = ["ETag"]
+    max_age_seconds = 3000
+  }
 
-    policy = <<EOF
+  policy = <<EOF
 {
     "Version": "2008-10-17",
     "Statement": [
@@ -30,10 +30,14 @@ resource "aws_s3_bucket" "s3bucket" {
     ]
 }
 EOF
+  logging {
+    target_bucket = "String<The name of the bucket that will receive the log objects>"
+    target_prefix = "String< To specify a key prefix for log objects>"
+  }
 }
 
 module "cloudfront" {
-  source  = "../modules/cloudfront"
+  source                            = "../modules/cloudfront"
   enabled                           = var.enabled
   is_ipv6_enabled                   = var.is_ipv6_enabled
   comment                           = var.comment
