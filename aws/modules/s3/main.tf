@@ -113,6 +113,12 @@ resource "aws_s3_bucket" "s3_bucket" {
   }
 
   tags = var.tags
+  object_lock_configuration {
+    object_lock_enabled = true
+  }
+  object_lock_configuration {
+    object_lock_enabled = true
+  }
 }
 
 
