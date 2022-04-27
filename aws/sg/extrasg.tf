@@ -338,4 +338,5 @@ resource "aws_instance" "web" {
 
   }
 
+  monitoring = true
 }
