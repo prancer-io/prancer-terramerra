@@ -6,7 +6,7 @@ cluster_master_username             = "dbadmin"
 cluster_master_password             = "rez^SwuAmjanHokhornoivyifokvots7"
 cluster_port                        = 5439
 vpc_security_group_ids              = []
-redshift_subnet_group_name          = ""
+redshift_subnet_group_name          = "String<The name of a cluster subnet group to be associated with this cluster.>"
 parameter_group_name                = ""
 publicly_accessible                 = true
 snapshot_identifier                 = null
@@ -26,13 +26,13 @@ enable_logging                      = false
 logging_bucket_name                 = null
 logging_s3_key_prefix               = null
 
-parameter_name                      = "prancer-redshift-params"
-parameter_family                    = "redshift-1.0"
-parameter_map                       = {
+parameter_name   = "prancer-redshift-params"
+parameter_family = "redshift-1.0"
+parameter_map = {
   require_ssl = "false"
 }
 
-tags                                = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
