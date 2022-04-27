@@ -818,7 +818,7 @@ resource "aws_glue_security_configuration" "example" {
 resource "aws_iam_group_membership" "team" {
   name = "tf-testing-group-membership"
 
-  users = []
+  users = "List<A list of IAM User names to associate with the Group>"
 
   group = aws_iam_group.group.name
 }
