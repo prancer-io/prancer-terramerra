@@ -48,6 +48,7 @@ resource "aws_autoscaling_group" "web-asg" {
     value               = "web-asg"
     propagate_at_launch = "true"
   }
+  health_check_type = "ELB"
 }
 
 resource "aws_launch_configuration" "web-lc" {
