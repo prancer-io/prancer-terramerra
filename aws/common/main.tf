@@ -170,7 +170,7 @@ resource "aws_dms_endpoint" "test" {
   password                    = "test"
   port                        = 3306
   server_name                 = "test"
-  ssl_mode                    = "none"
+  ssl_mode                    = "String<The SSL mode to use for the connection. Can be one of these: require | verify-ca | verify-full>"
 
   tags = {
     Name = "test"
