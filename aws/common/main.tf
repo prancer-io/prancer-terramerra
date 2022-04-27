@@ -304,7 +304,8 @@ resource "aws_ecr_repository" "foo" {
   }
 
   encryption_configuration {
-    kms_key = ""
+    kms_key         = "String<The ARN of the KMS key>"
+    encryption_type = "KMS"
   }
 }
 
