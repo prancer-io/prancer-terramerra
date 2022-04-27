@@ -22,12 +22,12 @@ instance_initiated_shutdown_behavior = "stop"
 placement_group                      = null
 tenancy                              = null
 
-availability_zone                    = "us-east-2a"
-encrypted                            = false
-size                                 = 5
+availability_zone = "us-east-2a"
+encrypted         = true
+size              = 5
 
 tags = {
-  Name = "prancer-ec2"
+  Name        = "prancer-ec2"
   Environment = "Production"
-  Project = "Prancer"
+  Project     = "Prancer"
 }
