@@ -545,7 +545,8 @@ resource "aws_lambda_function" "authorizer" {
   role          = aws_iam_role.lambda.arn
   handler       = "exports.example"
 
-  source_code_hash = filebase64sha256("lambda-function.zip")
+  source_code_hash               = filebase64sha256("lambda-function.zip")
+  reserved_concurrent_executions = "String<Amount of reserved concurrent executions for this lambda function. Value should be greater than or equal to 1>"
 }
 
 resource "aws_elb" "main" {
