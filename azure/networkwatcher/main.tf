@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "application1" {
-  name                        = "app1_rg"
-  location                    = "northcentralus"
+  name     = "app1_rg"
+  location = "northcentralus"
 }
 
 # Networking components to be monitored
@@ -23,13 +23,13 @@ resource "azurerm_network_security_group" "application1" {
 }
 
 resource "azurerm_storage_account" "network_log_data" {
-  name                      = "applogdata"
-  resource_group_name       = azurerm_resource_group.application1.name
-  location                  = var.location
+  name                = "applogdata"
+  resource_group_name = azurerm_resource_group.application1.name
+  location            = var.location
 
-  account_tier              = "Standard"
-  account_replication_type  = "GRS"
-  min_tls_version           = "TLS1_2"
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
+  min_tls_version          = "TLS1_2"
 }
 
 resource "azurerm_log_analytics_workspace" "traffic_analytics" {
@@ -52,7 +52,7 @@ resource "azurerm_network_watcher_flow_log" "app1_network_logs" {
 
   network_security_group_id = azurerm_network_security_group.application1.id
   storage_account_id        = azurerm_storage_account.network_log_data.id
-  enabled                   = false
+  enabled                   = true
 
   retention_policy {
     enabled = false
