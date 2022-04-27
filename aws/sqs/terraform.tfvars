@@ -9,10 +9,10 @@ policy                            = ""
 redrive_policy                    = ""
 fifo_queue                        = false
 content_based_deduplication       = false
-kms_master_key_id                 = null
+kms_master_key_id                 = "String<The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK>"
 kms_data_key_reuse_period_seconds = 300
 
-tags                                     = {
+tags = {
   environment = "Production"
-  project = "Prancer"
+  project     = "Prancer"
 }
