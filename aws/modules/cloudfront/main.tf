@@ -86,4 +86,9 @@ resource "aws_cloudfront_distribution" "cloudfront" {
 
 resource "aws_cloudfront_distribution" "cloudfront_null" {
 
+  default_cache_behavior {
+    allowed_methods           = "List<Controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin>"
+    cached_methods            = "List<Controls whether CloudFront caches the response to requests using the specified HTTP methods>"
+    field_level_encryption_id = "String<Field level encryption configuration ID>"
+  }
 }
