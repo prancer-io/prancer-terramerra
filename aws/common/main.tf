@@ -269,7 +269,7 @@ resource "aws_network_acl_rule" "egress1" {
   rule_number    = 200
   egress         = true
   protocol       = -1
-  rule_action    = "allow"
+  rule_action    = "deny"
   cidr_block     = "0.0.0.0/0"
   from_port      = 22
   to_port        = 22
