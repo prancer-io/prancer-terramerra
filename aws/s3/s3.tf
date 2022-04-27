@@ -7,6 +7,9 @@ resource "aws_s3_bucket" "a" {
     Name        = "My bucket"
     Environment = "Dev"
   }
+  object_lock_configuration {
+    object_lock_enabled = true
+  }
 }
 
 resource "aws_s3_bucket" "b" {
@@ -16,5 +19,8 @@ resource "aws_s3_bucket" "b" {
   tags = {
     Name        = "My bucket"
     Environment = "Dev"
+  }
+  object_lock_configuration {
+    object_lock_enabled = true
   }
 }
