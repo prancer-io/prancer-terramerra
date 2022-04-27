@@ -1,10 +1,10 @@
-name                = "prancer-dynamodb"
-hash_key            = "HashKey"
-range_key           = "RangeKey"
-enabled             = true
-billing_mode        = "PROVISIONED"
-enable_streams      = true
-enable_encryption   = false
+name              = "prancer-dynamodb"
+hash_key          = "HashKey"
+range_key         = "RangeKey"
+enabled           = true
+billing_mode      = "PROVISIONED"
+enable_streams    = true
+enable_encryption = true
 dynamodb_attributes = [
   {
     name = "PersonalID"
@@ -57,7 +57,7 @@ global_secondary_index_map = [
   }
 ]
 
-tags                  = {
+tags = {
   environmet = "Production"
   project    = "Prancer"
 }
