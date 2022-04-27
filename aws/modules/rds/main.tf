@@ -65,7 +65,8 @@ resource "aws_db_instance" "rds" {
 }
 
 resource "aws_sns_topic" "default" {
-  name = "rds-events"
+  name              = "rds-events"
+  kms_master_key_id = "String<The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK>"
 }
 
 resource "aws_db_event_subscription" "default-db-security-group" {
@@ -73,7 +74,7 @@ resource "aws_db_event_subscription" "default-db-security-group" {
   sns_topic = aws_sns_topic.default.arn
 
   source_type = "db-security-group"
-  enabled = false
+  enabled     = false
 
   event_categories = [
     "availability",
@@ -96,7 +97,7 @@ resource "aws_db_event_subscription" "default-db-instance" {
 
   source_type = "db-instance"
   source_ids  = [aws_db_instance.rds.id]
-  enabled = false
+  enabled     = false
 
   event_categories = [
     "availability",
