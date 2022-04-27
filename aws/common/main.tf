@@ -558,6 +558,7 @@ resource "aws_elb" "main" {
     lb_port           = 80
     lb_protocol       = "http"
   }
+  connection_draining = true
 }
 
 resource "aws_route53_record" "www" {
