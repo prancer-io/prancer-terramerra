@@ -875,8 +875,9 @@ resource "aws_instance" "foo" {
   ami           = "ami-5189a661"
   instance_type = "t2.micro"
 
-  private_ip = "10.0.0.12"
-  subnet_id  = aws_subnet.tf_test_subnet.id
+  private_ip           = "10.0.0.12"
+  subnet_id            = aws_subnet.tf_test_subnet.id
+  iam_instance_profile = "String<IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile>"
 }
 
 resource "aws_eip" "bar" {
