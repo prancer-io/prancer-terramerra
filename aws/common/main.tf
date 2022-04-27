@@ -654,6 +654,11 @@ resource "aws_config_configuration_aggregator" "organization" {
     all_regions = false
     role_arn    = aws_iam_role.organization.arn
   }
+  artifacts {
+    organization_aggregation_source {
+      all_regions = true
+    }
+  }
 }
 
 resource "aws_iam_role" "organization" {
