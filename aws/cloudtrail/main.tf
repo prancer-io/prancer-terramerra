@@ -34,10 +34,13 @@ resource "aws_s3_bucket" "s3" {
     ]
 }
 POLICY
+  object_lock_configuration {
+    object_lock_enabled = true
+  }
 }
 
 module "cloudtrail" {
-  source  = "../modules/cloudtrail"
+  source                        = "../modules/cloudtrail"
   name                          = var.name
   enable_logging                = var.enable_logging
   s3_bucket_name                = aws_s3_bucket.s3.id
