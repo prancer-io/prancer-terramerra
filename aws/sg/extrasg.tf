@@ -237,6 +237,7 @@ resource "aws_elb" "web" {
 
     lb_protocol = "http"
 
+    ssl_certificate_id = "String<The Amazon Resource Name (ARN) of the server certificate>"
   }
 
 
