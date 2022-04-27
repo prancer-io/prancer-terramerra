@@ -877,6 +877,7 @@ resource "aws_instance" "foo" {
 
   private_ip = "10.0.0.12"
   subnet_id  = aws_subnet.tf_test_subnet.id
+  monitoring = true
 }
 
 resource "aws_eip" "bar" {
