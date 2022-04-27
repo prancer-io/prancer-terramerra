@@ -546,6 +546,9 @@ resource "aws_lambda_function" "authorizer" {
   handler       = "exports.example"
 
   source_code_hash = filebase64sha256("lambda-function.zip")
+  tracing_config {
+    mode = "Active"
+  }
 }
 
 resource "aws_elb" "main" {
