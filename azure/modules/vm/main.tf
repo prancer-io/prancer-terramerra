@@ -16,8 +16,8 @@ resource "azurerm_storage_account" "vm-sa" {
   name                     = "bootdiag${lower(random_id.vm-sa.hex)}"
   resource_group_name      = var.resource_group_name
   location                 = var.location
-  account_tier             = element(split("_", var.boot_diagnostics_sa_type),0)
-  account_replication_type = element(split("_", var.boot_diagnostics_sa_type),1)
+  account_tier             = element(split("_", var.boot_diagnostics_sa_type), 0)
+  account_replication_type = element(split("_", var.boot_diagnostics_sa_type), 1)
   tags                     = var.tags
 }
 
@@ -48,11 +48,10 @@ resource "azurerm_virtual_machine" "vm-linux" {
   os_profile {
     computer_name  = "${var.vm_hostname}${count.index}"
     admin_username = var.admin_username
-    admin_password = var.admin_password
   }
 
   os_profile_linux_config {
-    disable_password_authentication = false
+    disable_password_authentication = true
 
     ssh_keys {
       path     = "/home/${var.admin_username}/.ssh/authorized_keys"
@@ -64,12 +63,20 @@ resource "azurerm_virtual_machine" "vm-linux" {
 
   boot_diagnostics {
     enabled     = var.boot_diagnostics
-    storage_uri = var.boot_diagnostics == "true" ? join(",", azurerm_storage_account.vm-sa.*.primary_blob_endpoint) : "" 
+    storage_uri = var.boot_diagnostics == "true" ? join(",", azurerm_storage_account.vm-sa.*.primary_blob_endpoint) : ""
+  }
+  admin_ssh_key {
+    public_key = "String<The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.>"
+    username   = "String<The Username for which this Public SSH Key should be configured.>"
+  }
+  admin_ssh_key {
+    public_key = "String<The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.>"
+    username   = "String<The Username for which this Public SSH Key should be configured.>"
   }
 }
 
 resource "azurerm_virtual_machine" "vm-linux-with-datadisk" {
-  count                         = !contains(list(var.vm_os_simple,var.vm_os_offer), "WindowsServer")  && var.is_windows_image != "true"  && var.data_disk == "true" ? var.nb_instances : 0
+  count                         = !contains(list(var.vm_os_simple, var.vm_os_offer), "WindowsServer") && var.is_windows_image != "true" && var.data_disk == "true" ? var.nb_instances : 0
   name                          = "${var.vm_hostname}${count.index}"
   location                      = var.location
   resource_group_name           = var.resource_group_name
@@ -104,11 +111,10 @@ resource "azurerm_virtual_machine" "vm-linux-with-datadisk" {
   os_profile {
     computer_name  = "${var.vm_hostname}${count.index}"
     admin_username = var.admin_username
-    admin_password = var.admin_password
   }
 
   os_profile_linux_config {
-    disable_password_authentication = false
+    disable_password_authentication = true
   }
 
   tags = var.tags
@@ -116,6 +122,14 @@ resource "azurerm_virtual_machine" "vm-linux-with-datadisk" {
   boot_diagnostics {
     enabled     = var.boot_diagnostics
     storage_uri = var.boot_diagnostics == "true" ? join(",", azurerm_storage_account.vm-sa.*.primary_blob_endpoint) : ""
+  }
+  admin_ssh_key {
+    public_key = "String<The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.>"
+    username   = "String<The Username for which this Public SSH Key should be configured.>"
+  }
+  admin_ssh_key {
+    public_key = "String<The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.>"
+    username   = "String<The Username for which this Public SSH Key should be configured.>"
   }
 }
 
@@ -160,7 +174,7 @@ resource "azurerm_virtual_machine" "vm-windows" {
 }
 
 resource "azurerm_virtual_machine" "vm-windows-with-datadisk" {
-  count                         = ((var.vm_os_id != "" && var.is_windows_image == "true") || contains(list("${var.vm_os_simple}","${var.vm_os_offer}"), "WindowsServer")) && var.data_disk == "true" ? var.nb_instances : 0
+  count                         = ((var.vm_os_id != "" && var.is_windows_image == "true") || contains(list("${var.vm_os_simple}", "${var.vm_os_offer}"), "WindowsServer")) && var.data_disk == "true" ? var.nb_instances : 0
   name                          = "${var.vm_hostname}${count.index}"
   location                      = var.location
   resource_group_name           = var.resource_group_name
@@ -217,19 +231,19 @@ resource "azurerm_availability_set" "vm" {
 }
 
 resource "azurerm_public_ip" "vm" {
-  count                        = var.nb_public_ip
-  name                         = "${var.vm_hostname}-${count.index}-publicIP"
-  location                     = var.location
-  resource_group_name          = var.resource_group_name
-  allocation_method            = var.public_ip_address_allocation
-  domain_name_label            = element(var.public_ip_dns, count.index)
+  count               = var.nb_public_ip
+  name                = "${var.vm_hostname}-${count.index}-publicIP"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  allocation_method   = var.public_ip_address_allocation
+  domain_name_label   = element(var.public_ip_dns, count.index)
 }
 
 resource "azurerm_network_interface" "vm" {
-  count                     = var.nb_instances
-  name                      = "nic-${var.vm_hostname}-${count.index}"
-  location                  = var.location
-  resource_group_name       = var.resource_group_name
+  count               = var.nb_instances
+  name                = "nic-${var.vm_hostname}-${count.index}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
 
   ip_configuration {
     name                          = "ipconfig${count.index}"
