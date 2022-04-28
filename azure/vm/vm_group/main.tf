@@ -42,9 +42,9 @@ resource "azurerm_network_interface" "main" {
 }
 
 resource "azurerm_network_interface" "internal" {
-  name                      = "${var.prefix}-nic2"
-  resource_group_name       = azurerm_resource_group.main.name
-  location                  = azurerm_resource_group.main.location
+  name                = "${var.prefix}-nic2"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
 
   ip_configuration {
     name                          = "internal"
@@ -99,6 +99,7 @@ resource "azurerm_linux_virtual_machine" "main" {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
   }
+  allow_extension_operations = false
 }
 
 resource "azurerm_linux_virtual_machine" "slave" {
@@ -124,15 +125,16 @@ resource "azurerm_linux_virtual_machine" "slave" {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
   }
+  allow_extension_operations = false
 }
 
 resource "azurerm_windows_virtual_machine" "main" {
-  name                            = "${var.prefix}-vm"
-  resource_group_name             = azurerm_resource_group.main.name
-  location                        = azurerm_resource_group.main.location
-  size                            = "Standard_DS3_v2"
-  admin_username                  = "adminuser"
-  admin_password                  = "P@ssw0rd1234!"
+  name                = "${var.prefix}-vm"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  size                = "Standard_DS3_v2"
+  admin_username      = "adminuser"
+  admin_password      = "P@ssw0rd1234!"
   network_interface_ids = [
     azurerm_network_interface.main.id,
   ]
