@@ -17,10 +17,11 @@ resource "aws_elb" "web-elb" {
   availability_zones = local.availability_zones
 
   listener {
-    instance_port     = 80
-    instance_protocol = "http"
-    lb_port           = 80
-    lb_protocol       = "http"
+    instance_port      = 80
+    instance_protocol  = "http"
+    lb_port            = 80
+    lb_protocol        = "http"
+    ssl_certificate_id = "String<The Amazon Resource Name (ARN) of the server certificate>"
   }
 
   health_check {
