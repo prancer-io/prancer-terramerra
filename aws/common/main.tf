@@ -17,7 +17,7 @@ resource "aws_codepipeline" "codepipeline" {
 
     encryption_key {
       id   = data.aws_kms_alias.s3kmskey.arn
-      type = ""
+      type = "KMS"
     }
   }
 
