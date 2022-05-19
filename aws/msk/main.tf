@@ -39,6 +39,13 @@ resource "aws_cloudwatch_log_group" "test" {
 resource "aws_s3_bucket" "bucket" {
   bucket = "msk-broker-logs-bucket"
   acl    = "private"
+  replication_configuration {
+    rules {
+      destination {
+        bucket = "String<The ARN of the S3 bucket where you want Amazon S3 to store replicas of the object identified by the rule>"
+      }
+    }
+  }
 }
 
 resource "aws_iam_role" "firehose_role" {
