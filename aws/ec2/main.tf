@@ -15,7 +15,7 @@ data "aws_ami" "ubuntu" {
 }
 
 module "ec2" {
-  source  = "../modules/ec2"
+  source                               = "../modules/ec2"
   instance_count                       = var.instance_count
   name                                 = var.name
   ami                                  = data.aws_ami.ubuntu.id
@@ -44,9 +44,20 @@ module "ec2" {
 }
 
 module "ebs_volume" {
-  source = "../modules/ebs_volume"
+  source            = "../modules/ebs_volume"
   availability_zone = var.availability_zone
   encrypted         = var.encrypted
   size              = var.size
   tags              = var.tags
+}
+
+resource "aws_launch_configuration" "as_conf" {
+  name          = "web_config"
+  image_id      = data.aws_ami.ubuntu.id
+  instance_type = "t2.micro"
+  metadata_options {
+    http_endpoint               = "enabled"
+    http_put_response_hop_limit = 2
+    http_tokens                 = "optional"
+  }
 }

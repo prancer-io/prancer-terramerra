@@ -73,7 +73,7 @@ resource "aws_db_event_subscription" "default-db-security-group" {
   sns_topic = aws_sns_topic.default.arn
 
   source_type = "db-security-group"
-  enabled = false
+  enabled     = false
 
   event_categories = [
     "availability",
@@ -96,7 +96,7 @@ resource "aws_db_event_subscription" "default-db-instance" {
 
   source_type = "db-instance"
   source_ids  = [aws_db_instance.rds.id]
-  enabled = false
+  enabled     = false
 
   event_categories = [
     "availability",
@@ -133,4 +133,16 @@ resource "aws_rds_global_cluster" "example" {
   engine_version            = "5.6.mysql_aurora.1.22.2"
   database_name             = "example_db"
   storage_encrypted         = false
+}
+
+resource "aws_rds_cluster" "default" {
+  cluster_identifier      = "aurora-cluster-demo"
+  engine                  = "postgres"
+  engine_version          = "13.2"
+  availability_zones      = ["us-west-2a", "us-west-2b", "us-west-2c"]
+  database_name           = "mydb"
+  master_username         = "foo"
+  master_password         = "bar"
+  backup_retention_period = 5
+  preferred_backup_window = "07:00-09:00"
 }

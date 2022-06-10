@@ -171,6 +171,7 @@ resource "aws_dms_endpoint" "test" {
   port                        = 3306
   server_name                 = "test"
   ssl_mode                    = "none"
+  disable_rollback            = false
 
   tags = {
     Name = "test"
@@ -187,6 +188,8 @@ resource "aws_cloudformation_stack" "network" {
   parameters = {
     VPCCidr = "10.0.0.0/16"
   }
+
+  capabilities = ["*"]
 
   template_body = <<STACK
 {
@@ -216,8 +219,9 @@ STACK
 
 #config recorder
 resource "aws_config_configuration_recorder" "foo" {
-  name     = "example"
-  role_arn = aws_iam_role.r.arn
+  name                          = "example"
+  role_arn                      = aws_iam_role.r.arn
+  include_global_resource_types = false
 }
 
 resource "aws_iam_role" "r" {
@@ -294,6 +298,64 @@ resource "aws_api_gateway_request_validator" "example" {
   validate_request_parameters = false
 }
 
+resource "aws_api_gateway_rest_api" "example" {
+  body = jsonencode({
+    openapi = "3.0.1"
+    info = {
+      title   = "example"
+      version = "1.0"
+    }
+    paths = {
+      "/path1" = {
+        get = {
+          x-amazon-apigateway-integration = {
+            httpMethod           = "GET"
+            payloadFormatVersion = "1.0"
+            type                 = "HTTP_PROXY"
+            uri                  = "https://ip-ranges.amazonaws.com/ip-ranges.json"
+          }
+        }
+      }
+    }
+  })
+
+  name = "example"
+}
+
+resource "aws_api_gateway_deployment" "example" {
+  rest_api_id = aws_api_gateway_rest_api.example.id
+
+  triggers = {
+    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.example.body))
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_api_gateway_stage" "example" {
+  deployment_id = aws_api_gateway_deployment.example.id
+  rest_api_id   = aws_api_gateway_rest_api.example.id
+  stage_name    = "example"
+}
+
+resource "aws_api_gateway_method_settings" "example" {
+  rest_api_id = aws_api_gateway_rest_api.example.id
+  stage_name  = aws_api_gateway_stage.example.stage_name
+  method_path = "*/*"
+
+  settings {
+    metrics_enabled = true
+    logging_level   = "INFO"
+  }
+}
+
+resource "aws_api_gateway_domain_name" "example" {
+  certificate_arn = aws_acm_certificate_validation.example.certificate_arn
+  domain_name     = "api.example.com"
+  security_policy = "TLS_1_0"
+}
 
 resource "aws_ecr_repository" "foo" {
   name                 = "bar"
@@ -588,10 +650,11 @@ resource "aws_sagemaker_notebook_instance" "ni" {
 }
 
 resource "aws_dax_cluster" "bar" {
-  cluster_name       = "cluster-example"
-  iam_role_arn       = data.aws_iam_role.example.arn
-  node_type          = "dax.r4.large"
-  replication_factor = 1
+  cluster_name                     = "cluster-example"
+  iam_role_arn                     = data.aws_iam_role.example.arn
+  node_type                        = "dax.r4.large"
+  replication_factor               = 1
+  cluster_endpoint_encryption_type = "NONE"
 
   server_side_encryption {
     enabled = false
@@ -946,4 +1009,172 @@ resource "aws_emr_security_configuration" "foo" {
   }
 }
 EOF
+}
+
+
+resource "aws_appsync_graphql_api" "example" {
+  authentication_type = "API_KEY"
+  name                = "example"
+}
+
+resource "aws_wafv2_web_acl" "example" {
+  name        = "managed-rule-example"
+  description = "Example of a managed rule."
+  scope       = "REGIONAL"
+
+  default_action {
+    allow {}
+  }
+
+  rule {
+    name     = "rule-1"
+    priority = 1
+
+    override_action {
+      count {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesCommonRuleSet"
+        vendor_name = "AWS"
+
+        excluded_rule {
+          name = "SizeRestrictions_QUERYSTRING"
+        }
+
+        excluded_rule {
+          name = "NoUserAgent_HEADER"
+        }
+
+        scope_down_statement {
+          geo_match_statement {
+            country_codes = ["US", "NL"]
+          }
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = false
+      metric_name                = "friendly-rule-metric-name"
+      sampled_requests_enabled   = false
+    }
+  }
+
+  tags = {
+    Tag1 = "Value1"
+    Tag2 = "Value2"
+  }
+
+  visibility_config {
+    cloudwatch_metrics_enabled = false
+    metric_name                = "friendly-metric-name"
+    sampled_requests_enabled   = false
+  }
+}
+
+resource "aws_wafv2_web_acl_association" "example" {
+  resource_arn = aws_appsync_graphql_api.example1.arn
+  web_acl_arn  = aws_wafv2_web_acl.example.arn
+}
+
+
+resource "aws_athena_workgroup" "example" {
+  name = "example"
+
+  configuration {
+    enforce_workgroup_configuration    = true
+    publish_cloudwatch_metrics_enabled = true
+
+    result_configuration {
+      output_location = "s3://${aws_s3_bucket.example.bucket}/output/"
+
+      encryption_configuration {
+        encryption_option = "SSE_KMS"
+        kms_key_arn       = aws_kms_key.example.arn
+      }
+    }
+  }
+}
+
+
+resource "aws_iam_policy" "policy" {
+  name        = "test_policy"
+  path        = "/"
+  description = "My test policy"
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+          "lambda:*",
+          "elasticbeanstalk:*",
+          "ecs:*"
+        ]
+        Effect   = "Allow"
+        Resource = "*",
+        Condition = {
+          "IpAddress" : {
+            "aws:SourceIp" : "0.0.0.0/0"
+          },
+          "StringEquals" : {
+            "AWS:SourceOwner" : "test"
+          }
+        }
+      },
+    ]
+  })
+}
+
+resource "aws_iam_policy" "policy2" {
+  name        = "test_policy"
+  path        = "/"
+  description = "My test policy"
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+          "lambda:*",
+          "elasticbeanstalk:*",
+          "ecs:*"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
+
+resource "aws_iam_role" "test_role" {
+  name = "test_role"
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = ["iam:AttachGroupPolicy", "iam:AttachRolePolicy", "iam:AttachUserPolicy", "iam:CreatePolicy", "iam:CreatePolicyVersion", "iam:DeleteAccountPasswordPolicy", "iam:DeleteGroupPolicy", "iam:DeletePolicy", "iam:DeletePolicyVersion", "iam:DeleteRolePermissionsBoundary", "iam:DeleteRolePolicy", "iam:DeleteUserPermissionsBoundary", "iam:DeleteUserPolicy", "iam:DetachGroupPolicy", "iam:DetachRolePolicy", "iam:DetachUserPolicy", "iam:PutGroupPolicy", "iam:PutRolePermissionsBoundary", "iam:PutRolePolicy", "iam:PutUserPermissionsBoundary", "iam:PutUserPolicy", "iam:SetDefaultPolicyVersion", "iam:UpdateAssumeRolePolicy", "iam:AddClientIDToOpenIDConnectProvider", "iam:AddRoleToInstanceProfile", "iam:AddUserToGroup", "iam:ChangePassword", "iam:CreateAccessKey", "iam:CreateAccountAlias", "iam:CreateGroup", "iam:CreateInstanceProfile", "iam:CreateLoginProfile", "iam:CreateOpenIDConnectProvider", "iam:CreateRole", "iam:CreateSAMLProvider", "iam:CreateServiceLinkedRole", "iam:CreateServiceSpecificCredential", "iam:CreateUser", "iam:CreateVirtualMFADevice", "iam:DeactivateMFADevice", "iam:DeleteAccessKey", "iam:DeleteAccountAlias", "iam:DeleteGroup", "iam:DeleteInstanceProfile", "iam:DeleteLoginProfile", "iam:DeleteOpenIDConnectProvider", "iam:DeleteRole", "iam:DeleteSAMLProvider", "iam:DeleteSSHPublicKey", "iam:DeleteServerCertificate", "iam:DeleteServiceLinkedRole", "iam:DeleteServiceSpecificCredential", "iam:DeleteSigningCertificate", "iam:DeleteUser", "iam:DeleteVirtualMFADevice", "iam:EnableMFADevice", "iam:PassRole", "iam:RemoveClientIDFromOpenIDConnectProvider", "iam:RemoveRoleFromInstanceProfile", "iam:RemoveUserFromGroup", "iam:ResetServiceSpecificCredential", "iam:ResyncMFADevice", "iam:SetSecurityTokenServicePreferences", "iam:UpdateAccessKey", "iam:UpdateAccountPasswordPolicy", "iam:UpdateGroup", "iam:UpdateLoginProfile", "iam:UpdateOpenIDConnectProviderThumbprint", "iam:UpdateRole", "iam:UpdateRoleDescription", "iam:UpdateSAMLProvider", "iam:UpdateSSHPublicKey", "iam:UpdateServerCertificate", "iam:UpdateServiceSpecificCredential", "iam:UpdateSigningCertificate", "iam:UpdateUser", "iam:UploadSSHPublicKey", "iam:UploadServerCertificate", "iam:UploadSigningCertificate"]
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = ["ec2.amazonaws.com", "lambda:amazonaws.com"]
+        }
+      },
+    ]
+  })
+
+  tags = {
+    tag-key = "tag-value"
+  }
 }

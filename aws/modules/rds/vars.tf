@@ -65,11 +65,13 @@ variable "domain_iam_role_name" {
 variable "engine" {
   description = "The database engine to use"
   type        = string
+  default     = "aurora-postgresql"
 }
 
 variable "engine_version" {
   description = "The engine version to use"
   type        = string
+  default     = "10.11"
 }
 
 variable "instance_class" {
