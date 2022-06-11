@@ -478,6 +478,9 @@ resource "aws_api_gateway_authorizer" "demo" {
 
 resource "aws_api_gateway_rest_api" "demo" {
   name = "auth-demo"
+  endpoint_configuration {
+    types = ["PRIVATE"]
+  }
 }
 
 resource "aws_iam_role" "invocation_role" {
