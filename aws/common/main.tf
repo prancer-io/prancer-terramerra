@@ -595,6 +595,7 @@ resource "aws_iam_role" "lambda" {
       },
       "Effect": "Allow",
       "Sid": ""
+      "Resource": "*"
     }
   ]
 }
@@ -1168,7 +1169,16 @@ resource "aws_iam_role" "test_role" {
         Effect = "Allow"
         Sid    = ""
         Principal = {
-          Service = ["ec2.amazonaws.com", "lambda:amazonaws.com"]
+          Service = ["ec2.amazonaws.com", "lambda:amazonaws.com", "secretmanager.amazonaws.com", "sqs.amazonaws.com"]
+        }
+        Resource = "*", 
+        Condition = {
+          "IpAddress" : {
+            "aws:SourceIp" : "0.0.0.0/0"
+          },
+          "StringEquals" : {
+            "AWS:SourceOwner" : "test"
+          }
         }
       },
     ]

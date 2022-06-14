@@ -7,8 +7,8 @@ cluster_kms_key_id          = null
 cluster_storage_encrypted   = false
 
 identifier                            = "prancer-rds"
-engine                                = "mysql"
-engine_version                        = "5.7"
+engine                                = "postgres"
+engine_version                        = "13.2"
 instance_class                        = "db.t2.micro"
 allocated_storage                     = 5
 storage_type                          = "gp2"
