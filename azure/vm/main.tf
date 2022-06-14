@@ -1,19 +1,19 @@
 module "vnet" {
-  source              = "../modules/virtualNetwork/"
-  location            = var.location
-  vnet_name           = var.vnet_name
-  vnet_rg             = var.resource_group
-  address_space       = var.address_space
-  dns_server          = var.dns_server
-  tags                = {}
+  source        = "../modules/virtualNetwork/"
+  location      = var.location
+  vnet_name     = var.vnet_name
+  vnet_rg       = var.resource_group
+  address_space = var.address_space
+  dns_server    = var.dns_server
+  tags          = {}
 }
 
 module "subnet" {
-  source                = "../modules/subnet/"
-  subnet_name           = var.subnet_name
-  subnet_rg             = var.resource_group
-  vnet_name             = module.vnet.vnet_name
-  address_prefixes      = var.address_prefixes
+  source           = "../modules/subnet/"
+  subnet_name      = var.subnet_name
+  subnet_rg        = var.resource_group
+  vnet_name        = module.vnet.vnet_name
+  address_prefixes = var.address_prefixes
 }
 
 module "linuxservers" {
