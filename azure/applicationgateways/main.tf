@@ -1,38 +1,38 @@
 module "vnet" {
-  source                = "../modules/virtualNetwork/"
-  location              = var.location
-  vnet_name             = var.vnet_name
-  vnet_rg               = var.resource_group
-  address_space         = var.address_space
-  dns_server            = var.dns_server
-  tags                  = var.tags
+  source        = "../modules/virtualNetwork/"
+  location      = var.location
+  vnet_name     = var.vnet_name
+  vnet_rg       = var.resource_group
+  address_space = var.address_space
+  dns_server    = var.dns_server
+  tags          = var.tags
 }
 
 module "subnet-frontend" {
-  source                = "../modules/subnet/"
-  subnet_name           = var.subnet_name_fe
-  subnet_rg             = var.resource_group
-  vnet_name             = module.vnet.vnet_name
-  address_prefixes      = var.address_prefixes_fe
+  source           = "../modules/subnet/"
+  subnet_name      = var.subnet_name_fe
+  subnet_rg        = var.resource_group
+  vnet_name        = module.vnet.vnet_name
+  address_prefixes = var.address_prefixes_fe
 }
 
 module "subnet-backend" {
-  source                = "../modules/subnet/"
-  subnet_name           = var.subnet_name_be
-  subnet_rg             = var.resource_group
-  vnet_name             = module.vnet.vnet_name
-  address_prefixes      = var.address_prefixes_be
+  source           = "../modules/subnet/"
+  subnet_name      = var.subnet_name_be
+  subnet_rg        = var.resource_group
+  vnet_name        = module.vnet.vnet_name
+  address_prefixes = var.address_prefixes_be
 }
 
 module "publicIP" {
-  source                = "../modules/publicIP/"
-  name                  = var.pip_name
-  location              = var.location
-  resource_group        = var.resource_group
-  type                  = var.pip_type
-  sku                   = var.pip_sku
-  ip_version            = var.ip_version
-  tags                  = var.tags
+  source         = "../modules/publicIP/"
+  name           = var.pip_name
+  location       = var.location
+  resource_group = var.resource_group
+  type           = var.pip_type
+  sku            = var.pip_sku
+  ip_version     = var.ip_version
+  tags           = var.tags
 }
 
 module "applicationGateway" {
