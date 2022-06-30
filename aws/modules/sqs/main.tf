@@ -14,3 +14,28 @@ resource "aws_sqs_queue" "sqs" {
   kms_data_key_reuse_period_seconds = var.kms_data_key_reuse_period_seconds
   tags                              = var.tags
 }
+
+
+resource "aws_sqs_queue_policy" "test" {
+
+  policy = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Id": "sqspolicy",
+  "Statement": [
+    {
+      "Sid": "First",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "sqs:SendMessage",
+      "Resource": "*",
+      "Condition": {
+        "ArnEquals": {
+          "aws:SourceArn": "test"
+        }
+      }
+    }
+  ]
+}
+POLICY
+}
