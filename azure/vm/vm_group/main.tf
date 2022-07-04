@@ -42,9 +42,9 @@ resource "azurerm_network_interface" "main" {
 }
 
 resource "azurerm_network_interface" "internal" {
-  name                      = "${var.prefix}-nic2"
-  resource_group_name       = azurerm_resource_group.main.name
-  location                  = azurerm_resource_group.main.location
+  name                = "${var.prefix}-nic2"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
 
   ip_configuration {
     name                          = "internal"
@@ -127,12 +127,12 @@ resource "azurerm_linux_virtual_machine" "slave" {
 }
 
 resource "azurerm_windows_virtual_machine" "main" {
-  name                            = "${var.prefix}-vm"
-  resource_group_name             = azurerm_resource_group.main.name
-  location                        = azurerm_resource_group.main.location
-  size                            = "Standard_DS3_v2"
-  admin_username                  = "adminuser"
-  admin_password                  = "P@ssw0rd1234!"
+  name                = "${var.prefix}-vm"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  size                = "Standard_DS3_v2"
+  admin_username      = "adminuser"
+  admin_password      = "P@ssw0rd1234!"
   network_interface_ids = [
     azurerm_network_interface.main.id,
   ]
@@ -164,4 +164,9 @@ resource "azurerm_virtual_machine_extension" "test" {
     "fileUris"         = ["https://raw.githubusercontent.com/Azure/azure-quickstart-templates/00b79d2102c88b56502a63041936ef4dd62cf725/101-vms-with-selfhost-integration-runtime/gatewayInstall.ps1"],
     "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File gatewayInstall.ps1 ${azurerm_data_factory_integration_runtime_self_hosted.host.auth_key_1} && timeout /t 120"
   })
+}
+resource "azurerm_subnet_network_security_group_association" "<azurerm_subnet_network_security_group_association_name>" {
+  network_security_group_id = "String<The ID of the Network Security Group which should be associated with the Subnet. Changing this forces a new resource to be created.>"
+  name                      = "String<Name of the azurerm_subnet_network_security_group_association>"
+  subnet_id                 = "String<The ID of the Subnet. Changing this forces a new resource to be created.>"
 }
