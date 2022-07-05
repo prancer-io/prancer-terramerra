@@ -1188,3 +1188,45 @@ resource "aws_iam_role" "test_role" {
     tag-key = "tag-value"
   }
 }
+
+
+resource "aws_transfer_server" "example-transfer-server" {
+  endpoint_type = "VPC"
+
+  endpoint_details {
+    subnet_ids = [aws_subnet.example.id]
+    vpc_id     = aws_vpc.example.id
+  }
+
+  protocols   = ["FTP", "FTPS"]
+  certificate = aws_acm_certificate.example.arn
+
+  identity_provider_type = "API_GATEWAY"
+}
+
+resource "aws_vpc_endpoint" "vpc-policy" {
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.us-west-2.s3"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+        Principal =  "*"
+      }
+    ]
+  })
+}
+
+resource "aws_secretsmanager_secret_rotation" "secret-manager-example" {
+  secret_id           = aws_secretsmanager_secret.rotation-example.id
+  rotation_lambda_arn = aws_lambda_function.example.arn
+
+  rotation_rules {
+    automatically_after_days = 35
+  }
+}
