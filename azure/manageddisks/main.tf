@@ -62,12 +62,12 @@ resource "azurerm_disk_encryption_set" "test" {
 }
 
 resource "azurerm_managed_disk" "data" {
-  name                 = "data"
-  location             = azurerm_resource_group.main.location
-  create_option        = "Empty"
-  disk_size_gb         = 10
-  resource_group_name  = azurerm_resource_group.main.name
-  storage_account_type = "Standard_LRS"
+  name                   = "data"
+  location               = azurerm_resource_group.main.location
+  create_option          = "Empty"
+  disk_size_gb           = 10
+  resource_group_name    = azurerm_resource_group.main.name
+  storage_account_type   = "Standard_LRS"
   disk_encryption_set_id = azurerm_disk_encryption_set.test.id
 }
 
@@ -107,4 +107,9 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
       option = "Local"
     }
   }
+}
+resource "azurerm_subnet_network_security_group_association" "<azurerm_subnet_network_security_group_association_name>" {
+  name                      = "String<Name of the azurerm_subnet_network_security_group_association>"
+  subnet_id                 = "String<The ID of the Subnet. Changing this forces a new resource to be created.>"
+  network_security_group_id = "String<The ID of the Network Security Group which should be associated with the Subnet. Changing this forces a new resource to be created.>"
 }
