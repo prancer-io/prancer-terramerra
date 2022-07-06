@@ -32,6 +32,13 @@ resource "azurerm_key_vault" "example" {
   enabled_for_disk_encryption = true
   soft_delete_enabled         = true
   purge_protection_enabled    = true
+
+  access_policy {
+    key_permissions         = "List<List of key permissions, must be one or more from the following: Backup, Create, Decrypt, Delete, Encrypt, Get, Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update, Verify and WrapKey.>"
+    secret_permissions      = "List< List of secret permissions, must be one or more from the following: Backup, Delete, Get, List, Purge, Recover, Restore and Set.>"
+    certificate_permissions = "List<List of certificate permissions, must be one or more from the following: Backup, Create, Delete, DeleteIssuers, Get, GetIssuers, Import, List, ListIssuers, ManageContacts, ManageIssuers, Purge, Recover, Restore, SetIssuers and Update.>"
+    storage_permissions     = "List<List of storage permissions, must be one or more from the following: Backup, Delete, DeleteSAS, Get, GetSAS, List, ListSAS, Purge, Recover, RegenerateKey, Restore, Set, SetSAS and Update.>"
+  }
 }
 
 resource "azurerm_key_vault_key" "example" {
@@ -62,12 +69,12 @@ resource "azurerm_disk_encryption_set" "test" {
 }
 
 resource "azurerm_managed_disk" "data" {
-  name                 = "data"
-  location             = azurerm_resource_group.main.location
-  create_option        = "Empty"
-  disk_size_gb         = 10
-  resource_group_name  = azurerm_resource_group.main.name
-  storage_account_type = "Standard_LRS"
+  name                   = "data"
+  location               = azurerm_resource_group.main.location
+  create_option          = "Empty"
+  disk_size_gb           = 10
+  resource_group_name    = azurerm_resource_group.main.name
+  storage_account_type   = "Standard_LRS"
   disk_encryption_set_id = azurerm_disk_encryption_set.test.id
 }
 
