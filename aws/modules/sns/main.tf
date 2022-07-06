@@ -19,3 +19,25 @@ resource "aws_sns_topic" "sns" {
   kms_master_key_id                        = var.kms_master_key_id
   tags                                     = var.tags
 }
+
+
+resource "aws_sns_topic_policy" "policy_statement_allow_principal_with_wildcard" {
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "sns:Publish",
+      "Principal": {
+        "AWS": [
+          "*"
+        ]
+      },
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
