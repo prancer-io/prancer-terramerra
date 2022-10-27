@@ -34,3 +34,19 @@ data "google_iam_policy" "admin" {
     }
   }
 }
+
+# Project Audit Logs
+
+resource "google_project_iam_audit_config" "project" {
+  project = "your-project-id"
+  service = "allServices"
+  audit_log_config {
+    log_type = "ADMIN_READ"
+  }
+  audit_log_config {
+    log_type = "DATA_READ"
+    exempted_members = [
+      "user:joebloggs@hashicorp.com",
+    ]
+  }
+}
