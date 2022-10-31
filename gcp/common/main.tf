@@ -50,3 +50,84 @@ resource "google_project_iam_audit_config" "project" {
     ]
   }
 }
+
+
+# Api keys
+
+# Android
+resource "google_apikeys_key" "primary" {
+  name         = "key"
+  display_name = "sample-key"
+  project      = google_project.basic.name
+
+  restrictions {
+    android_key_restrictions {
+      allowed_applications {
+        package_name     = "com.example.app123"
+        sha1_fingerprint = "1699466a142d4682a5f91b50fdf400f2358e2b0b"
+      }
+    }
+
+    api_targets {
+      service = "translate.googleapis.com"
+      methods = ["GET*"]
+    }
+  }
+}
+
+# Browser 
+resource "google_apikeys_key" "primary" {
+  name         = "key"
+  display_name = "sample-key"
+  project      = google_project.basic.name
+
+  restrictions {
+    api_targets {
+      service = "translate.googleapis.com"
+      methods = ["GET*"]
+    }
+
+    browser_key_restrictions {
+      allowed_referrers = [".*"]
+    }
+  }
+}
+
+# IOS
+resource "google_apikeys_key" "primary" {
+  name         = "key"
+  display_name = "sample-key"
+  project      = google_project.basic.name
+
+  restrictions {
+    api_targets {
+      service = "translate.googleapis.com"
+      methods = ["GET*"]
+    }
+
+    ios_key_restrictions {
+      allowed_bundle_ids = ["com.google.app.macos"]
+    }
+  }
+}
+
+# Server
+
+resource "google_apikeys_key" "primary" {
+  name         = "key"
+  display_name = "sample-key"
+  project      = google_project.basic.name
+
+  restrictions {
+    api_targets {
+      service = "translate.googleapis.com"
+      methods = ["GET*"]
+    }
+
+    server_key_restrictions {
+      allowed_ips = ["127.0.0.1"]
+    }
+  }
+}
+
+  
