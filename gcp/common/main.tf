@@ -52,3 +52,29 @@ resource "google_project_iam_audit_config" "project" {
 }
 
 
+# Api keys
+
+resource "google_apikeys_key" "primary" {
+  project      = google_project.basic.name
+  restrictions {
+    android_key_restrictions {
+      allowed_applications {
+        package_name     = "com.example.app123"
+        sha1_fingerprint = "1699466a142d4682a5f91b50fdf400f2358e2b0b"
+      }
+    },
+    browser_key_restrictions {
+      allowed_referrers = [".*"]
+    },
+    ios_key_restrictions {
+      allowed_bundle_ids = ["com.google.app.macos"]
+    },
+    server_key_restrictions {
+      allowed_ips = ["127.0.0.1"]
+    },
+    api_targets {
+      service = "translate.googleapis.com"
+      methods = ["GET*"]
+    }
+  }
+}
