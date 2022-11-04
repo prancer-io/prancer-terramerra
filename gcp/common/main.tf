@@ -78,3 +78,13 @@ resource "google_apikeys_key" "primary" {
     }
   }
 }
+
+# App engine
+
+
+resource "google_app_engine_application" "app" {
+  project     = google_project.my_project.project_id
+  location_id = "us-central"
+  serving_status = "SERVING"
+  iap = "iap"
+}
