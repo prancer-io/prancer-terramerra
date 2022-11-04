@@ -111,7 +111,7 @@ resource "google_compute_security_policy" "policy" {
     priority = "2147483647"
     match {
       expr {
-        expression = "cve-canary
+        expression = "cve-canary"
       }
       versioned_expr = "SRC_IPS_V1"
       config {
