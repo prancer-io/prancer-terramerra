@@ -65,7 +65,8 @@ resource "aws_db_instance" "rds" {
 }
 
 resource "aws_sns_topic" "default" {
-  name = "rds-events"
+  name              = "rds-events"
+  kms_master_key_id = "String<The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK>"
 }
 
 resource "aws_db_event_subscription" "default-db-security-group" {
