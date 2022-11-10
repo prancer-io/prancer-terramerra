@@ -145,4 +145,5 @@ resource "aws_rds_cluster" "default" {
   master_password         = "bar"
   backup_retention_period = 5
   preferred_backup_window = "07:00-09:00"
+  storage_encrypted       = true
 }
