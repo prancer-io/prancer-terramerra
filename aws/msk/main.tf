@@ -39,6 +39,11 @@ resource "aws_cloudwatch_log_group" "test" {
 resource "aws_s3_bucket" "bucket" {
   bucket = "msk-broker-logs-bucket"
   acl    = "private"
+
+  logging {
+    target_prefix = "String< To specify a key prefix for log objects>"
+    target_bucket = "String<The name of the bucket that will receive the log objects>"
+  }
 }
 
 resource "aws_iam_role" "firehose_role" {
