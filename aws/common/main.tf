@@ -88,6 +88,10 @@ resource "aws_codestarconnections_connection" "example" {
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket = "test-bucket"
   acl    = "private"
+
+  versioning {
+    enabled = true
+  }
 }
 
 resource "aws_iam_role" "codepipeline_role" {
@@ -1171,7 +1175,7 @@ resource "aws_iam_role" "test_role" {
         Principal = {
           Service = ["ec2.amazonaws.com", "lambda:amazonaws.com", "secretmanager.amazonaws.com", "sqs.amazonaws.com"]
         }
-        Resource = "*", 
+        Resource = "*",
         Condition = {
           "IpAddress" : {
             "aws:SourceIp" : "0.0.0.0/0"
@@ -1214,9 +1218,9 @@ resource "aws_vpc_endpoint" "vpc-policy" {
         Action = [
           "*",
         ]
-        Effect   = "Allow"
-        Resource = "*"
-        Principal =  "*"
+        Effect    = "Allow"
+        Resource  = "*"
+        Principal = "*"
       }
     ]
   })
