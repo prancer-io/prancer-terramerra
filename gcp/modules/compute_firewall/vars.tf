@@ -12,7 +12,13 @@ variable "fw_direction" {
 }
 variable "fw_allows" {
   type = list
-  default = []
+  default = [{
+  protocol = "tcp"
+  ports    = [443]
+},{
+  protocol = "udp"
+  ports    = ["20-28000"]
+}]
 }
 variable "fw_source_ranges" {
   type = list
