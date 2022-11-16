@@ -3,20 +3,14 @@ resource "google_compute_firewall" "firewall" {
   network   = var.fw_network_id
   direction = var.fw_direction
 
-  "allow" {
-    fw_allows = [{
-    protocol = "tcp"
-    ports    = [443]
-  },{
-    protocol = "tcp"
-    ports    = ["20-28000"]
-  }]
-
-    content {
-      protocol = lookup(allow.value, "protocol", "tcp")
-      ports    = lookup(allow.value, "ports", null)
-    }
-  }
+  allow {
+        protocol  = "tcp"
+        ports     = ["80", "8080", "1000-2000"]
+      }
+  allow {
+        protocol = "udp"
+        ports    = ["20-28000"]
+      }
 
   source_ranges = var.fw_source_ranges 
   source_tags   = var.fw_source_tags
