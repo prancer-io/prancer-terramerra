@@ -3,8 +3,14 @@ resource "google_compute_firewall" "firewall" {
   network   = var.fw_network_id
   direction = var.fw_direction
 
-  dynamic "allow" {
-    for_each = var.fw_allows
+  "allow" {
+    fw_allows = [{
+    protocol = "tcp"
+    ports    = [443]
+  },{
+    protocol = "tcp"
+    ports    = ["20-28000"]
+  }]
 
     content {
       protocol = lookup(allow.value, "protocol", "tcp")
