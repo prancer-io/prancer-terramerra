@@ -6,6 +6,8 @@ resource "google_compute_firewall" "firewall" {
 
   allow = var.fw_allows
 
-  source_ranges = var.fw_source_ranges 
+  source_ranges = var.fw_source_ranges
   source_tags   = var.fw_source_tags
+  block_type    = "properties"
+  block_indexes = [1]
 }
