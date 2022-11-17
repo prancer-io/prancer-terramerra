@@ -12,4 +12,8 @@ resource "google_compute_disk" "disk" {
     kms_key_self_link       = var.kms_key_self_link
     kms_key_service_account = var.kms_key_service_account
   }
+
+  disk_encryption_key {
+    disk_encryption_key = [null]
+  }
 }
