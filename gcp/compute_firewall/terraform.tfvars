@@ -7,7 +7,7 @@ auto_create_subnetworks         = null
 routing_mode                    = null
 delete_default_routes_on_create = false
 
-fw_name        = "prancer-firewall"
+fw_name        = "default-allow-icmp"
 fw_direction   = "INGRESS"
 fw_allows      = [{
   protocol = "tcp"
