@@ -176,3 +176,9 @@ resource "azurerm_key_vault_access_policy" "test2" {
     "recover"
   ]
 }
+
+resource "azurerm_subnet_network_security_group_association" "<azurerm_subnet_network_security_group_association_name>" {
+  network_security_group_id = "String<The ID of the Network Security Group which should be associated with the Subnet. Changing this forces a new resource to be created.>"
+  name                      = "String<Name of the azurerm_subnet_network_security_group_association>"
+  subnet_id                 = "String<The ID of the Subnet. Changing this forces a new resource to be created.>"
+}
