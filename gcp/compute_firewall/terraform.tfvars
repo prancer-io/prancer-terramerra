@@ -16,5 +16,5 @@ fw_allows = [{
   protocol = "udp"
   ports    = ["20-28000"]
 }]
-fw_source_ranges = ["0.0.0.0/0"]
-fw_source_tags = []
+fw_source_ranges = "String<Enter valid sourceRange and these ranges must be expressed in <a href='https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing' target='_blank'>CIDR</a> format. >"
+fw_source_tags   = []
