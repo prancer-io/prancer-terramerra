@@ -17,4 +17,4 @@ fw_allows = [{
   ports    = ["20-28000"]
 }]
 fw_source_ranges = ["0.0.0.0/0"]
-fw_source_tags = []
+fw_source_tags  = []
