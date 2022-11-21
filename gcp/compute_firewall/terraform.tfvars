@@ -7,11 +7,8 @@ auto_create_subnetworks         = null
 routing_mode                    = null
 delete_default_routes_on_create = false
 
-fw_name      = "default-allow-icmp"
-fw_direction = "INGRESS"
-fw_allows = [{
-  protocol = "udp"
-  ports    = ["20-28000"]
-}]
+fw_name          = "default-allow-icmp"
+fw_direction     = "INGRESS"
+fw_allows        = []
 fw_source_ranges = ["0.0.0.0/0"]
 fw_source_tags   = []
