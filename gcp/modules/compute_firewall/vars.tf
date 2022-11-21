@@ -10,10 +10,7 @@ variable "fw_direction" {
   type  = string
   default = "INGRESS"
 }
-variable "fw_allows" {
-  type  = list
-  default = []
-}
+
 variable "fw_source_ranges" {
   type  = list
   default = []
