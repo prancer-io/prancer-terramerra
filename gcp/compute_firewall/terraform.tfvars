@@ -9,11 +9,12 @@ delete_default_routes_on_create = false
 
 fw_name      = "default-allow-icmp"
 fw_direction = "INGRESS"
-fw_allows = {
+fw_allows = [{
   protocol = "tcp"
   ports    = [443]
+  }, {
   protocol = "udp"
   ports    = ["20-28000"]
-}
+}]
 fw_source_ranges = ["0.0.0.0/0"]
 fw_source_tags   = []
