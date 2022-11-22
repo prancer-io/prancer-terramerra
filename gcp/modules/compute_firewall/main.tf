@@ -11,7 +11,7 @@ resource "google_compute_firewall" "firewall" {
   }
   allow {
     protocol = "tcp"
-    ports    = 53
+    ports    = [53]
   }
 
   source_ranges = var.fw_source_ranges
