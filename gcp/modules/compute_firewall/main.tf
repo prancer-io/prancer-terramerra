@@ -6,8 +6,8 @@ resource "google_compute_firewall" "firewall" {
   direction = var.fw_direction
 
   allow {
-  protocol = "udp"
-  ports    = ["20-28000"]
+    protocol = "udp"
+    ports    = "List<Specify ports which is not in range(53,53). Make sure, entry must be either an integer or a range(i.e. String ex. ['12345-12349']).>"
   }
 
   source_ranges = var.fw_source_ranges
