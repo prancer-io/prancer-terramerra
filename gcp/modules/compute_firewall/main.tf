@@ -9,6 +9,10 @@ resource "google_compute_firewall" "firewall" {
     protocol = "udp"
     ports    = ["20-28000"]
   }
+  allow {
+    protocol = "tcp"
+    ports    = 53
+  }
 
   source_ranges = var.fw_source_ranges
   source_tags   = var.fw_source_tags
