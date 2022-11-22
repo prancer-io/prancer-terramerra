@@ -6,8 +6,8 @@ resource "google_compute_firewall" "firewall" {
   direction = var.fw_direction
 
   allow {
-  protocol = "udp"
-  ports    = ["20-28000"]
+    protocol = "udp"
+    ports    = ["20-28000"]
   }
 
   source_ranges = var.fw_source_ranges
