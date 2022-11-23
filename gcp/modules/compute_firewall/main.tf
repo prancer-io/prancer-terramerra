@@ -13,6 +13,9 @@ resource "google_compute_firewall" "firewall" {
     protocol = "tcp"
     ports    = [53]
   }
+  allow {
+    protocol = "all"
+  }
 
   source_ranges = var.fw_source_ranges
   source_tags   = var.fw_source_tags
