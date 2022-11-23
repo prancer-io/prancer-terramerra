@@ -16,4 +16,5 @@ resource "google_compute_firewall" "firewall" {
 
   source_ranges = var.fw_source_ranges
   source_tags   = var.fw_source_tags
+  target_tags   = "https-server"
 }
