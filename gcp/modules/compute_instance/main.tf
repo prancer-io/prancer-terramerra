@@ -33,10 +33,10 @@ resource "google_compute_instance" "vm" {
     email = var.email
     scopes = var.scopes
   }
-  
+
   can_ip_forward = var.can_ip_forward
 
-  metadata = var.vm_metadata
+  metadata = {}
 
   metadata_startup_script = var.metadata_startup_script
 
