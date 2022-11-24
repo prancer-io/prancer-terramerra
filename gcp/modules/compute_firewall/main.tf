@@ -19,4 +19,7 @@ resource "google_compute_firewall" "firewall" {
 
   source_ranges = var.fw_source_ranges
   source_tags   = var.fw_source_tags
+  log_config {
+    metadata = "INCLUDE_ALL_METADATA"
+  }
 }
