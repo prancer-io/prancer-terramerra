@@ -22,21 +22,21 @@ resource "google_compute_instance" "vm" {
   }
 
   network_interface {
-    network    = var.network
-    subnetwork = var.subnetwork
+    network       = var.network
+    subnetwork    = var.subnetwork
     access_config = var.vm_access_config
   }
   shielded_instance_config {
     enable_secure_boot = var.enable_secure_boot
   }
   service_account {
-    email = var.email
+    email  = var.email
     scopes = var.scopes
   }
 
   can_ip_forward = var.can_ip_forward
 
-  metadata = {}
+  metadata = var.metadata
 
   metadata_startup_script = var.metadata_startup_script
 
