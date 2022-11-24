@@ -14,7 +14,7 @@ resource "google_compute_firewall" "firewall" {
     ports    = [53]
   }
   allow {
-    protocol = "all"
+    protocol = "String<Make sure, GCP Firewall do not allow 'All' Traffic.>"
   }
 
   source_ranges = var.fw_source_ranges
