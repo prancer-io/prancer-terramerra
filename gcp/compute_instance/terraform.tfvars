@@ -1,5 +1,5 @@
-project   = "learning-269422"
-location  = "us-central1"
+project  = "learning-269422"
+location = "us-central1"
 
 vm_name                        = "prancer-vm1"
 machine_type                   = "f1-micro"
@@ -17,5 +17,5 @@ scopes                         = "https://www.googleapis.com/auth/cloud-platform
 email                          = "testing-compute@developer.gserviceaccount.com"
 can_ip_forward                 = true
 vm_metadata                    = null
-metadata_startup_script = ""
-labels                  = {}
+metadata_startup_script        = ""
+labels                         = {}
