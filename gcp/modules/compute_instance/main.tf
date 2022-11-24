@@ -36,7 +36,7 @@ resource "google_compute_instance" "vm" {
 
   can_ip_forward = var.can_ip_forward
 
-  metadata = var.metadata
+  metadata = var.vm_metadata
 
   metadata_startup_script = var.metadata_startup_script
 
