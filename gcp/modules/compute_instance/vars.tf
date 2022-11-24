@@ -42,6 +42,22 @@ variable "subnetwork" {
   type = string
   default = null
 }
+variable "vm_access_config" {
+  type = map
+  default = {}
+}
+variable "enable_secure_boot" {
+  type = bool
+  default = false
+}
+variable "email" {
+  type = string
+  default = ""
+}
+variable "scopes" {
+  type = string
+  default = ""
+}
 variable "can_ip_forward" {
   type = bool
   default = false

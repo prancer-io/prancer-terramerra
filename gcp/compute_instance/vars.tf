@@ -12,6 +12,9 @@ variable "scheduling_on_host_maintenance" {}
 variable "scheduling_automatic_restart" {}
 variable "network" {}
 variable "subnetwork" {}
+variable "vm_access_config" {}
+variable "email" {}
+variable "scopes" {}
 variable "can_ip_forward" {}
 variable "vm_metadata" {}
 variable "metadata_startup_script" {}
