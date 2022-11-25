@@ -11,14 +11,10 @@ resource "google_compute_instance" "vm" {
     }
   }
 
-  dynamic "scheduling" {
-    for_each = var.scheduling_enabled ? [1] : []
-
-    content {
-      preemptible         = var.scheduling_preemptible
-      on_host_maintenance = var.scheduling_on_host_maintenance
-      automatic_restart   = var.scheduling_automatic_restart
-    }
+  scheduling {
+    automatic_restart = false
+    on_host_maintenance = null
+    preemptible = true
   }
 
   network_interface {
