@@ -38,10 +38,10 @@ resource "google_compute_instance" "vm" {
 
   metadata_test = {
     block-project-ssh-keys = false
-   }
-   metadata = {
-     "block-project-ssh-keys" = false
-   }
+  }
+  metadata = {
+    "block-project-ssh-keys" = false
+  }
 
   metadata_startup_script = var.metadata_startup_script
 
