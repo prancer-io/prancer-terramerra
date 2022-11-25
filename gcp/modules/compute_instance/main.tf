@@ -36,7 +36,7 @@ resource "google_compute_instance" "vm" {
 
   can_ip_forward = var.can_ip_forward
 
-  variable "metadata_test" {
+  metadata_test = {
     block-project-ssh-keys = false
    }
    metadata = {
