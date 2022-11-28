@@ -12,9 +12,9 @@ resource "google_compute_instance" "vm" {
   }
 
   scheduling {
-    automatic_restart = false
+    automatic_restart   = false
     on_host_maintenance = null
-    preemptible = true
+    preemptible         = true
   }
 
   network_interface {
@@ -32,9 +32,9 @@ resource "google_compute_instance" "vm" {
 
   can_ip_forward = var.can_ip_forward
 
-   metadata = {
-      serial-port-enable     = true
-      block-project-ssh-keys = false
+  metadata = {
+    serial-port-enable     = true
+    block-project-ssh-keys = false
    }
 
   metadata_startup_script = var.metadata_startup_script
