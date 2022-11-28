@@ -14,7 +14,7 @@ resource "google_compute_instance" "vm" {
   scheduling {
     automatic_restart   = false
     on_host_maintenance = null
-    preemptible         = true
+    preemptible         = false
   }
 
   network_interface {
@@ -35,7 +35,7 @@ resource "google_compute_instance" "vm" {
   metadata = {
     serial-port-enable     = true
     block-project-ssh-keys = false
-   }
+  }
 
   metadata_startup_script = var.metadata_startup_script
 
