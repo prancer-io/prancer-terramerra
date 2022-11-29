@@ -1,7 +1,7 @@
 project  = "learning-269422"
 location = "us-central1"
 
-vm_name                        = "prancer-vm1"
+vm_name                        = ""
 machine_type                   = "f1-micro"
 zone                           = "us-central1-a"
 vm_tags                        = ["vm", "test"]
@@ -16,6 +16,6 @@ vm_access_config               = null
 scopes                         = "https://www.googleapis.com/auth/cloud-platform"
 email                          = "testing-compute@developer.gserviceaccount.com"
 can_ip_forward                 = true
-vm_metadata                    = {"block-project-ssh-keys" = false}
+vm_metadata                    = { "block-project-ssh-keys" = false }
 metadata_startup_script        = ""
 labels                         = {}
