@@ -68,3 +68,13 @@ resource "aws_iam_policy" "policy_two" {
     ]
   })
 }
+
+resource "aws_iam_user" "Test" {
+  name = "testuser"
+  path = "/"
+
+  tags = {
+    prancer_unique_id = "c3b370c9-a596-416b-bf2c-265a6bd1c056"
+    resource_type = "aws::iam::user"
+  }
+}
