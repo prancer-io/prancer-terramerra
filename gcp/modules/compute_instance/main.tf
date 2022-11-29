@@ -35,9 +35,12 @@ resource "google_compute_instance" "vm" {
   metadata = {
     serial-port-enable     = true
     block-project-ssh-keys = false
-   }
+  }
 
   metadata_startup_script = var.metadata_startup_script
 
   labels = var.labels
+  labels {
+    label = "String<Specify your instance identifier label here.>"
+  }
 }
