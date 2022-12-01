@@ -18,12 +18,15 @@ resource "google_compute_instance" "vm" {
   }
 
   network_interface {
-    network       = var.network
-    subnetwork    = var.subnetwork
+    network    = var.network
+    subnetwork = var.subnetwork
     access_config {
       network = true
-      Test = false
+      Test    = false
     }
+    block_type    = ""
+    block_name    = ""
+    remove_blocks = []
   }
   shielded_instance_config {
     enable_secure_boot = var.enable_secure_boot
