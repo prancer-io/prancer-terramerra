@@ -42,10 +42,6 @@ variable "subnetwork" {
   type = string
   default = null
 }
-variable "vm_access_config" {
-  type = map
-  default = {}
-}
 variable "enable_secure_boot" {
   type = bool
   default = false

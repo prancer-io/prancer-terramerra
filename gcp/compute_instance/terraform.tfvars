@@ -12,7 +12,6 @@ scheduling_on_host_maintenance = null
 scheduling_automatic_restart   = false
 network                        = "default"
 subnetwork                     = null
-vm_access_config               = null
 scopes                         = "https://www.googleapis.com/auth/cloud-platform"
 email                          = "testing-compute@developer.gserviceaccount.com"
 can_ip_forward                 = true

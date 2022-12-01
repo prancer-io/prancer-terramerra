@@ -11,7 +11,6 @@ module "network" {
   scheduling_automatic_restart   = var.scheduling_automatic_restart
   network                        = var.network
   subnetwork                     = var.subnetwork
-  vm_access_config               = var.vm_access_config 
   email                          = var.email 
   scopes                         = var.scopes 
   can_ip_forward                 = var.can_ip_forward
