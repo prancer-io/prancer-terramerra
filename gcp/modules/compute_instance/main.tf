@@ -21,7 +21,8 @@ resource "google_compute_instance" "vm" {
     network       = var.network
     subnetwork    = var.subnetwork
     access_config {
-      
+      network = true
+      Test = false
     }
   }
   shielded_instance_config {
