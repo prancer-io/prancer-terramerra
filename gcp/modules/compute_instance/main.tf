@@ -18,10 +18,10 @@ resource "google_compute_instance" "vm" {
   }
 
   network_interface {
-    network       = var.network
-    subnetwork    = var.subnetwork
+    network    = var.network
+    subnetwork = var.subnetwork
     access_config {
-      
+
     }
   }
   shielded_instance_config {
