@@ -14,5 +14,9 @@ resource "google_compute_subnetwork" "subnet" {
     }
   }
 
-  private_ip_google_access = var.private_ip_google_access 
+  private_ip_google_access = var.private_ip_google_access
+  log_config {
+    aggregation_interval = "INTERVAL_5_SEC"
+    metadata             = "INCLUDE_ALL_METADATA"
+  }
 }
