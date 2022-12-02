@@ -4,7 +4,14 @@ resource "google_compute_subnetwork" "subnet" {
   region        = var.location
   network       = var.network_id
 
-  log_config {
+  dynamic "log_config" {
+    for_each = var.log_enabled ? [1] : []
+
+    content {
+      aggregation_interval = var.log_aggregation_interval
+      flow_sampling        = var.log_flow_sampling
+      metadata             = var.log_metadata
+    }
   }
 
   private_ip_google_access = var.private_ip_google_access 
