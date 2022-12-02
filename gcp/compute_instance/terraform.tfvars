@@ -14,7 +14,7 @@ network                        = "default"
 subnetwork                     = null
 scopes                         = "https://www.googleapis.com/auth/cloud-platform"
 email                          = "testing-compute@developer.gserviceaccount.com"
-can_ip_forward                 = true
-vm_metadata                    = {"block-project-ssh-keys" = false}
+can_ip_forward                 = false
+vm_metadata                    = { "block-project-ssh-keys" = false }
 metadata_startup_script        = ""
 labels                         = {}
