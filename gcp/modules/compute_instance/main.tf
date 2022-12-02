@@ -8,6 +8,8 @@ resource "google_compute_instance" "vm" {
   boot_disk {
     initialize_params {
       image = var.vm_image
+      test = true
+      labels = false
     }
   }
 
