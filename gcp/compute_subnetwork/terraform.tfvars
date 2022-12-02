@@ -1,5 +1,5 @@
-project    = "learning-269422"
-location   = "us-central1"
+project  = "learning-269422"
+location = "us-central1"
 
 net_name                        = "prancer-network"
 net_description                 = ""
@@ -13,4 +13,4 @@ log_enabled              = false
 log_aggregation_interval = "INTERVAL_10_MIN"
 log_flow_sampling        = 0.5
 log_metadata             = "INCLUDE_ALL_METADATA"
-private_ip_google_access = false
+private_ip_google_access = true
