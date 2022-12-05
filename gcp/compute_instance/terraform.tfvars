@@ -12,9 +12,9 @@ scheduling_on_host_maintenance = null
 scheduling_automatic_restart   = false
 network                        = "default"
 subnetwork                     = null
-scopes                         = "https://www.googleapis.com/auth/cloud-platform"
+scopes                         = "String<Please provide valid scopes that is not allow full access to all Cloud APIs.>"
 email                          = "testing-compute@developer.gserviceaccount.com"
 can_ip_forward                 = true
-vm_metadata                    = {"block-project-ssh-keys" = false}
+vm_metadata                    = { "block-project-ssh-keys" = false }
 metadata_startup_script        = ""
 labels                         = {}
