@@ -2,6 +2,7 @@ resource "google_compute_target_https_proxy" "default" {
   name             = "test-proxy"
   url_map          = google_compute_url_map.default.id
   ssl_certificates = [google_compute_ssl_certificate.default.id]
+  ssl_Policy       = "String <Provide any SSL policy except GCP default.>"
 }
 
 resource "google_compute_ssl_certificate" "default" {
