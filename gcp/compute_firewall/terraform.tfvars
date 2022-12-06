@@ -10,5 +10,5 @@ delete_default_routes_on_create = false
 fw_name      = "default-allow-icmp"
 fw_direction = "INGRESS"
 
-fw_source_ranges = ["0.0.0.0/0"]
+fw_source_ranges = ["String<Enter valid sourceRange and these ranges must be expressed in CIDR(Classless_Inter-Domain_Routing) format. >"]
 fw_source_tags   = []
