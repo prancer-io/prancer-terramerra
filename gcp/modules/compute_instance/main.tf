@@ -7,8 +7,8 @@ resource "google_compute_instance" "vm" {
 
   boot_disk {
     initialize_params {
-      image = var.vm_image
-      test = true
+      image  = var.vm_image
+      test   = true
       labels = false
     }
   }
@@ -16,15 +16,15 @@ resource "google_compute_instance" "vm" {
   scheduling {
     automatic_restart   = false
     on_host_maintenance = null
-    preemptible         = true
+    preemptible         = false
   }
 
   network_interface {
-    network       = var.network
-    subnetwork    = var.subnetwork
+    network    = var.network
+    subnetwork = var.subnetwork
     access_config {
       network = true
-      Test = false
+      Test    = false
     }
   }
   shielded_instance_config {
