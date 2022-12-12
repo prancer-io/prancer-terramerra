@@ -1,13 +1,13 @@
 resource "google_container_cluster" "primary" {
-  name                     = var.k8s_name
-  location                 = var.location
-  enable_shielded_nodes    = false
+  name                  = var.k8s_name
+  location              = var.location
+  enable_shielded_nodes = false
 
   remove_default_node_pool = true
   initial_node_count       = 1
 
-  enable_kubernetes_alpha  = var.k8s_enable_kubernetes_alpha
-  enable_legacy_abac       = var.k8s_enable_legacy_abac
+  enable_kubernetes_alpha = var.k8s_enable_kubernetes_alpha
+  enable_legacy_abac      = var.k8s_enable_legacy_abac
 
   network = var.k8s_network
 
@@ -60,8 +60,6 @@ resource "google_container_cluster" "primary" {
   }
 
   master_auth {
-    username = var.k8s_username
-    password = var.k8s_password
 
     client_certificate_config {
       issue_client_certificate = var.k8s_certificate
@@ -112,16 +110,16 @@ resource "google_container_node_pool" "nodes" {
   node_locations = var.node_locations
 
   node_config {
-    image_type            = var.k8s_image_type
-    preemptible           = var.k8s_preemptible
-    machine_type          = var.k8s_machine_type
-    service_account       = null
-    metadata              = var.k8s_metadata
-    
-  management {
-    auto_repair  = false
-    auto_upgrade = false
-  }
+    image_type      = var.k8s_image_type
+    preemptible     = var.k8s_preemptible
+    machine_type    = var.k8s_machine_type
+    service_account = null
+    metadata        = var.k8s_metadata
+
+    management {
+      auto_repair  = false
+      auto_upgrade = false
+    }
     shielded_instance_config {
       enable_secure_boot          = false
       enable_integrity_monitoring = false
