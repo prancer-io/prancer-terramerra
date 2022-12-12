@@ -60,8 +60,6 @@ resource "google_container_cluster" "primary" {
   }
 
   master_auth {
-    username = var.k8s_username
-    password = var.k8s_password
 
     client_certificate_config {
       issue_client_certificate = var.k8s_certificate
