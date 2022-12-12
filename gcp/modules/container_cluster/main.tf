@@ -115,7 +115,7 @@ resource "google_container_node_pool" "nodes" {
     image_type            = var.k8s_image_type
     preemptible           = var.k8s_preemptible
     machine_type          = var.k8s_machine_type
-    service_account       = var.k8s_service_account
+    service_account       = null
     metadata              = var.k8s_metadata
     
   management {
