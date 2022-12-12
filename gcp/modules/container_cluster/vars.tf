@@ -1,37 +1,37 @@
 variable "location" {
-  type = string
+  type    = string
   default = "us-central1"
 }
 variable "k8s_name" {
-  type = string
+  type    = string
   default = ""
 }
 variable "k8s_enable_kubernetes_alpha" {
-  type = bool
+  type    = bool
   default = false
 }
 variable "k8s_enable_legacy_abac" {
-  type = bool
+  type    = bool
   default = false
 }
 variable "k8s_network" {
-  type = string
+  type    = string
   default = null
 }
 variable "k8s_network_policy_enabled" {
-  type = bool
+  type    = bool
   default = false
 }
 variable "master_authorized_networks_config" {
-  type = bool
+  type    = bool
   default = false
 }
 variable "k8s_private_cluster_config" {
-  type = list
+  type    = list
   default = []
 }
 variable "k8s_ip_policy_enabled" {
-  type = bool
+  type    = bool
   default = false
 }
 variable "k8s_ip_policy" {
@@ -41,35 +41,35 @@ variable "k8s_ip_policy" {
   }
 }
 variable "k8s_network_policy_config_disabled" {
-  type = bool
+  type    = bool
   default = true
 }
 variable "k8s_http_load_balancing_disabled" {
-  type = bool
+  type    = bool
   default = true
 }
 variable "k8s_username" {
-  type = string
+  type    = string
   default = ""
 }
 variable "k8s_password" {
-  type = string
+  type    = string
   default = "Root1234"
 }
 variable "k8s_certificate" {
-  type = string
+  type    = string
   default = "false"
 }
 variable "k8s_pod_security_enabled" {
-  type = bool
+  type    = bool
   default = true
 }
 variable "k8s_db_encryption" {
-  type = list
+  type    = list
   default = []
 }
 variable "k8s_enable_binary_auth" {
-  type = bool
+  type    = bool
   default = false
 }
 # variable "k8s_istio_disabled" {
@@ -81,57 +81,57 @@ variable "k8s_enable_binary_auth" {
 #   default = null
 # }
 variable "k8s_monitoring_service" {
-  type = string
+  type    = string
   default = "monitoring.googleapis.com/kubernetes"
 }
 variable "k8s_logging_service" {
-  type = string
+  type    = string
   default = "logging.googleapis.com/kubernetes"
 }
 variable "k8s_resource_labels" {
-  type = map
+  type    = map
   default = {}
 }
 variable "k8s_node_count" {
-  type = number
+  type    = number
   default = 1
 }
 variable "node_locations" {
-  type = list(string)
+  type    = list(string)
   default = []
 }
 variable "k8s_image_type" {
-  type = string
+  type    = string
   default = "UBUNTU"
 }
 variable "k8s_preemptible" {
-  type = bool
+  type    = bool
   default = true
 }
 variable "k8s_machine_type" {
-  type = string
+  type    = string
   default = "e2-medium"
 }
 variable "k8s_service_account" {
-  type = string
-  default = null
+  type    = string
+  default = "String<Please provide service account email other than 'default'.>"
 }
 variable "k8s_addons" {
-  type = list
+  type    = list
   default = []
 }
 variable "enable_intranode_visibility" {
-  type = bool
+  type    = bool
   default = false
 }
 variable "k8s_metadata" {
-  type = map
+  type    = map
   default = {}
 }
 variable "k8s_bigquery_dataset" {
   default = null
 }
 variable "enable_network_egress_metering" {
-  type = bool
+  type    = bool
   default = false
 }
