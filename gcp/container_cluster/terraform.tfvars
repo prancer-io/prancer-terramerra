@@ -2,7 +2,7 @@ project    = "learning-269422"
 location   = "us-central1"
 
 k8s_name                           = "prancer-k8s"
-k8s_enable_kubernetes_alpha        = false
+k8s_enable_kubernetes_alpha        = true
 k8s_enable_legacy_abac             = true
 k8s_network                        = null
 k8s_network_policy_enabled         = true
@@ -23,7 +23,7 @@ k8s_db_encryption                  = [{
 k8s_enable_binary_auth             = false
 k8s_monitoring_service             = "none"
 k8s_logging_service                = "none"
-k8s_resource_labels                = {}
+k8s_resource_labels                = {"goog-composer-version" : "1-composer"}
 k8s_node_count                     = 3
 node_locations                     = ["us-central1-a"]
 k8s_image_type                     = "UBUNTU"

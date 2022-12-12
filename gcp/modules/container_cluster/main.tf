@@ -14,15 +14,18 @@ resource "google_container_cluster" "primary" {
     enabled = var.k8s_network_policy_enabled
   }
 
-  dynamic "private_cluster_config" {
-    for_each = var.k8s_private_cluster_config
-    iterator = private
+  # dynamic "private_cluster_config" {
+  #   for_each = var.k8s_private_cluster_config
+  #   iterator = private
 
-    content {
-      enable_private_nodes    = lookup(private.value, "enable_private_nodes", null)
-      enable_private_endpoint = lookup(private.value, "enable_private_endpoint", null)
-      master_ipv4_cidr_block  = lookup(private.value, "master_ipv4_cidr_block", null)
-    }
+  #   content {
+  #     enable_private_nodes    = lookup(private.value, "enable_private_nodes", null)
+  #     enable_private_endpoint = lookup(private.value, "enable_private_endpoint", null)
+  #     master_ipv4_cidr_block  = lookup(private.value, "master_ipv4_cidr_block", null)
+  #   }
+  # }
+  private_cluster_config {
+    enable_private_nodes = false
   }
 
   dynamic "ip_allocation_policy" {
@@ -113,8 +116,11 @@ resource "google_container_node_pool" "nodes" {
     machine_type          = var.k8s_machine_type
     service_account       = var.k8s_service_account
     metadata              = var.k8s_metadata
-    enable_shielded_nodes = true
-
+    enable_shielded_nodes = false
+  management {
+    auto_repair = false
+    auto_upgrade = false
+  }
     shielded_instance_config {
       enable_secure_boot          = false
       enable_integrity_monitoring = false
