@@ -1,12 +1,13 @@
 resource "google_container_cluster" "primary" {
-  name     = var.k8s_name
-  location = var.location
+  name                     = var.k8s_name
+  location                 = var.location
+  enable_shielded_nodes    = false
 
   remove_default_node_pool = true
   initial_node_count       = 1
 
-  enable_kubernetes_alpha = var.k8s_enable_kubernetes_alpha
-  enable_legacy_abac      = var.k8s_enable_legacy_abac
+  enable_kubernetes_alpha  = var.k8s_enable_kubernetes_alpha
+  enable_legacy_abac       = var.k8s_enable_legacy_abac
 
   network = var.k8s_network
 
@@ -116,9 +117,9 @@ resource "google_container_node_pool" "nodes" {
     machine_type          = var.k8s_machine_type
     service_account       = var.k8s_service_account
     metadata              = var.k8s_metadata
-    enable_shielded_nodes = false
+    
   management {
-    auto_repair = false
+    auto_repair  = false
     auto_upgrade = false
   }
     shielded_instance_config {
