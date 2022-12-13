@@ -75,6 +75,6 @@ resource "aws_iam_user" "Test" {
 
   tags = {
     prancer_unique_id = "c3b370c9-a596-416b-bf2c-265a6bd1c056"
-    resource_type = "aws::iam::user"
+    resource_type = "aws_iam_user"
   }
 }
