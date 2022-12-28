@@ -20,3 +20,13 @@ module "sqlServerFWRule" {
   sql_fw_start_ip           = var.sql_fw_start_ip
   sql_fw_end_ip             = var.sql_fw_end_ip
 }
+
+module "sqlADAdmin" {
+  source                    = "../modules/sqlADAdministrator/"
+  location                  = var.location
+  server_name               = var.server_name
+  server_rg                 = var.server_rg
+  sql_server_login          = "sqladmin"
+  azure_tenant_id           = data.azurerm_client_config.current.tenant_id
+  ad_object_id              = data.azurerm_client_config.current.object_id
+}
