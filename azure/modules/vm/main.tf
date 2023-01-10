@@ -29,6 +29,10 @@ resource "azurerm_virtual_machine" "vm-linux" {
   vm_size                       = var.vm_size
   network_interface_ids         = [element(azurerm_network_interface.vm.*.id, count.index)]
   delete_os_disk_on_termination = var.delete_os_disk_on_termination
+  tags = {
+    "prancer_unique_id": "15f36246-6937-45b3-94f1-dfd76cc0bef5",
+    "resource_type": "azurerm_virtual_machine"
+  }
 
   storage_image_reference {
     id        = var.vm_os_id
