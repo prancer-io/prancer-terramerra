@@ -33,6 +33,7 @@ resource "azurerm_virtual_machine" "vm-linux" {
     "prancer_unique_id": "15f36246-6937-45b3-94f1-dfd76cc0bef5",
     "resource_type": "azurerm_virtual_machine"
   }
+}
 
   storage_image_reference {
     id        = var.vm_os_id
@@ -70,7 +71,6 @@ resource "azurerm_virtual_machine" "vm-linux" {
     enabled     = var.boot_diagnostics
     storage_uri = var.boot_diagnostics == "true" ? join(",", azurerm_storage_account.vm-sa.*.primary_blob_endpoint) : "" 
   }
-}
 
 resource "azurerm_virtual_machine" "vm-linux-with-datadisk" {
   count                         = !contains(list(var.vm_os_simple,var.vm_os_offer), "WindowsServer")  && var.is_windows_image != "true"  && var.data_disk == "true" ? var.nb_instances : 0
