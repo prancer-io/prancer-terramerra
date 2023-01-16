@@ -61,6 +61,11 @@ resource "azurerm_app_service" "example" {
     share_name = ""
     access_key = ""
   }
+
+  tags = {
+    "prancer_unique_id": "9b0b53c1-6619-47ac-b646-599b6bc5ae02",
+    "resource_type": "azurerm_app_service"
+  }
 }
 
 resource "azurerm_app_service_plan" "example" {
