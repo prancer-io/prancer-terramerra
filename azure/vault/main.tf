@@ -17,6 +17,10 @@ resource "azurerm_key_vault" "example" {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
   }
+  tags = {
+    "prancer_unique_id": "d113a818-b7ab-469f-82d3-994fd9206ac5",
+    "resource_type": "azurerm_key_vault"
+  }
 }
 
 resource "azurerm_key_vault_secret" "example" {

@@ -19,4 +19,7 @@ storage_blob_name         = "prancer-storage-blob"
 storage_blob_type         = "Block"
 storage_blob_size         = "5120"
 
-tags = {}
+tags = {
+    "prancer_unique_id": "7846b5c5-4f0c-420f-a797-0c82845e80dd",
+    "resource_type": "azurerm_key_vault"
+}
