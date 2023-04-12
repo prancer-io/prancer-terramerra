@@ -29,7 +29,8 @@ resource "aws_security_group" "sg" {
 }
 
 resource "aws_kms_key" "kms" {
-  description = "example"
+  description         = "example"
+  enable_key_rotation = true
 }
 
 resource "aws_cloudwatch_log_group" "test" {
